@@ -98,10 +98,10 @@ function LogbookIcon() {
       <path d="M3 3h13l5 5v13H3z" fill="#3a72c4" stroke="#1a1a1a" />
       <path d="M7 3h8.7v8H7z" fill="#ded8cd" stroke="#1a1a1a" />
       <path fill="#fff" stroke="#1a1a1a" d="M6 13h12v8H6z" />
-    </svg>
+    </svg>  
   );
 }
-
+// push
 function FocusIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
