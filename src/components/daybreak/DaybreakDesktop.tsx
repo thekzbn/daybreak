@@ -1210,43 +1210,43 @@ function DaybreakOS({ session }: { session: Session }) {
           onClick={(e) => e.stopPropagation()}
         >
           <button className="context-menu-item" onClick={() => createStickyAt(contextMenu.x, contextMenu.y)}>
-            <span>📝 New Sticky Note</span>
+            <span>New Sticky Note</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("display")}>
-            <span>🖼️ Display Properties...</span>
+            <span>Display Properties...</span>
           </button>
           <div className="context-menu-divider" />
           <button className="context-menu-item" onClick={() => { setIconPositions({ ...ICON_DEFAULTS }); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
-            <span>⚡ Align Icons</span>
+            <span>Align Icons</span>
           </button>
           <button className="context-menu-item" onClick={() => { refresh(); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
-            <span>🔄 Refresh Desktop</span>
+            <span>Refresh Desktop</span>
           </button>
           <div className="context-menu-divider" />
           <button className="context-menu-item" onClick={() => launch("focus")}>
-            <span>🎯 Daily 3 Focus</span>
+            <span>Daily 3 Focus</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("timer")}>
-            <span>🎵 Focus Timer (Winamp)</span>
+            <span>Focus Timer</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("notes")}>
-            <span>📋 Scratch Note</span>
+            <span>Scratch Note</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("reading")}>
-            <span>📚 Reading Shelf</span>
+            <span>Reading Shelf</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("budget")}>
-            <span>💰 Budget Ledger</span>
+            <span>Budget Ledger</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("archive")}>
-            <span>💾 Logbook</span>
+            <span>Logbook</span>
           </button>
           <div className="context-menu-divider" />
           <button className="context-menu-item" onClick={() => launch("trash")}>
-            <span>🗑️ Recycle Bin</span>
+            <span>Recycle Bin</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("account")}>
-            <span>👤 Account Settings...</span>
+            <span>Account Settings...</span>
           </button>
         </div>
       )}
