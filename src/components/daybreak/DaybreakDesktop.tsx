@@ -39,14 +39,14 @@ function AccountIcon() {
   return (
     <svg viewBox="0 0 32 32" id="boy_Light" data-name="boy/Light" xmlns="http://www.w3.org/2000/svg">
       <g>
-        <path d="M0,0H12V2H8V4H6V6H4v4H2v4H0Z" fill="#FFF"/>
+        <path d="M0,0H12V2H8V4H6V6H4v4H2v4H0Z" fill="#ffffff00"/>
         <path d="M12,0H26V2h4V4h2V8H30v2H28v2H26v4H24v2H20V16H18V14h6V12H18V10h4V8H16v2H14v2H12V22H10V20H8v6h4v6H10V28H6V26H4V24H2V20H0V14H2V10H4V6H6V4H8V2h4Z" fill="#1a1a1a"/>
-        <path d="M0,0H6V4H4V2H0Z" transform="translate(26)" fill="#FFF"/>
+        <path d="M0,0H6V4H4V2H0Z" transform="translate(26)" fill="#ffffff00"/>
         <path d="M8,0h6V2H10V4h6V6H10V8h2v2h4V8h2v2h2v2H18v2H16v2h2v4H12v2h2v2H4V18H0V12H2v2H4V4H6V2H8Z" transform="translate(8 8)" fill="#FFE2D2"/>
-        <path d="M6,0H8V24H0V22H2V20H4V12H6V10H4V8H2V4H4V2H6Z" transform="translate(24 8)" fill="#FFF"/>
+        <path d="M6,0H8V24H0V22H2V20H4V12H6V10H4V8H2V4H4V2H6Z" transform="translate(24 8)" fill="#ffffff00"/>
         <path d="M0,0H2V2H0Z" transform="translate(26 16)" fill="#1a1a1a"/>
         <path d="M0,0H2V2H0Z" transform="translate(28 18)" fill="#1a1a1a"/>
-        <path d="M0,0H2V4H4V6H6V8h4v4H0Z" transform="translate(0 20)" fill="#FFF"/>
+        <path d="M0,0H2V4H4V6H6V8h4v4H0Z" transform="translate(0 20)" fill="#ffffff00"/>
         <path d="M2,0H4V8H2V4H0V2H2Z" transform="translate(24 20)" fill="#1a1a1a"/>
         <path d="M0,0H6V2H4V4H2V2H0Z" transform="translate(20 28)" fill="#1a1a1a"/>
       </g>
@@ -118,10 +118,19 @@ function FocusIcon() {
 
 function TimerIcon() {
   return (
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="28" height="28" rx="2" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
-      <circle cx="16" cy="16" r="11" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="1"/>
-      <path d="M 18 6 L 10 17 L 15 17 L 13 26 L 23 14 L 17 14 Z" fill="#ff4040" stroke="#1a1a1a" strokeWidth="0.8"/>
+    <svg viewBox="0 0 32 32" data-name="clockfacethreeoclock/Light" xmlns="http://www.w3.org/2000/svg">
+      <g strokeWidth="0"/>
+      <g strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M0 0h10v2H6v2H4v2H2v4H0Z" fill="#ffffff00"/>
+      <path data-name="Path" d="M10 0h12v2h-6v12h8v2H14V2h-4Z" fill="#1a1a1a"/>
+      <path data-name="Path" d="M22 0h10v10h-2V6h-2V4h-2V2h-4Z" fill="#ffffff00"/>
+      <path data-name="Path" d="M6 2h4v2H6Z" fill="#1a1a1a"/>
+      <path data-name="Path" d="M10 2h4v14h10v-2h-8V2h6v2h4v2h2v4h2v12h-2v4h-2v2h-4v2H10v-2H6v-2H4v-4H2V10h2V6h2V4h4Z" fill="#f0be6a"/>
+      <path data-name="Path" d="M22 2h4v2h-4ZM4 4h2v2H4Zm22 0h2v2h-2ZM2 6h2v4H2Zm26 0h2v4h-2ZM0 10h2v12H0Zm30 0h2v12h-2Z" fill="#1a1a1a"/>
+      <path data-name="Path" d="M0 22h2v4h2v2h2v2h4v2H0Z" fill="#ffffff00"/>
+      <path data-name="Path" d="M2 22h2v4H2Zm26 0h2v4h-2Z" fill="#1a1a1a"/>
+      <path data-name="Path" d="M30 22h2v10H22v-2h4v-2h2v-2h2Z" fill="#ffffff00"/>
+      <path data-name="Path" d="M4 26h2v2H4Zm22 0h2v2h-2ZM6 28h4v2H6Zm16 0h4v2h-4Zm-12 2h12v2H10Z" fill="#1a1a1a"/>
     </svg>
   );
 }
@@ -666,12 +675,6 @@ function NotesApp({ userId, initial, refresh }: { userId: string; initial: strin
 
   return (
     <div className="notepad-container">
-      <div className="notepad-menubar">
-        <span>File</span>
-        <span>Edit</span>
-        <span>Format</span>
-        <span>Help</span>
-      </div>
       <textarea
         className="notepad-textarea"
         value={text}
@@ -969,11 +972,143 @@ function AccountApp({
 }
 
 /* ============================================================
+   DRAGGABLE STICKY NOTE COMPONENT
+   ============================================================ */
+function DraggableSticky({
+  sticky,
+  onUpdateContent,
+  onDelete,
+  onMoveEnd,
+}: {
+  sticky: Tables<"stickies">;
+  onUpdateContent: (content: string) => void;
+  onDelete: () => void;
+  onMoveEnd: (x: number, y: number) => void;
+}) {
+  const [pos, setPos] = useState({ x: sticky.position_x, y: sticky.position_y });
+  const dragRef = useRef<{ startX: number; startY: number; startPX: number; startPY: number; moved: boolean } | null>(null);
+
+  useEffect(() => {
+    setPos({ x: sticky.position_x, y: sticky.position_y });
+  }, [sticky.position_x, sticky.position_y]);
+
+  function handlePointerDown(e: React.PointerEvent) {
+    if ((e.target as HTMLElement).tagName === "BUTTON") return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragRef.current = { startX: e.clientX, startY: e.clientY, startPX: pos.x, startPY: pos.y, moved: false };
+  }
+
+  function handlePointerMove(e: React.PointerEvent) {
+    if (!dragRef.current) return;
+    const dx = e.clientX - dragRef.current.startX;
+    const dy = e.clientY - dragRef.current.startY;
+    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+      dragRef.current.moved = true;
+    }
+    if (dragRef.current.moved) {
+      setPos({
+        x: Math.max(10, dragRef.current.startPX + dx),
+        y: Math.max(34, dragRef.current.startPY + dy),
+      });
+    }
+  }
+
+  function handlePointerUp() {
+    if (dragRef.current?.moved) {
+      onMoveEnd(pos.x, pos.y);
+    }
+    dragRef.current = null;
+  }
+
+  return (
+    <div
+      className={`sticky sticky-${sticky.color}`}
+      style={{ left: pos.x, top: pos.y, position: "absolute" }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div
+        className="sticky-drag-handle"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+      >
+        <span className="sticky-pin">▪ STICKY</span>
+        <button
+          className="sticky-close-btn"
+          onClick={onDelete}
+          aria-label="Delete note"
+        >
+          ×
+        </button>
+      </div>
+      <textarea
+        value={sticky.content}
+        onChange={(e) => onUpdateContent(e.target.value)}
+        placeholder="Type note..."
+      />
+    </div>
+  );
+}
+
+/* ============================================================
+   DRAGGABLE HOMESCREEN CLOCK WIDGET
+   ============================================================ */
+function DraggableHomescreenClock({ time }: { time: Date }) {
+  const [pos, setPos] = useState(() => ({
+    x: typeof window !== "undefined" ? Math.max(20, window.innerWidth - 270) : 800,
+    y: 55,
+  }));
+  const dragRef = useRef<{ startX: number; startY: number; startPX: number; startPY: number; moved: boolean } | null>(null);
+
+  function handlePointerDown(e: React.PointerEvent) {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragRef.current = { startX: e.clientX, startY: e.clientY, startPX: pos.x, startPY: pos.y, moved: false };
+  }
+
+  function handlePointerMove(e: React.PointerEvent) {
+    if (!dragRef.current) return;
+    const dx = e.clientX - dragRef.current.startX;
+    const dy = e.clientY - dragRef.current.startY;
+    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+      dragRef.current.moved = true;
+    }
+    if (dragRef.current.moved) {
+      setPos({
+        x: Math.max(10, Math.min(window.innerWidth - 220, dragRef.current.startPX + dx)),
+        y: Math.max(34, Math.min(window.innerHeight - 120, dragRef.current.startPY + dy)),
+      });
+    }
+  }
+
+  function handlePointerUp() {
+    dragRef.current = null;
+  }
+
+  return (
+    <div
+      className="homescreen-clock-widget"
+      style={{ left: pos.x, top: pos.y, right: "auto" }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="homescreen-clock-time">
+        {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true })}
+      </div>
+      <div className="homescreen-clock-date">
+        {time.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" })}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
    MAIN DAYBREAK OS COMPONENT
    ============================================================ */
 function DaybreakOS({ session }: { session: Session }) {
-  const [open, setOpen] = useState<AppId[]>(["focus", "timer"]);
-  const [active, setActive] = useState<AppId>("focus");
+  const [open, setOpen] = useState<AppId[]>([]);
+  const [active, setActive] = useState<AppId | null>(null);
   const [minimized, setMinimized] = useState<AppId[]>([]);
   const [maximized, setMaximized] = useState<AppId[]>([]);
   const [selected, setSelected] = useState<AppId | null>(null);
@@ -1095,6 +1230,9 @@ function DaybreakOS({ session }: { session: Session }) {
     setOpen((v) => v.filter((x) => x !== id));
     setMinimized((v) => v.filter((x) => x !== id));
     setMaximized((v) => v.filter((x) => x !== id));
+    if (active === id) {
+      setActive(null);
+    }
   }
 
   async function createStickyAt(x: number, y: number) {
@@ -1108,6 +1246,21 @@ function DaybreakOS({ session }: { session: Session }) {
     });
     setContextMenu({ x: 0, y: 0, visible: false });
     refresh();
+  }
+
+  async function updateStickyContent(id: string, content: string) {
+    setStickies((v) => v.map((x) => (x.id === id ? { ...x, content } : x)));
+    await supabase.from("stickies").update({ content }).eq("id", id);
+  }
+
+  async function deleteSticky(id: string) {
+    sound("trash");
+    setStickies((v) => v.filter((x) => x.id !== id));
+    await supabase.from("stickies").delete().eq("id", id);
+  }
+
+  async function moveSticky(id: string, x: number, y: number) {
+    await supabase.from("stickies").update({ position_x: x, position_y: y }).eq("id", id);
   }
 
   function handleContextMenu(e: React.MouseEvent) {
@@ -1169,15 +1322,8 @@ function DaybreakOS({ session }: { session: Session }) {
         </div>
       </header>
 
-      {/* Pinned Homescreen Digital Clock Widget (Top Right of Wallpaper) */}
-      <div className="homescreen-clock-widget">
-        <div className="homescreen-clock-time">
-          {clockTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true })}
-        </div>
-        <div className="homescreen-clock-date">
-          {clockTime.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" })}
-        </div>
-      </div>
+      {/* Draggable Homescreen Digital Clock Widget */}
+      <DraggableHomescreenClock time={clockTime} />
 
       {/* Draggable Desktop Icons */}
       {(Object.keys(APP_META) as AppId[]).map((id) => (
@@ -1192,15 +1338,14 @@ function DaybreakOS({ session }: { session: Session }) {
         />
       ))}
 
-      {/* Stickies */}
+      {/* Draggable Desktop Stickies */}
       {stickies.map((s) => (
-        <textarea
+        <DraggableSticky
           key={s.id}
-          className={`sticky sticky-${s.color}`}
-          style={{ left: s.position_x, top: s.position_y }}
-          value={s.content}
-          onChange={(e) => setStickies((v) => v.map((x) => (x.id === s.id ? { ...x, content: e.target.value } : x)))}
-          onBlur={(e) => supabase.from("stickies").update({ content: e.target.value }).eq("id", s.id)}
+          sticky={s}
+          onUpdateContent={(content) => updateStickyContent(s.id, content)}
+          onDelete={() => deleteSticky(s.id)}
+          onMoveEnd={(x, y) => moveSticky(s.id, x, y)}
         />
       ))}
 
@@ -1232,7 +1377,7 @@ function DaybreakOS({ session }: { session: Session }) {
         </div>
       )}
 
-      {/* Desktop Right-Click Context Menu */}
+      {/* Desktop Right-Click Context Menu (Desktop Actions Only) */}
       {contextMenu.visible && (
         <div
           className="desktop-context-menu"
@@ -1255,40 +1400,6 @@ function DaybreakOS({ session }: { session: Session }) {
           <button className="context-menu-item" onClick={() => { refresh(); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
             <span className="menu-icon"><RefreshMenuIcon /></span>
             <span>Refresh Desktop</span>
-          </button>
-          <div className="context-menu-divider" />
-          <button className="context-menu-item" onClick={() => launch("focus")}>
-            <span className="menu-icon"><FocusIcon /></span>
-            <span>Daily 3 Focus</span>
-          </button>
-          <button className="context-menu-item" onClick={() => launch("timer")}>
-            <span className="menu-icon"><TimerIcon /></span>
-            <span>Focus Timer</span>
-          </button>
-          <button className="context-menu-item" onClick={() => launch("notes")}>
-            <span className="menu-icon"><NotesIcon /></span>
-            <span>Scratch Note</span>
-          </button>
-          <button className="context-menu-item" onClick={() => launch("reading")}>
-            <span className="menu-icon"><ReadingIcon /></span>
-            <span>Reading Shelf</span>
-          </button>
-          <button className="context-menu-item" onClick={() => launch("budget")}>
-            <span className="menu-icon"><BudgetIcon /></span>
-            <span>Budget Ledger</span>
-          </button>
-          <button className="context-menu-item" onClick={() => launch("archive")}>
-            <span className="menu-icon"><LogbookIcon /></span>
-            <span>Logbook</span>
-          </button>
-          <div className="context-menu-divider" />
-          <button className="context-menu-item" onClick={() => launch("trash")}>
-            <span className="menu-icon"><BinIcon /></span>
-            <span>Recycle Bin</span>
-          </button>
-          <button className="context-menu-item" onClick={() => launch("account")}>
-            <span className="menu-icon"><AccountIcon /></span>
-            <span>Account Settings...</span>
           </button>
         </div>
       )}

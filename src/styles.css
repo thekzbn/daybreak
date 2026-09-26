@@ -236,17 +236,27 @@ button {
 }
 
 /* ============================================================
-   PINNED HOMESCREEN CLOCK WIDGET (Top Right)
+   DRAGGABLE HOMESCREEN CLOCK WIDGET
    ============================================================ */
 .homescreen-clock-widget {
   position: absolute;
-  top: 48px;
-  right: 28px;
   text-align: right;
   color: #ffffff;
   text-shadow: 1px 1px 0 #1a1a1a, 0 0 12px rgba(184, 164, 220, 0.8);
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
   z-index: 5;
+  padding: 6px 10px;
+  background: rgba(43, 34, 56, 0.25);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+.homescreen-clock-widget:active {
+  cursor: grabbing;
+  border-color: #ffffff;
+  background: rgba(43, 34, 56, 0.4);
 }
 
 .homescreen-clock-time {
@@ -332,19 +342,65 @@ button {
 }
 
 /* ============================================================
-   STICKY NOTES ON WALLPAPER
+   STICKY NOTES ON WALLPAPER (DRAGGABLE)
    ============================================================ */
 .sticky {
   position: absolute;
   width: 180px;
   height: 160px;
-  padding: 18px 12px 10px;
   border: 1px solid #1a1a1a;
   box-shadow: 3px 4px 0 rgba(28, 26, 23, 0.35);
-  resize: none;
-  z-index: 8;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky-drag-handle {
+  height: 20px;
+  background: rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  font-size: 11px;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.sticky-drag-handle:active {
+  cursor: grabbing;
+}
+
+.sticky-pin {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.sticky-close-btn {
+  background: transparent;
+  border: 0;
   font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  color: #1a1a1a;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.sticky textarea {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 13px;
   line-height: 1.4;
+  resize: none;
   outline: none;
 }
 
@@ -473,12 +529,18 @@ button {
   place-items: center;
   box-shadow:
     inset 1px 1px 0 #ffffff,
-    inset -1px -1px 0 #9c968b;
+    inset -1px -1px 0 #80786e;
+}
+
+.window-controls button:hover {
+  background: #ffffff;
 }
 
 .window-controls button:active {
+  background: #c8c0b2;
   box-shadow:
-    inset 1px 1px 0 #9c968b,
+    inset 1px 1px 0 #000000,
+    inset 2px 2px 0 #60584e,
     inset -1px -1px 0 #ffffff;
   transform: translate(1px, 1px);
 }
@@ -498,7 +560,7 @@ button {
 }
 
 /* ============================================================
-   RETRO BUTTONS (Amber / Gold / Beige from Reference)
+   RETRO BUTTONS (Amber / Gold / Beige Tactile Out / In States)
    ============================================================ */
 .retro-button {
   border-radius: 0 !important;
@@ -507,21 +569,27 @@ button {
   color: #1a1a1a !important;
   box-shadow:
     inset 1px 1px 0 #ffffff,
-    inset -1px -1px 0 #9c968b,
+    inset -1px -1px 0 #80786e,
     1px 1px 0 #1a1a1a !important;
   height: 30px;
   padding: 0 14px !important;
   font-size: 13px !important;
   font-weight: bold !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .retro-button:hover {
   background: #eae4d8 !important;
 }
 
-.retro-button:active {
+.retro-button:active, .retro-button.active {
+  background: #c8c0b2 !important;
   box-shadow:
-    inset 1px 1px 0 #9c968b,
+    inset 1px 1px 0 #000000,
+    inset 2px 2px 0 #60584e,
     inset -1px -1px 0 #ffffff !important;
   transform: translate(1px, 1px);
 }
@@ -537,6 +605,15 @@ button {
 
 .retro-button-accent:hover {
   background: #f5cb7e !important;
+}
+
+.retro-button-accent:active, .retro-button-accent.active {
+  background: #cf9636 !important;
+  box-shadow:
+    inset 1px 1px 0 #000000,
+    inset 2px 2px 0 #805810,
+    inset -1px -1px 0 #fff0c0 !important;
+  transform: translate(1px, 1px);
 }
 
 /* ============================================================
