@@ -144,12 +144,33 @@ function BudgetIcon() {
 function DisplayIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <rect x="3" y="3" width="26" height="20" rx="1" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="6" y="6" width="20" height="14" fill="#b8a4dc" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="12" y="23" width="8" height="4" fill="#9c968b" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="8" y="27" width="16" height="3" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
-      <circle cx="9" cy="9" r="1.5" fill="#f29ab8"/>
-      <circle cx="21" cy="16" r="2.5" fill="#5bbccf"/>
+      <defs>
+        <linearGradient id="displayScreenGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fca5d0" />
+          <stop offset="50%" stopColor="#d8b4fe" />
+          <stop offset="100%" stopColor="#93c5fd" />
+        </linearGradient>
+      </defs>
+      {/* Outer monitor body */}
+      <rect x="3" y="3" width="26" height="20" fill="#e8e2d8" stroke="#1a1a1a" strokeWidth="2"/>
+      {/* Screen viewport with wallpaper */}
+      <rect x="5" y="5" width="22" height="11" fill="url(#displayScreenGrad)"/>
+      {/* Pixel art sun / clouds on screen */}
+      <rect x="18" y="7" width="5" height="4" fill="#fef08a"/>
+      <rect x="7" y="11" width="8" height="3" fill="#ffffff" opacity="0.9"/>
+      <rect x="9" y="9" width="4" height="2" fill="#ffffff" opacity="0.9"/>
+      {/* Thick horizontal divider bar matching reference image */}
+      <rect x="3" y="16" width="26" height="2" fill="#1a1a1a"/>
+      {/* Bottom chin bezel */}
+      <rect x="5" y="18" width="22" height="3" fill="#ded8cd"/>
+      {/* Power LED and button */}
+      <rect x="22" y="19" width="3" height="1.5" fill="#38f088"/>
+      <rect x="7" y="19" width="2" height="1.5" fill="#9c968b"/>
+      {/* Stand neck */}
+      <rect x="13" y="23" width="6" height="4" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="2"/>
+      {/* Stand base */}
+      <rect x="9" y="27" width="14" height="3" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="2"/>
+      <rect x="11" y="28" width="10" height="1" fill="#9c968b"/>
     </svg>
   );
 }
