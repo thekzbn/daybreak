@@ -1279,32 +1279,42 @@ button {
 }
 
 /* ============================================================
-   MACOS-STYLE RETRO FLOATING DOCK (At Bottom Screen)
+   Y2K PIXELATED RETRO FLOATING DOCK (At Bottom Screen)
    ============================================================ */
 .macos-dock {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   height: 52px;
-  padding: 4px 10px;
-  background: rgba(222, 216, 205, 0.92);
-  backdrop-filter: blur(8px);
-  border: 1px solid #1a1a1a;
-  border-radius: 8px;
+  padding: 3px 8px;
+  background: #ded8cd;
+  border: 2px solid #1a1a1a;
+  border-radius: 0;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   z-index: 60;
   box-shadow:
-    inset 1px 1px 0 #ffffff,
-    inset -1px -1px 0 #9c968b,
-    0 8px 24px rgba(0, 0, 0, 0.35);
+    inset 2px 2px 0 #ffffff,
+    inset -2px -2px 0 #80786e,
+    3px 3px 0 rgba(0, 0, 0, 0.45);
+  image-rendering: pixelated;
+}
+
+.macos-dock::before {
+  content: "";
+  display: block;
+  width: 3px;
+  height: 28px;
+  background: #80786e;
+  border-right: 1px solid #ffffff;
+  margin-right: 2px;
 }
 
 .dock-item {
   position: relative;
-  width: 42px;
+  width: 40px;
   height: 42px;
   border: 1px solid transparent;
   background: transparent;
@@ -1314,15 +1324,24 @@ button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  image-rendering: pixelated;
+  transition: transform 0.08s step-end;
 }
 
 .dock-item:hover {
-  transform: translateY(-8px) scale(1.18);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px dashed #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: inset 1px 1px 0 #ffffff;
 }
 
 .dock-item:active {
-  transform: translateY(-4px) scale(1.08);
+  background: #c8c0b2;
+  border: 1px solid #1a1a1a;
+  transform: translateY(0);
+  box-shadow:
+    inset 1px 1px 0 #000000,
+    inset -1px -1px 0 #ffffff;
 }
 
 .dock-icon-wrapper {
@@ -1333,42 +1352,49 @@ button {
 }
 
 .dock-icon-wrapper svg {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
 }
 
-/* Running/Active Dot Indicator underneath icon */
+/* Retro Pixel LED Indicator underneath active apps */
 .dock-active-dot {
   position: absolute;
-  bottom: 1px;
-  width: 4px;
-  height: 4px;
+  bottom: 2px;
+  width: 6px;
+  height: 3px;
   background: #168ea8;
-  border-radius: 50%;
-  box-shadow: 0 0 4px #168ea8;
+  border-radius: 0;
+  border: 1px solid #0a404c;
+  box-shadow: 0 1px 0 #ffffff;
 }
 
 .dock-active-dot.focused {
-  background: #f0be6a;
-  box-shadow: 0 0 6px #f0be6a;
+  background: #38f088;
+  border: 1px solid #106030;
+  box-shadow: 0 0 0 1px #1a1a1a;
 }
 
-/* Tooltip on Hover */
+/* Classic Windows 95/98 Pale Yellow Pixel Tooltip on Hover */
 .dock-tooltip {
   position: absolute;
-  bottom: 50px;
-  background: #1a1a1a;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  padding: 2px 8px;
-  font-size: 11px;
-  font-weight: bold;
+  bottom: 48px;
+  background: #ffffe1;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 0;
+  padding: 2px 6px;
+  font-family: 'W95FA', monospace;
+  font-size: 12px;
+  letter-spacing: 0.3px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.12s, transform 0.12s;
+  transform: translateY(2px);
+  transition: opacity 0.08s;
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+  image-rendering: pixelated;
+  z-index: 100;
 }
 
 .dock-item:hover .dock-tooltip {
@@ -1376,13 +1402,13 @@ button {
   transform: translateY(0);
 }
 
-/* Divider before Trash in Dock */
+/* Retro Etched Divider */
 .dock-divider {
-  width: 1px;
-  height: 32px;
-  background: #9c968b;
+  width: 2px;
+  height: 30px;
+  border-left: 1px solid #80786e;
   border-right: 1px solid #ffffff;
-  margin: 0 2px;
+  margin: 0 3px;
 }
 
 /* ============================================================
