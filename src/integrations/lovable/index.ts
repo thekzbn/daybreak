@@ -3,12 +3,18 @@
 import { createLovableAuth } from "@lovable.dev/cloud-auth-js";
 import type { OAuthProvider } from "@lovable.dev/cloud-auth-js";
 import { supabase } from "../supabase/client";
-const lovableAuth = createLovableAuth();
+
+const lovableAuth = createLovableAuth({
+  oauthBrokerUrl: "https://oauth.lovable.app/initiate",
+});
 
 type SignInOptions = {
   redirect_uri?: string;
   extraParams?: Record<string, string>;
 };
+
+const LOVABLE_PROJECT_ID =
+  import.meta.env["VITE_LOVABLE_PROJECT_ID"] || "85be506b-c0e8-47c3-9d1c-4f416fb6d5e9";
 
 export const lovable = {
   auth: {
@@ -17,19 +23,17 @@ export const lovable = {
         ...opts,
         extraParams: {
           ...opts?.extraParams,
+          project_id: LOVABLE_PROJECT_ID,
         },
       });
 
-      if (result.redirected) {
-        return result;
-      }
-
-      if (result.error) {
-        return result;
-      }
+      if (result.redirected) return result;
+      if (result.error) return result;
 
       try {
-        await supabase.auth.setSession(result.tokens);
+        if (result.tokens) {
+          await supabase.auth.setSession(result.tokens);
+        }
       } catch (e) {
         return { error: e instanceof Error ? e : new Error(String(e)) };
       }
