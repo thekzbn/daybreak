@@ -31,7 +31,7 @@ type Expense = Tables<"expenses">;
 type Category = Tables<"budget_categories">;
 
 /* ============================================================
-   AUTHENTIC PIXEL ART SVGS (Colored & Styled from Reference)
+   AUTHENTIC PIXEL ART SVGS (Colored & Styled for Daybreak OS)
    ============================================================ */
 function AccountIcon() {
   return (
@@ -97,7 +97,7 @@ function LogbookIcon() {
       <rect x="5" y="3" width="14" height="7" fill="#f4ece1"/>
       <rect x="14" y="4" width="3" height="5" fill="#3a72c4"/>
       <rect x="6" y="14" width="12" height="7" fill="#ffffff"/>
-      <circle x="12" y="17.5" r="2.5" cx="12" cy="17.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <circle cx="12" cy="17.5" r="2.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
     </svg>
   );
 }
@@ -152,29 +152,30 @@ function DisplayIcon() {
   );
 }
 
+/* App definitions with canonical names strictly from the Daybreak prompt */
 const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode }> = {
-  focus:   { label: "Catalog",   renderIcon: () => <FocusIcon /> },
-  timer:   { label: "Winamp",    renderIcon: () => <TimerIcon /> },
-  notes:   { label: "Size Chart",renderIcon: () => <NotesIcon /> },
-  reading: { label: "About Us",  renderIcon: () => <ReadingIcon /> },
-  budget:  { label: "TikTok",    renderIcon: () => <BudgetIcon /> },
-  archive: { label: "Wishlist",  renderIcon: () => <LogbookIcon /> },
-  display: { label: "Display",   renderIcon: () => <DisplayIcon /> },
-  account: { label: "Contact",   renderIcon: () => <AccountIcon /> },
-  trash:   { label: "Cart",      renderIcon: () => <BinIcon /> },
+  focus:   { label: "Daily 3",      renderIcon: () => <FocusIcon /> },
+  timer:   { label: "Focus Timer",  renderIcon: () => <TimerIcon /> },
+  notes:   { label: "Scratch Note", renderIcon: () => <NotesIcon /> },
+  reading: { label: "Reading Shelf",renderIcon: () => <ReadingIcon /> },
+  budget:  { label: "Budget Ledger",renderIcon: () => <BudgetIcon /> },
+  archive: { label: "Logbook",      renderIcon: () => <LogbookIcon /> },
+  display: { label: "Display",      renderIcon: () => <DisplayIcon /> },
+  account: { label: "Account",      renderIcon: () => <AccountIcon /> },
+  trash:   { label: "Recycle Bin",  renderIcon: () => <BinIcon /> },
 };
 
-// Default layout matching reference image: 2 columns on the bottom left, plus 2 top-right
+// Default layout matching reference: 2 columns on the left
 const ICON_DEFAULTS: Record<AppId, { x: number; y: number }> = {
-  focus:   { x: 32,  y: 420 },
-  account: { x: 96,  y: 420 },
-  budget:  { x: 160, y: 420 },
-  archive: { x: 224, y: 420 },
-  display: { x: 32,  y: 500 },
-  timer:   { x: 96,  y: 500 },
-  reading: { x: 880, y: 150 },
-  notes:   { x: 880, y: 60 },
-  trash:   { x: 224, y: 500 },
+  focus:   { x: 28,  y: 60 },
+  timer:   { x: 28,  y: 160 },
+  notes:   { x: 28,  y: 260 },
+  reading: { x: 28,  y: 360 },
+  budget:  { x: 28,  y: 460 },
+  archive: { x: 120, y: 60 },
+  display: { x: 120, y: 160 },
+  account: { x: 120, y: 260 },
+  trash:   { x: 120, y: 360 },
 };
 
 const today = () => new Date().toLocaleDateString("en-CA");
@@ -228,44 +229,44 @@ function LoginWindow() {
 
   return (
     <main className="boot-screen wallpaper-pastel-cyber" style={{ display: "grid", placeItems: "center", minHeight: "100vh" }}>
-      <section className="app-window" style={{ width: "min(520px, 94vw)", position: "relative" }} aria-label="Daybreak account">
+      <section className="app-window" style={{ width: "min(500px, 94vw)", position: "relative" }} aria-label="Daybreak account">
         <div className="titlebar">
-          <span className="titlebar-title">Daybreak Account - Sign In</span>
+          <span className="titlebar-title">Daybreak Account</span>
           <div className="window-controls">
             <button>?</button>
             <button className="close-btn">×</button>
           </div>
         </div>
-        <div className="window-body" style={{ padding: "20px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px", borderBottom: "1px solid #1a1a1a", paddingBottom: "12px" }}>
-            <div style={{ width: "40px", height: "40px" }}><AccountIcon /></div>
+        <div className="window-body" style={{ padding: "18px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px", borderBottom: "1px solid #1a1a1a", paddingBottom: "10px" }}>
+            <div style={{ width: "36px", height: "36px" }}><AccountIcon /></div>
             <div>
-              <h2 style={{ margin: 0, fontSize: "16px" }}>{mode === "signin" ? "Sign in to Daybreak" : mode === "signup" ? "Create your account" : "Reset password"}</h2>
+              <h2 style={{ margin: 0, fontSize: "15px" }}>{mode === "signin" ? "Sign in to Daybreak" : mode === "signup" ? "Create your account" : "Reset password"}</h2>
               <span style={{ fontSize: "12px", color: "var(--muted-ink)" }}>{status}</span>
             </div>
           </div>
           <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {mode === "signup" && (
-              <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <label style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
                 Display name
                 <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={60} />
               </label>
             )}
-            <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            <label style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
               Email address
               <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
             </label>
             {mode !== "forgot" && (
-              <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <label style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
                 Password
                 <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
               </label>
             )}
-            <div style={{ display: "flex", gap: "8px", marginTop: "6px" }}>
+            <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
               <RetroButton className="retro-button-accent" disabled={busy} type="submit">{busy ? "Please wait..." : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}</RetroButton>
               {mode !== "forgot" && <RetroButton type="button" onClick={google}>G Continue with Google</RetroButton>}
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px", fontSize: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px", fontSize: "12px" }}>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>{mode === "signup" ? "Already have an account? Sign in" : "Create new account"}</button>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "forgot" ? "signin" : "forgot")}>{mode === "forgot" ? "Back to sign in" : "Forgot password?"}</button>
             </div>
@@ -343,17 +344,17 @@ function OSWindow({
 }) {
   const [pos, setPos] = useState(() => {
     const offsets: Record<AppId, { x: number; y: number }> = {
-      focus:   { x: 140, y: 70 },
-      timer:   { x: 580, y: 70 },
-      notes:   { x: 260, y: 100 },
-      reading: { x: 220, y: 90 },
-      budget:  { x: 240, y: 80 },
-      archive: { x: 280, y: 95 },
-      display: { x: 300, y: 110 },
-      account: { x: 320, y: 100 },
-      trash:   { x: 340, y: 120 },
+      focus:   { x: 230, y: 60 },
+      timer:   { x: 670, y: 60 },
+      notes:   { x: 280, y: 90 },
+      reading: { x: 250, y: 80 },
+      budget:  { x: 270, y: 75 },
+      archive: { x: 290, y: 85 },
+      display: { x: 310, y: 100 },
+      account: { x: 330, y: 95 },
+      trash:   { x: 350, y: 110 },
     };
-    return offsets[id] ?? { x: 200, y: 80 };
+    return offsets[id] ?? { x: 240, y: 70 };
   });
 
   const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(null);
@@ -384,7 +385,7 @@ function OSWindow({
         onPointerUp={() => { drag.current = null; }}
       >
         <span className="titlebar-title">
-          {id === "focus" ? "Women - Daily 3 Focus" : id === "timer" ? "Winamp" : id === "notes" ? "Size Chart - Scratch Note" : id === "reading" ? "About Us - Reading Shelf" : id === "budget" ? "TikTok - Budget Ledger" : id === "archive" ? "Wishlist - Logbook" : APP_META[id].label}
+          {APP_META[id].label}
         </span>
         <div className="window-controls">
           <button
@@ -465,16 +466,6 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
 
   return (
     <div className="focus-content">
-      {/* Top Search Bar (like Women window in reference) */}
-      <div style={{ display: "flex", gap: "6px", alignItems: "center", borderBottom: "1px solid #1a1a1a", paddingBottom: "8px" }}>
-        <button className="retro-button" style={{ width: "24px", height: "24px", padding: 0 }}>◀</button>
-        <button className="retro-button" style={{ width: "24px", height: "24px", padding: 0 }}>▶</button>
-        <div style={{ flex: 1, border: "1px solid #1a1a1a", padding: "2px 8px", background: "#ffffff", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ color: "var(--muted-ink)", fontSize: "12px" }}>Search / Focus task filter...</span>
-          <Search size={14} color="var(--muted-ink)" />
-        </div>
-      </div>
-
       <div className="focus-header">
         <div>
           <span className="eyebrow">TODAY'S PRIORITY LOCK</span>
@@ -511,7 +502,7 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder={recommended.length < 3 ? "Add a daily priority item..." : "Add an extra item..."}
+          placeholder={recommended.length < 3 ? "Add a primary priority..." : "Add an extra task..."}
           maxLength={240}
         />
         <RetroButton className="retro-button-accent" type="submit" size="icon"><Plus size={14} /></RetroButton>
@@ -521,7 +512,7 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
         <div className="victory-dialog">
           <div className="confetti">✦ ▪ ✧ ▪ ✦</div>
           <strong>MISSION COMPLETE!</strong>
-          <span style={{ fontSize: "13px" }}>All three primary items are completed today.</span>
+          <span style={{ fontSize: "13px" }}>All 3 primary priorities are finished.</span>
           <RetroButton className="retro-button-accent" onClick={() => setVictoryDismissed(true)}>OK</RetroButton>
         </div>
       )}
@@ -1065,7 +1056,7 @@ function DaybreakOS({ session }: { session: Session }) {
     return (
       <div style={{ textAlign: "center", padding: "20px" }}>
         <div style={{ width: "60px", height: "60px", margin: "0 auto 8px" }}><BinIcon /></div>
-        <h3 style={{ fontSize: "18px", margin: "0 0 6px" }}>Recycle Bin</h3>
+        <h3 style={{ fontSize: "16px", margin: "0 0 6px" }}>Recycle Bin</h3>
         <p style={{ fontSize: "13px" }}>{balloon.includes("deleted") ? "1 crumpled item in bin" : "The bin is empty."}</p>
         <RetroButton className="retro-button-accent" onClick={() => { sound("trash"); setBalloon("Recycle Bin emptied with a crunch."); }}>Empty Bin</RetroButton>
       </div>
@@ -1087,11 +1078,11 @@ function DaybreakOS({ session }: { session: Session }) {
             <span>daybreak</span>
           </div>
           <nav className="top-nav-links">
-            <button className={`top-nav-btn ${active === "focus" && open.includes("focus") ? "active" : ""}`} onClick={() => launch("focus")}>Women</button>
+            <button className={`top-nav-btn ${active === "focus" && open.includes("focus") ? "active" : ""}`} onClick={() => launch("focus")}>Daily 3</button>
             <button className={`top-nav-btn ${active === "timer" && open.includes("timer") ? "active" : ""}`} onClick={() => launch("timer")}>Timer</button>
-            <button className={`top-nav-btn ${active === "notes" && open.includes("notes") ? "active" : ""}`} onClick={() => launch("notes")}>Size Chart</button>
-            <button className={`top-nav-btn ${active === "reading" && open.includes("reading") ? "active" : ""}`} onClick={() => launch("reading")}>About Us</button>
-            <button className={`top-nav-btn ${active === "budget" && open.includes("budget") ? "active" : ""}`} onClick={() => launch("budget")}>Chat</button>
+            <button className={`top-nav-btn ${active === "notes" && open.includes("notes") ? "active" : ""}`} onClick={() => launch("notes")}>Scratch Note</button>
+            <button className={`top-nav-btn ${active === "reading" && open.includes("reading") ? "active" : ""}`} onClick={() => launch("reading")}>Reading Shelf</button>
+            <button className={`top-nav-btn ${active === "budget" && open.includes("budget") ? "active" : ""}`} onClick={() => launch("budget")}>Ledger</button>
           </nav>
         </div>
         <div className="top-navbar-right">
