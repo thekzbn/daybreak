@@ -61,7 +61,7 @@ Every app is a standalone desktop application, not a web widget. Treat it as suc
 
 ---
 
-## 🛠️ Development Workflow
+## Development Workflow
 
 ### 1. Fork & Clone
 
@@ -117,7 +117,7 @@ Notify the user with a retro chime sound when a 25-minute Pomodoro timer conclud
 
 ---
 
-## 📬 Submitting a Pull Request
+## Submitting a Pull Request
 
 1. Push your branch to your fork:
    ```bash
@@ -129,7 +129,7 @@ Notify the user with a retro chime sound when a 25-minute Pomodoro timer conclud
 
 ---
 
-## 💬 Community & Questions
+## Community and Questions
 
 If you have questions or want to discuss a new feature before building it, feel free to open a Discussion or an Issue on GitHub.
 
