@@ -1,5 +1,21 @@
 {
-  "name": "tanstack_start_ts",
+  "name": "daybreak-command-centre",
+  "version": "1.0.0",
+  "description": "A vintage Y2K personal command centre desktop OS web application",
+  "license": "MIT",
+  "author": "Ayomide Deji-Adeyale",
+  "keywords": [
+    "y2k",
+    "desktop-os",
+    "command-centre",
+    "retro-ui",
+    "productivity",
+    "pomodoro",
+    "tanstack-start",
+    "supabase",
+    "react19",
+    "tailwindcss"
+  ],
   "private": true,
   "sideEffects": false,
   "type": "module",

@@ -1,84 +1,156 @@
-# Daybreak Command Centre
+# 🌅 Daybreak Command Centre
 
-Project Name: daybreak
+> A vintage **Pastel Cyber Y2K Personal Command Centre Desktop OS** designed for mindful daily productivity.
 
-Build a personal command centre web application called daybreak in a vintage Y2K desktop OS aesthetic based on the attached fashion website design.
-Font: @import url('https://fonts.cdnfonts.com/css/bit-cell'); font-family: 'Bit Cell', sans-serif;
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![TanStack Start](https://img.shields.io/badge/TanStack_Start-1.168-orange)](https://tanstack.com/start)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_DB-3ecf8e?logo=supabase)](https://supabase.com/)
+[![Lovable](https://img.shields.io/badge/Built_with-Lovable-ff557f)](https://lovable.dev)
 
-Design & architectural constraints:
-- No cards
-- No toast notifications
-- No em dashes
-- No dashboards
-- Aesthetic: Pastel Cyber Y2K with soft pink/lilac gradient wallpaper, chrome beveled window bars, pixel art icons, and retro drop shadows.
-- Built-in Display Properties window accessible from desktop to switch between vintage wallpapers (Pastel Cyber, Retro Tech Grid, Vintage Lavender, Pixel Clouds).
-- Bottom Windows 98 style taskbar featuring active window buttons, sound mute toggle, and system tray.
-- Tray clock formatted in 12-hour AM/PM time with date tooltip.
-- Pinned desktop homescreen widget featuring a large retro 12-hour digital clock.
-- Start button functions as a spotlight-style quick launcher and search menu. No Shut Down option.
-- Double-click desktop icons to launch windows; single click selects.
-- Windows 98 balloon tooltips and retro beveled modal dialogs for all system feedback (zero modern toasts).
-- Recycle Bin on desktop with a retro crush/compact animation when items are deleted.
-- Authentic retro sound effects (mechanical clicks, window swooshes, crumple sound) with an instant mute toggle in the system tray.
-- Responsive mobile mode: switches to Pocket OS layout with full-screen retro windows and bottom tab navigation.
+---
 
-Authentication & Backend Setup:
-- Implement authentication and cloud backend first.
-- The sign in module must also be an "app" window with the exact vintage Y2K OS aesthetic (retro login dialog box with pixel inputs and classic beveled buttons).
-- Ensure auth works properly with redirect URLs configured for localhost, daybreak.thekzbn.name.ng, and Vercel preview/production domains.
-- Persist all user data (tasks, notes, stickies, budget logs, reading shelf) scoped per authenticated user in the cloud database.
+## 🖥️ Overview
 
-Core Feature Windows:
+**Daybreak** reimagines personal productivity as a tactile, nostalgic operating system from the turn of the millennium. Built with chrome beveled window bars, pixel art icons, W95FA typography, and pastel cyber wallpapers, Daybreak combines daily focus planning, time tracking, note taking, reading lists, and budget management into an immersive desktop experience.
 
-1. Daily 3 Focus:
-- Recommends 3 primary items for the day while allowing extra tasks if needed.
-- Supports single active focus with a ticking timer, side-by-side checklist, and strict priority locking.
-- Pixel victory modal dialog with 8-bit confetti animation and victory chime upon completing all three recommended items.
+---
 
-2. One Build in Progress:
-- Kept on hold for now.
+## ✨ Features & Built-in Apps
 
-3. Build Focus Timer (Winamp Skin):
-- Repurposed authentic Winamp player skin acting as the primary work timer.
-- Dual mode: count-up stopwatch and 25/50 minute Pomodoro countdown blocks.
-- Animated multi-band dancing LED spectrum analyzer and glowing green digital LED counter.
-- Tactile retro controls for play, pause, and reset.
+| App | Description |
+| :--- | :--- |
+| **🎯 Daily 3 Focus** | Pick up to 3 high-impact priorities for the day. Includes side-by-side execution checklist, single-item focus mode with live timer, strict priority locking, and an 8-bit confetti victory screen upon completion. |
+| **⚡ Focus Timer (Winamp)** | Repurposed vintage Winamp player skin acting as your primary timer. Features dual modes (Stopwatch and 25m/50m Pomodoro blocks), animated dancing LED spectrum analyzer, glowing green digits, and retro transport controls. |
+| **📝 Scratch Note & Stickies** | Pure plain-text Notepad with character counts and word wrap. Tear off pastel yellow/pink/cyan sticky notes and pin them anywhere freely across the desktop wallpaper. |
+| **📚 Reading Shelf** | A tactile wooden bookshelf capped at 5 active books. Click empty slots to add books with custom title, URL, and spine color. Click existing spines to pull them forward, view reading progress, or open external links. |
+| **💰 Budget Ledger** | Dual-pane envelope budgeting. Calculates daily burn allowance from monthly surplus with dynamic daily rollover (unspent rolls over, overspending reduces tomorrow's allowance). |
+| **💾 Midnight Archive (Logbook)** | Automatically derives day rollover so each morning starts clean. Features a monthly calendar where clicking past dates reveals tasks, focus time, notes, and spend logs. Download daily logs via the 3.5-inch floppy disk export. |
+| **🖥️ Display Properties** | Switch between vintage wallpaper themes: *Pastel Cyber*, *Retro Tech Grid*, *Vintage Lavender*, and *Pixel Clouds*. |
+| **🪟 Desktop OS Environment** | Draggable desktop icons with lavender pill labels, right-click desktop context menu, retro macOS-style floating dock with active indicators, top system bar with live time, sound effects toggle, and custom pixel cursors. |
 
-4. Quick Scratch Note (Notepad):
-- Authentic Notepad window with pure plain text, Bit Cell font, character count in status bar, and word wrap (no line numbers).
-- Ability to tear off pastel sticky notes and pin them freely across the desktop wallpaper.
+---
 
-5. Reading Queue (Wooden Bookshelf):
-- Strict capped queue (maximum 5 items) displayed as a literal wooden bookshelf with pixel-art book spines.
-- Clicking any empty wooden slot opens a prompt to place a new book with title, URL, and spine color.
-- Clicking an existing book spine pulls it forward to display reading progress and open the link.
+## 🎨 Design & Aesthetic Guidelines
 
-6. Midnight Archive & Clean Slate:
-- Automatically archives the day at midnight so each morning starts clean.
-- Monthly calendar logbook window where clicking any past date reveals that day's completed tasks, total focus time, notes, and spend log.
-- Desktop 3.5-inch floppy disk icon to export and download the complete daily logbook as a clean text file.
+- **Typography**: Authentic vintage Windows 95 font [`W95FA`](https://fonts.cdnfonts.com/css/w95fa) across all interfaces.
+- **Pixel Art Cursors**: Integrated retro pointer and default cursors from `pixelarticons.com`.
+- **Zero Modern Clutter**: No cards, no modern toast notifications (uses retro beveled dialogs & balloon hints), no em dashes, and no modern dashboards.
+- **Window Management**: Full windowing system with dragging, minimize, maximize/restore, and close controls.
 
-7. Budgeting Ledger (Dual-Pane):
-- Top pane: Daily burn allowance calculated from monthly surplus divided by remaining days, factoring in customizable saving goals and dynamic daily rollover (unspent rolls over, overspend reduces tomorrow).
-- Bottom pane: Monthly spending categories with retro pixel icons, preset essential buckets, envelope budget pools, and retro progress fill bars.
+---
 
-This project was built with [Lovable](https://lovable.dev).
+## 🏗️ Architecture & Tech Stack
 
-## Build with Lovable
+```
+daybreak-command-centre/
+├── src/
+│   ├── components/
+│   │   ├── daybreak/
+│   │   │   └── DaybreakDesktop.tsx     # Core Desktop OS & Window Manager
+│   │   └── ui/                         # Base UI components
+│   ├── integrations/
+│   │   └── supabase/                   # Supabase client & auth middleware
+│   ├── routes/
+│   │   ├── __root.tsx                  # Root layout & context providers
+│   │   ├── index.tsx                   # Main Desktop route
+│   │   └── reset-password.tsx          # Password recovery flow
+│   ├── styles.css                      # Retro themes, cursors, bevels & animations
+│   ├── router.tsx                      # TanStack Router configuration
+│   └── start.ts                        # TanStack Start entrypoint
+├── supabase/
+│   ├── config.toml                     # Supabase local configuration
+│   └── migrations/                     # SQL schemas & Row-Level Security (RLS)
+├── public/                             # Static assets, audio & icons
+└── package.json
+```
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/85be506b-c0e8-47c3-9d1c-4f416fb6d5e9).
+- **Frontend Framework**: React 19 + TanStack Start / Vite
+- **Styling**: Tailwind CSS v4 + Custom Retro CSS rules
+- **Backend & Database**: Supabase (PostgreSQL with Row-Level Security)
+- **Authentication**: Supabase Cloud Auth (Email / Password)
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+---
 
-## Development
+## 🚀 Getting Started
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+### Prerequisites
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+- **Node.js**: `v20+` or **Bun**: `v1.1+`
+- **npm** or **bun**
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/thekzbn/daybreak-command-centre.git
+cd daybreak-command-centre
+```
+
+### 2. Configure Environment Variables
+
+Copy `.env.example` to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Update `.env` with your Supabase credentials:
+
+```env
+VITE_SUPABASE_PROJECT_ID="your-project-id"
+VITE_SUPABASE_PUBLISHABLE_KEY="your-supabase-publishable-key"
+VITE_SUPABASE_URL="https://your-project-id.supabase.co"
+```
+
+### 3. Database Setup
+
+Apply the database migrations located in `supabase/migrations/` to your Supabase project:
+- Tables: `tasks`, `reading_queue`, `notes`, `stickies`, `expenses`, `budget_categories`, `budget_settings`, `profiles`.
+- All tables are protected by Row-Level Security (`auth.uid() = user_id`).
+
+### 4. Install Dependencies & Run
+
+Using **npm**:
+```bash
+npm install
 npm run dev
 ```
+
+Or using **Bun**:
+```bash
+bun install
+bun run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser to start your session.
+
+---
+
+## 📜 Available Scripts
+
+- `npm run dev` / `bun run dev` - Start the local development server with HMR.
+- `npm run build` / `bun run build` - Build production assets.
+- `npm run preview` / `bun run preview` - Preview the production build locally.
+- `npm run lint` / `bun run lint` - Run ESLint code checks.
+- `npm run format` / `bun run format` - Format code using Prettier.
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+Please review [CONTRIBUTING.md](CONTRIBUTING.md) and our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before opening pull requests.
+
+---
+
+## 🔒 Security
+
+If you discover a security vulnerability, please refer to [SECURITY.md](SECURITY.md) for reporting guidelines.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
