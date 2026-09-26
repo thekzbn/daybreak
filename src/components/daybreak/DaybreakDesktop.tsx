@@ -144,33 +144,9 @@ function BudgetIcon() {
 function DisplayIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="displayScreenGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fca5d0" />
-          <stop offset="50%" stopColor="#d8b4fe" />
-          <stop offset="100%" stopColor="#93c5fd" />
-        </linearGradient>
-      </defs>
-      {/* Outer monitor body */}
-      <rect x="3" y="3" width="26" height="20" fill="#e8e2d8" stroke="#1a1a1a" strokeWidth="2"/>
-      {/* Screen viewport with wallpaper */}
-      <rect x="5" y="5" width="22" height="11" fill="url(#displayScreenGrad)"/>
-      {/* Pixel art sun / clouds on screen */}
-      <rect x="18" y="7" width="5" height="4" fill="#fef08a"/>
-      <rect x="7" y="11" width="8" height="3" fill="#ffffff" opacity="0.9"/>
-      <rect x="9" y="9" width="4" height="2" fill="#ffffff" opacity="0.9"/>
-      {/* Thick horizontal divider bar matching reference image */}
-      <rect x="3" y="16" width="26" height="2" fill="#1a1a1a"/>
-      {/* Bottom chin bezel */}
-      <rect x="5" y="18" width="22" height="3" fill="#ded8cd"/>
-      {/* Power LED and button */}
-      <rect x="22" y="19" width="3" height="1.5" fill="#38f088"/>
-      <rect x="7" y="19" width="2" height="1.5" fill="#9c968b"/>
-      {/* Stand neck */}
-      <rect x="13" y="23" width="6" height="4" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="2"/>
-      {/* Stand base */}
-      <rect x="9" y="27" width="14" height="3" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="2"/>
-      <rect x="11" y="28" width="10" height="1" fill="#9c968b"/>
+      <path stroke="#000" strokeWidth="1" fill="#ded8cd" d="M8 27h16v3H8zm5-4h6v4h-6zM3 3h26v20H3z"/>
+      <path stroke="#000" strokeWidth="1" fill="#5bbccf" d="M5.5 5.5h21v11h-21z"/>
+      <path stroke="#000" strokeWidth="1" fill="#b8b0a2" d="M5.5 16.5h21v4h-21z"/>
     </svg>
   );
 }
