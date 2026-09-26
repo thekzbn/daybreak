@@ -1,10 +1,10 @@
-@import url('https://fonts.cdnfonts.com/css/bit-cell');
+@import url('https://fonts.cdnfonts.com/css/w95fa');
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
 
 @theme inline {
-  --font-sans: "Bit Cell", "Courier New", monospace;
+  --font-sans: 'W95FA', 'Courier New', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--panel);
@@ -17,7 +17,7 @@
   --color-secondary-foreground: var(--ink);
   --color-muted: var(--chrome-dark);
   --color-muted-foreground: var(--muted-ink);
-  --color-accent: var(--pink);
+  --color-accent: var(--amber);
   --color-accent-foreground: var(--ink);
   --color-destructive: var(--danger);
   --color-destructive-foreground: var(--paper);
@@ -27,49 +27,45 @@
 }
 
 /* ============================================================
-   DESIGN TOKENS — Authentic Y2K Fashion OS Palette
+   DESIGN TOKENS — Exact Match to Y2K Reference Image
    ============================================================ */
 :root {
   --radius: 0;
 
-  /* Warm beige-grey OS chrome (matches the reference image) */
+  /* Classic warm beige-grey desktop chrome (from reference image) */
   --chrome:        #ded8cd;
   --chrome-light:  #ffffff;
   --chrome-mid:    #e8e2d7;
   --chrome-dark:   #9c968b;
-  --chrome-shadow: #1c1a17;
+  --chrome-shadow: #1a1a1a;
   --panel:         #ded8cd;
 
   /* Content area */
   --paper:         #ffffff;
   --ink:           #141210;
   --muted-ink:     #6b655b;
-  --border:        #1c1a17;
+  --border:        #1a1a1a;
 
-  /* Titlebar palette */
-  --tb-bg:         #ded8cd;
-  --tb-active:     #e8e1d5;
-  --tb-accent:     #1b8fa8;
-
-  /* Authentic retro accents */
+  /* Vibrant Y2K Accents (exact match to reference) */
+  --teal:          #168ea8;
+  --teal-light:    #5bbccf;
+  --teal-soft:     #e2f3f7;
+  --amber:         #f0be6a;
+  --amber-light:   #fcdca0;
+  --amber-soft:    #fef7e8;
   --pink:          #f29ab8;
   --pink-soft:     #fcdbe7;
   --lilac:         #b8a4dc;
-  --teal:          #1b8fa8;
-  --teal-light:    #5bbccf;
-  --teal-soft:     #d4f2f7;
-  --amber:         #f0be6a;
-  --amber-soft:    #fdf1d6;
+  --lilac-soft:    #eee7fa;
   --danger:        #d94d43;
   --wood:          #704526;
   --wood-dark:     #4d2f19;
   --led-green:     #38f088;
   --led-cyan:      #00e5ff;
-  --led-amber:     #ffb834;
+  --led-orange:    #ff8e68;
 
-  /* Gradient wallpaper stops */
+  /* Wallpaper gradient stops */
   --wp-pink:       #f7c6d7;
-  --wp-mid:        #e0bcdc;
   --wp-lilac:      #bba6df;
 
   /* Tailwind mappings */
@@ -78,32 +74,28 @@
 }
 
 /* ============================================================
-   BASE TYPOGRAPHY & RESET
-   Bit Cell is a bitmap font: needs 20px-24px base size for
-   sharp, crystal-clear, comfortable reading!
+   BASE TYPOGRAPHY & RESET — Using W95FA System Font
    ============================================================ */
 * {
   box-sizing: border-box;
-  image-rendering: pixelated;
 }
 
 html {
-  font-size: 20px;
-  line-height: 1.25;
+  font-size: 14px;
+  line-height: 1.35;
 }
 
 html, body, #root {
   margin: 0;
   min-height: 100%;
-  font-family: "Bit Cell", "Courier New", monospace;
-  letter-spacing: 0.5px;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'W95FA', 'Courier New', monospace;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
 }
 
 button, input, textarea, select {
   font-family: inherit;
-  font-size: 20px;
+  font-size: 14px;
   letter-spacing: inherit;
 }
 
@@ -122,9 +114,9 @@ button {
 .wallpaper-retro-grid {
   background-color: #1a162b;
   background-image:
-    linear-gradient(rgba(27, 143, 168, 0.45) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(27, 143, 168, 0.45) 1px, transparent 1px),
-    linear-gradient(145deg, transparent 20%, rgba(242, 154, 184, 0.4));
+    linear-gradient(rgba(22, 142, 168, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 142, 168, 0.4) 1px, transparent 1px),
+    linear-gradient(145deg, transparent 20%, rgba(242, 154, 184, 0.35));
   background-size: 32px 32px, 32px 32px, 100% 100%;
 }
 
@@ -154,21 +146,22 @@ button {
   position: relative;
 }
 
-/* Top Navigation Bar (from the reference image!) */
+/* ============================================================
+   TOP NAVIGATION BAR (Exact match to Reference Image!)
+   ============================================================ */
 .top-navbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 38px;
-  background: var(--chrome-mid);
-  border-bottom: 2px solid var(--chrome-shadow);
+  height: 34px;
+  background: #eae4d8;
+  border-bottom: 1px solid var(--chrome-shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 12px 0 0;
   z-index: 50;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .top-navbar-left {
@@ -178,17 +171,18 @@ button {
 }
 
 .top-brand {
-  font-size: 26px;
+  font-size: 16px;
   font-weight: bold;
-  color: var(--teal);
+  font-style: italic;
+  color: #168ea8;
   padding: 0 18px;
   display: flex;
   align-items: center;
   gap: 6px;
-  border-right: 2px solid var(--chrome-dark);
+  border-right: 1px solid var(--chrome-shadow);
   height: 100%;
-  background: var(--chrome);
-  text-shadow: 1px 1px 0 #ffffff;
+  background: #ded8cb;
+  letter-spacing: 0.5px;
 }
 
 .top-nav-links {
@@ -200,10 +194,10 @@ button {
 .top-nav-btn {
   height: 100%;
   border: 0;
-  border-right: 1px solid var(--chrome-dark);
+  border-right: 1px solid var(--chrome-shadow);
   background: transparent;
   padding: 0 16px;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: bold;
   color: var(--ink);
   display: flex;
@@ -213,7 +207,7 @@ button {
 }
 
 .top-nav-btn:hover {
-  background: var(--chrome-light);
+  background: #ffffff;
   color: var(--teal);
 }
 
@@ -225,29 +219,32 @@ button {
 .top-navbar-right {
   display: flex;
   align-items: center;
-  gap: 16px;
-  font-size: 21px;
+  height: 100%;
+  font-size: 13px;
 }
 
 .top-sound-btn {
+  height: 100%;
   border: 0;
+  border-left: 1px solid var(--chrome-shadow);
   background: transparent;
-  padding: 4px;
+  padding: 0 12px;
   display: grid;
   place-items: center;
   color: var(--ink);
 }
 
 .top-sound-btn:hover {
-  color: var(--teal);
+  background: #ffffff;
 }
 
 .top-user-pill {
-  border: 2px solid;
-  border-color: var(--chrome-light) var(--chrome-shadow) var(--chrome-shadow) var(--chrome-light);
-  background: var(--chrome);
-  padding: 2px 12px;
-  font-size: 20px;
+  height: 100%;
+  border: 0;
+  border-left: 1px solid var(--chrome-shadow);
+  background: transparent;
+  padding: 0 14px;
+  font-size: 13px;
   font-weight: bold;
   color: var(--ink);
   display: flex;
@@ -255,64 +252,62 @@ button {
   gap: 6px;
 }
 
+.top-user-pill:hover {
+  background: #ffffff;
+}
+
 .top-clock-pill {
-  font-size: 21px;
+  height: 100%;
+  border-left: 1px solid var(--chrome-shadow);
+  padding: 0 16px;
+  font-size: 13px;
   font-weight: bold;
   color: var(--ink);
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 /* ============================================================
-   PINNED HOMESCREEN CLOCK WIDGET (Top Right of Wallpaper)
+   PINNED HOMESCREEN CLOCK WIDGET (Top Right)
    ============================================================ */
 .homescreen-clock-widget {
   position: absolute;
-  top: 54px;
+  top: 50px;
   right: 28px;
   text-align: right;
   color: #ffffff;
-  text-shadow: 2px 2px 0 rgba(28, 26, 23, 0.7), 0 0 16px rgba(184, 164, 220, 0.9);
+  text-shadow: 1px 1px 0 #1a1a1a, 0 0 12px rgba(184, 164, 220, 0.8);
   pointer-events: none;
   z-index: 5;
 }
 
 .homescreen-clock-time {
-  font-size: 48px;
+  font-size: 38px;
   font-weight: bold;
   line-height: 1;
 }
 
 .homescreen-clock-date {
-  font-size: 22px;
+  font-size: 15px;
   margin-top: 4px;
   opacity: 0.95;
 }
 
 /* ============================================================
-   DESKTOP ICONS (Draggable, Authentic Pixel Graphics)
+   DESKTOP ICONS (With Lavender Pill Label Background)
    ============================================================ */
 .desktop-icon {
   position: absolute;
   border: 1px solid transparent;
   background: transparent;
-  width: 90px;
-  min-height: 96px;
-  padding: 6px 4px;
-  color: #ffffff;
-  text-shadow:
-    1px 1px 0 #1c1a17,
-    -1px -1px 0 #1c1a17,
-    1px -1px 0 #1c1a17,
-    -1px 1px 0 #1c1a17,
-    2px 2px 2px rgba(0, 0, 0, 0.8);
+  width: 78px;
+  min-height: 82px;
+  padding: 4px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 1.15;
-  text-align: center;
+  gap: 4px;
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -323,78 +318,80 @@ button {
   cursor: grabbing;
 }
 
-.desktop-icon:hover {
-  background: rgba(27, 143, 168, 0.25);
-  border: 1px dashed rgba(255, 255, 255, 0.6);
+.desktop-icon:hover .icon-label-pill {
+  background: #ffffff;
+  color: #1a1a1a;
+  border-color: #1a1a1a;
 }
 
-.desktop-icon.selected {
-  background: rgba(27, 143, 168, 0.55);
-  border: 1px dashed #ffffff;
+.desktop-icon.selected .icon-label-pill {
+  background: #168ea8;
+  color: #ffffff;
+  border-color: #1a1a1a;
 }
 
-/* Pixel art icon box */
-.pixel-icon {
-  width: 56px;
-  height: 56px;
+/* Pixel Art Icon Graphics Container */
+.pixel-icon-box {
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  box-shadow: 2px 2px 0 #1c1a17;
-  color: #141210;
+  filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.35));
   transition: transform 0.08s;
 }
 
-.desktop-icon:hover .pixel-icon {
-  transform: scale(1.05);
+.desktop-icon:hover .pixel-icon-box {
+  transform: scale(1.08);
 }
 
-.pixel-icon svg {
-  width: 32px;
-  height: 32px;
-  stroke-width: 2.2;
+.pixel-icon-box svg {
+  width: 40px;
+  height: 40px;
 }
 
-/* Specific icon background accents (matching reference vibe) */
-.icon-focus   { background: #f29ab8; }
-.icon-timer   { background: #f0be6a; }
-.icon-notes   { background: #7cd5a8; }
-.icon-reading { background: #b8a4dc; }
-.icon-budget  { background: #5bbccf; }
-.icon-archive { background: #5086ec; }
-.icon-display { background: #f7a46e; }
-.icon-account { background: #e8a0c8; }
-.icon-trash   { background: #88c278; }
+/* Pill label container (from reference image!) */
+.icon-label-pill {
+  background: rgba(238, 230, 246, 0.92);
+  border: 1px solid #9c90af;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #2b2238;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
+}
 
 /* ============================================================
    STICKY NOTES ON WALLPAPER
    ============================================================ */
 .sticky {
   position: absolute;
-  width: 200px;
-  height: 180px;
-  padding: 22px 14px 12px;
-  border: 2px solid #1c1a17;
-  box-shadow: 4px 5px 0 rgba(28, 26, 23, 0.4);
+  width: 180px;
+  height: 160px;
+  padding: 18px 12px 10px;
+  border: 1px solid #1a1a1a;
+  box-shadow: 3px 4px 0 rgba(28, 26, 23, 0.35);
   resize: none;
   z-index: 8;
-  font-size: 21px;
+  font-size: 14px;
   line-height: 1.4;
   outline: none;
 }
 
-.sticky-yellow { background: #fff280; }
+.sticky-yellow { background: #fff488; }
 .sticky-pink   { background: #fcdbe7; }
 .sticky-lilac  { background: #ebdfff; }
 .sticky-mint   { background: #d0f7dc; }
 
 /* ============================================================
-   OS WINDOWS — Clean retro beige-grey frame + 3D bevels
+   OS WINDOWS — Clean retro beige-grey frame + 1px black outline
    ============================================================ */
 .window-layer {
   position: absolute;
-  inset: 40px 0 44px;
+  inset: 36px 0 40px;
   pointer-events: none;
 }
 
@@ -403,21 +400,26 @@ button {
   top: 0;
   left: 0;
   pointer-events: auto;
-  width: min(660px, calc(100vw - 120px));
-  max-height: calc(100vh - 100px);
+  width: min(640px, calc(100vw - 120px));
+  max-height: calc(100vh - 90px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   z-index: 20;
   background: var(--chrome);
-  border: 2px solid;
-  border-color: var(--chrome-light) var(--chrome-shadow) var(--chrome-shadow) var(--chrome-light);
-  box-shadow: 4px 4px 0 rgba(28, 26, 23, 0.6);
+  border: 1px solid #1a1a1a;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b,
+    4px 4px 0 rgba(26, 26, 26, 0.5);
 }
 
 .app-window.active {
   z-index: 30;
-  box-shadow: 6px 6px 0 rgba(28, 26, 23, 0.75);
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b,
+    6px 6px 0 rgba(26, 26, 26, 0.7);
 }
 
 .app-window.maximized {
@@ -429,81 +431,80 @@ button {
 }
 
 /* Per-app width sizing */
-.window-timer   { width: 420px; }
-.window-notes   { width: 580px; }
-.window-reading { width: 680px; }
-.window-budget  { width: 700px; }
-.window-display, .window-account, .window-trash { width: 480px; }
+.window-timer   { width: 440px; }
+.window-notes   { width: 560px; }
+.window-reading { width: 660px; }
+.window-budget  { width: 680px; }
+.window-display, .window-account, .window-trash { width: 460px; }
 
 /* ============================================================
-   WINDOW TITLEBAR (Crisp, light, high-contrast Y2K style)
+   WINDOW TITLEBAR (Exact match to Reference Image!)
    ============================================================ */
 .titlebar {
-  height: 30px;
-  min-height: 30px;
+  height: 26px;
+  min-height: 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4px 0 10px;
-  background: var(--chrome-mid);
-  color: var(--ink);
-  border-bottom: 2px solid var(--chrome-shadow);
-  font-size: 22px;
+  padding: 0 4px 0 8px;
+  background: #ede7dc;
+  color: #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 14px;
   font-weight: bold;
   user-select: none;
   cursor: move;
 }
 
 .app-window.active .titlebar {
-  background: linear-gradient(90deg, #eae4d8 0%, #ded8cb 100%);
-  color: var(--ink);
+  background: #ede7dc;
+  color: #1a1a1a;
 }
 
 .app-window:not(.active) .titlebar {
-  background: #c7c1b5;
-  color: var(--muted-ink);
+  background: #ded8cb;
+  color: #7a7469;
 }
 
 .titlebar-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Control buttons: _ □ × */
+/* Control buttons: _ □ × (Square boxes with 1px border) */
 .window-controls {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   flex-shrink: 0;
 }
 
 .window-controls button {
-  width: 22px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   padding: 0;
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  background: var(--chrome);
-  color: var(--ink);
-  font-size: 16px;
+  border: 1px solid #1a1a1a;
+  background: #ded8cd;
+  color: #1a1a1a;
+  font-size: 12px;
   font-weight: bold;
   line-height: 1;
   display: grid;
   place-items: center;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b;
 }
 
 .window-controls button:active {
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
+  box-shadow:
+    inset 1px 1px 0 #9c968b,
+    inset -1px -1px 0 #ffffff;
   transform: translate(1px, 1px);
-}
-
-.window-controls .close-btn {
-  background: #eed8d8;
-  color: #a02020;
 }
 
 .window-controls .close-btn:hover {
@@ -511,53 +512,64 @@ button {
   color: #ffffff;
 }
 
-/* Window content container (white interior) */
+/* Window content container (white interior with 1px border) */
 .window-body {
   flex: 1;
   overflow: auto;
   background: #ffffff;
   color: var(--ink);
-  padding: 16px;
+  padding: 14px;
 }
 
 /* ============================================================
-   RETRO BUTTONS
+   RETRO BUTTONS (Amber / Gold / Beige from Reference)
    ============================================================ */
 .retro-button {
   border-radius: 0 !important;
-  border: 2px solid !important;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff !important;
-  background: linear-gradient(180deg, #f7f4ee 0%, var(--chrome) 100%) !important;
-  color: var(--ink) !important;
-  box-shadow: 1px 1px 0 #1c1a17 !important;
-  height: 34px;
-  padding: 0 14px !important;
-  font-size: 21px !important;
+  border: 1px solid #1a1a1a !important;
+  background: #ded8cd !important;
+  color: #1a1a1a !important;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b,
+    1px 1px 0 #1a1a1a !important;
+  height: 28px;
+  padding: 0 12px !important;
+  font-size: 13px !important;
   font-weight: bold !important;
-  letter-spacing: 0.5px !important;
 }
 
 .retro-button:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #eae4d8 100%) !important;
+  background: #eae4d8 !important;
 }
 
 .retro-button:active {
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17 !important;
-  box-shadow: none !important;
+  box-shadow:
+    inset 1px 1px 0 #9c968b,
+    inset -1px -1px 0 #ffffff !important;
   transform: translate(1px, 1px);
 }
 
+/* Yellow/Amber primary CTA button (Add to Cart style in reference) */
 .retro-button-accent {
-  background: linear-gradient(180deg, #fcd285 0%, var(--amber) 100%) !important;
+  background: var(--amber) !important;
+  box-shadow:
+    inset 1px 1px 0 #fff0c0,
+    inset -1px -1px 0 #b08020,
+    1px 1px 0 #1a1a1a !important;
+}
+
+.retro-button-accent:hover {
+  background: #f5cb7e !important;
 }
 
 /* ============================================================
-   DAILY 3 FOCUS WINDOW
+   DAILY 3 FOCUS WINDOW (Women / Catalog layout in reference)
    ============================================================ */
 .focus-content {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .focus-header {
@@ -565,31 +577,31 @@ button {
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid var(--chrome-shadow);
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 }
 
 .focus-header h2 {
   margin: 0;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .eyebrow {
-  font-size: 18px;
+  font-size: 12px;
   color: var(--teal);
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .three-meter {
-  font-size: 52px;
+  font-size: 34px;
   font-weight: bold;
   color: var(--teal);
   line-height: 1;
 }
 
 .three-meter span {
-  font-size: 28px;
+  font-size: 18px;
   color: var(--muted-ink);
 }
 
@@ -601,13 +613,13 @@ button {
 
 .task-row {
   display: grid;
-  grid-template-columns: 28px 1fr auto 28px;
+  grid-template-columns: 24px 1fr auto 24px;
   align-items: center;
-  gap: 10px;
-  padding: 10px 8px;
-  border: 2px solid #e8e2d7;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #1a1a1a;
   background: #faf8f5;
-  font-size: 22px;
+  font-size: 14px;
 }
 
 .task-row.active-task {
@@ -616,7 +628,7 @@ button {
 }
 
 .task-row b {
-  margin-right: 8px;
+  margin-right: 6px;
   color: var(--teal);
 }
 
@@ -626,25 +638,25 @@ button {
 }
 
 .pixel-check {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   padding: 2px;
   background: #ffffff;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
+  border: 1px solid #1a1a1a;
   display: grid;
   place-items: center;
+  box-shadow: inset 1px 1px 0 #9c968b;
 }
 
 .pixel-check svg, .bare-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
 }
 
 .bare-icon {
   border: 0;
   background: transparent;
-  padding: 4px;
+  padding: 2px;
   color: var(--muted-ink);
 }
 
@@ -654,19 +666,19 @@ button {
 
 .inline-add {
   display: flex;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 6px;
+  margin-top: 6px;
 }
 
 .inline-add input, .expense-entry input {
   flex: 1;
   min-width: 0;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
+  border: 1px solid #1a1a1a;
   background: #ffffff;
-  padding: 6px 10px;
-  font-size: 21px;
+  padding: 4px 8px;
+  font-size: 14px;
   outline: none;
+  box-shadow: inset 1px 1px 0 #9c968b;
 }
 
 .inline-add input:focus, .expense-entry input:focus {
@@ -677,99 +689,96 @@ button {
   position: absolute;
   inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
-  width: 320px;
-  padding: 24px;
+  width: 280px;
+  padding: 18px;
   background: var(--chrome);
-  border: 3px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  box-shadow: 8px 8px 0 #1c1a17;
+  border: 2px solid #1a1a1a;
+  box-shadow: 6px 6px 0 #1a1a1a;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   z-index: 50;
   text-align: center;
 }
 
 .victory-dialog strong {
-  font-size: 28px;
+  font-size: 18px;
 }
 
 .confetti {
   color: var(--danger);
-  font-size: 34px;
+  font-size: 24px;
   animation: confetti .6s steps(2) infinite;
 }
 
 @keyframes confetti {
-  50% { transform: translateY(-8px); color: var(--teal); }
+  50% { transform: translateY(-6px); color: var(--teal); }
 }
 
 /* ============================================================
-   WINAMP FOCUS TIMER (Exact match to reference image!)
+   WINAMP TIMER WINDOW (Exact Match to Winamp in Reference!)
    ============================================================ */
 .winamp-skin {
-  background: var(--chrome);
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  padding: 10px;
+  background: #ded8cd;
+  border: 1px solid #1a1a1a;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .winamp-top-screen {
   background: #0d2830;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  padding: 8px 10px;
+  border: 1px solid #1a1a1a;
+  padding: 6px 8px;
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 10px;
+  grid-template-columns: 120px 1fr;
+  gap: 8px;
   align-items: center;
+  box-shadow: inset 1px 1px 0 #000000;
 }
 
 .winamp-time-display {
   color: var(--led-cyan);
-  font-size: 44px;
+  font-size: 32px;
   font-weight: bold;
   line-height: 1;
-  text-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .winamp-play-indicator {
-  font-size: 24px;
+  font-size: 16px;
   color: var(--led-green);
 }
 
 .winamp-track-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .winamp-track-title {
   color: #ff8e68;
-  font-size: 20px;
+  font-size: 13px;
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 0 8px rgba(255, 142, 104, 0.6);
 }
 
 .winamp-badges {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .winamp-badge {
   border: 1px solid #1e5260;
-  padding: 1px 4px;
-  font-size: 16px;
+  padding: 1px 3px;
+  font-size: 11px;
   color: #5bbccf;
   line-height: 1;
 }
@@ -779,9 +788,13 @@ button {
   border-color: var(--led-green);
 }
 
+.winamp-badge-pink {
+  color: #ff8e68;
+}
+
 /* Dancing Spectrum Analyzer */
 .winamp-spectrum {
-  height: 28px;
+  height: 24px;
   background: #081820;
   border: 1px solid #1e5260;
   padding: 2px 4px;
@@ -814,100 +827,113 @@ button {
 
 .winamp-mode-btn {
   flex: 1;
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  background: var(--chrome-mid);
+  border: 1px solid #1a1a1a;
+  background: #ded8cd;
   color: var(--ink);
-  padding: 4px 6px;
-  font-size: 19px;
+  padding: 3px 6px;
+  font-size: 12px;
   font-weight: bold;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b;
 }
 
 .winamp-mode-btn.active {
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
   background: var(--amber);
+  box-shadow:
+    inset 1px 1px 0 #9c968b,
+    inset -1px -1px 0 #ffffff;
 }
 
-/* Winamp Tactile Player Buttons (from reference image) */
+/* Winamp Tactile Player Buttons (Exact styling from reference image!) */
 .winamp-controls-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .winamp-btn-group {
   display: flex;
-  gap: 3px;
+  gap: 2px;
 }
 
 .winamp-btn {
-  width: 38px;
-  height: 32px;
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
+  width: 32px;
+  height: 26px;
+  border: 1px solid #1a1a1a;
   background: var(--amber);
   color: var(--ink);
-  font-size: 18px;
+  font-size: 13px;
   font-weight: bold;
   display: grid;
   place-items: center;
+  box-shadow:
+    inset 1px 1px 0 #fff0c0,
+    inset -1px -1px 0 #b08020;
 }
 
 .winamp-btn:active {
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
+  box-shadow:
+    inset 1px 1px 0 #b08020,
+    inset -1px -1px 0 #fff0c0;
   transform: translate(1px, 1px);
 }
 
 .winamp-toggle-btn {
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
+  border: 1px solid #1a1a1a;
   background: var(--amber);
   color: var(--ink);
-  font-size: 18px;
+  font-size: 12px;
   font-weight: bold;
-  padding: 2px 10px;
+  padding: 2px 8px;
+  box-shadow:
+    inset 1px 1px 0 #fff0c0,
+    inset -1px -1px 0 #b08020;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* ============================================================
    NOTEPAD WINDOW
    ============================================================ */
 .notepad-container {
-  height: 440px;
+  height: 360px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
 }
 
 .notepad-menubar {
-  padding: 4px 10px;
-  background: var(--chrome-mid);
-  border-bottom: 2px solid var(--chrome-dark);
-  font-size: 21px;
+  padding: 3px 8px;
+  background: #eae4d8;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 13px;
   color: var(--ink);
   display: flex;
-  gap: 16px;
+  gap: 12px;
 }
 
 .notepad-textarea {
   flex: 1;
   resize: none;
   border: 0;
-  padding: 14px;
-  font-size: 22px;
-  line-height: 1.6;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.5;
   outline: none;
   background: #ffffff;
 }
 
 .notepad-statusbar {
-  padding: 6px 12px;
-  background: var(--chrome-mid);
-  border-top: 2px solid var(--chrome-dark);
+  padding: 4px 10px;
+  background: #eae4d8;
+  border-top: 1px solid #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 20px;
+  font-size: 12px;
   color: var(--muted-ink);
 }
 
@@ -915,67 +941,67 @@ button {
    READING QUEUE (WOODEN BOOKSHELF)
    ============================================================ */
 .reading-container {
-  padding: 16px;
+  padding: 12px;
   background: #faf6f0;
 }
 
 .wood-shelf {
-  height: 290px;
-  padding: 30px 20px 0;
+  height: 240px;
+  padding: 24px 16px 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   background: linear-gradient(90deg, #4d2f19 0%, #704526 25%, #8a5833 50%, #704526 75%, #4d2f19 100%);
-  border: 12px ridge #8a5833;
-  box-shadow: inset 0 -26px 0 #3a2210, 4px 4px 0 #1c1a17;
+  border: 10px ridge #8a5833;
+  box-shadow: inset 0 -20px 0 #3a2210, 3px 3px 0 #1a1a1a;
 }
 
 .book-spine {
-  height: 215px;
-  width: 90px;
-  border: 2px solid #1c1a17;
-  padding: 10px 4px;
+  height: 180px;
+  width: 80px;
+  border: 1px solid #1a1a1a;
+  padding: 8px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.3);
+  box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.3);
   transition: transform 0.12s;
 }
 
 .book-spine:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 
 .book-spine span {
   writing-mode: vertical-rl;
-  font-size: 21px;
+  font-size: 13px;
   font-weight: bold;
   overflow: hidden;
-  max-height: 140px;
+  max-height: 120px;
 }
 
 .book-spine small {
   background: rgba(255, 255, 255, 0.9);
   color: #141210;
-  padding: 2px 6px;
-  font-size: 17px;
+  padding: 1px 4px;
+  font-size: 11px;
   font-weight: bold;
 }
 
 .spine-rose   { background: linear-gradient(160deg, #f29ab8 0%, #d46b8e 100%); color: #ffffff; }
-.spine-teal   { background: linear-gradient(160deg, #5bbccf 0%, #1b8fa8 100%); color: #ffffff; }
+.spine-teal   { background: linear-gradient(160deg, #5bbccf 0%, #168ea8 100%); color: #ffffff; }
 .spine-violet { background: linear-gradient(160deg, #b8a4dc 0%, #876fb5 100%); color: #ffffff; }
 .spine-amber  { background: linear-gradient(160deg, #f0be6a 0%, #cf9636 100%); color: #141210; }
 
 .empty-book-slot {
-  height: 85px;
-  width: 90px;
+  height: 70px;
+  width: 80px;
   border: 2px dashed #a37b56;
   background: rgba(77, 47, 25, 0.4);
   color: #d4bda8;
-  font-size: 20px;
+  font-size: 13px;
   font-weight: bold;
   display: grid;
   place-items: center;
@@ -987,13 +1013,13 @@ button {
 }
 
 .book-detail-card {
-  margin-top: 14px;
-  padding: 12px;
-  border: 2px solid #1c1a17;
-  background: var(--chrome-mid);
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #1a1a1a;
+  background: #ede7dc;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 /* ============================================================
@@ -1002,24 +1028,24 @@ button {
 .ledger-container {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .allowance-box {
   background: #0d2830;
   color: var(--led-green);
-  padding: 16px 20px;
-  border: 3px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
+  padding: 12px 16px;
+  border: 1px solid #1a1a1a;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: inset 1px 1px 0 #000000;
 }
 
 .allowance-box strong {
-  font-size: 48px;
+  font-size: 36px;
   line-height: 1;
-  text-shadow: 0 0 12px rgba(56, 240, 136, 0.7);
+  text-shadow: 0 0 8px rgba(56, 240, 136, 0.7);
 }
 
 .allowance-box-info {
@@ -1027,59 +1053,57 @@ button {
 }
 
 .allowance-box-info span {
-  font-size: 18px;
+  font-size: 12px;
   color: #5bbccf;
   display: block;
 }
 
 .allowance-box-info small {
-  font-size: 20px;
+  font-size: 13px;
   color: #ffffff;
 }
 
 .ledger-settings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 8px;
 }
 
 .ledger-settings-grid label {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 20px;
+  gap: 3px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .ledger-settings-grid input {
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  padding: 4px 8px;
-  font-size: 21px;
+  border: 1px solid #1a1a1a;
+  padding: 4px 6px;
+  font-size: 13px;
 }
 
 .envelope-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  padding: 12px;
+  gap: 6px;
+  border: 1px solid #1a1a1a;
+  padding: 8px;
   background: #faf8f5;
 }
 
 .envelope-item {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 6px;
-  font-size: 21px;
+  gap: 4px;
+  font-size: 13px;
 }
 
 .envelope-bar-track {
   grid-column: 1 / -1;
-  height: 14px;
-  background: var(--chrome);
-  border: 1px solid #1c1a17;
+  height: 12px;
+  background: #ded8cd;
+  border: 1px solid #1a1a1a;
 }
 
 .envelope-bar-fill {
@@ -1093,7 +1117,7 @@ button {
 .archive-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .archive-toolbar {
@@ -1104,25 +1128,24 @@ button {
 
 .archive-paper {
   background: #ffffff;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  padding: 16px;
-  min-height: 280px;
-  font-size: 21px;
+  border: 1px solid #1a1a1a;
+  padding: 12px;
+  min-height: 240px;
+  font-size: 13px;
 }
 
 .archive-paper h3 {
-  margin: 0 0 10px;
-  font-size: 26px;
-  border-bottom: 2px solid var(--chrome-dark);
-  padding-bottom: 6px;
+  margin: 0 0 8px;
+  font-size: 16px;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 4px;
 }
 
 .archive-paper pre {
   font-family: inherit;
-  font-size: 21px;
+  font-size: 13px;
   white-space: pre-wrap;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 /* ============================================================
@@ -1131,47 +1154,47 @@ button {
 .display-properties-body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .monitor-frame {
-  height: 160px;
-  border: 10px ridge var(--chrome-dark);
-  box-shadow: 4px 4px 0 #1c1a17;
+  height: 130px;
+  border: 8px ridge #9c968b;
+  box-shadow: 2px 2px 0 #1a1a1a;
   display: grid;
   place-items: center;
   color: #ffffff;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: bold;
-  text-shadow: 2px 2px 0 #1c1a17;
+  text-shadow: 1px 1px 0 #1a1a1a;
 }
 
 .wallpaper-fieldset {
-  border: 2px groove var(--chrome-dark);
-  padding: 12px;
+  border: 1px groove #9c968b;
+  padding: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 8px;
 }
 
 .wallpaper-fieldset legend {
-  font-size: 21px;
+  font-size: 13px;
   font-weight: bold;
-  padding: 0 6px;
+  padding: 0 4px;
 }
 
 .wallpaper-fieldset label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 21px;
+  gap: 6px;
+  font-size: 13px;
   cursor: pointer;
 }
 
 .swatch {
-  width: 36px;
-  height: 24px;
-  border: 2px solid #1c1a17;
+  width: 28px;
+  height: 18px;
+  border: 1px solid #1a1a1a;
 }
 
 /* ============================================================
@@ -1179,22 +1202,18 @@ button {
    ============================================================ */
 .account-body {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 20px;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
   align-items: start;
 }
 
 .account-avatar {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, var(--teal), var(--lilac));
-  border: 4px ridge var(--chrome-dark);
+  width: 80px;
+  height: 80px;
+  border: 1px solid #1a1a1a;
   display: grid;
   place-items: center;
-  font-size: 52px;
-  font-weight: bold;
-  color: #ffffff;
-  text-shadow: 2px 2px 0 #1c1a17;
+  background: #ede7dc;
 }
 
 /* ============================================================
@@ -1202,22 +1221,22 @@ button {
    ============================================================ */
 .balloon-tip {
   position: absolute;
-  right: 24px;
-  bottom: 56px;
-  width: 280px;
+  right: 20px;
+  bottom: 48px;
+  width: 260px;
   background: #ffffcc;
-  border: 2px solid #1c1a17;
-  padding: 12px 32px 12px 14px;
-  font-size: 20px;
+  border: 1px solid #1a1a1a;
+  padding: 10px 28px 10px 12px;
+  font-size: 13px;
   color: #141210;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
   z-index: 60;
 }
 
 .balloon-tip-close {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 4px;
+  right: 4px;
   border: 0;
   background: transparent;
   padding: 0;
@@ -1225,69 +1244,69 @@ button {
 }
 
 /* ============================================================
-   START MENU (Spotlight Search Style)
+   START MENU (Spotlight Quick Launcher)
    ============================================================ */
 .start-menu-panel {
   position: absolute;
   left: 2px;
-  bottom: 44px;
-  width: 340px;
-  min-height: 380px;
-  background: var(--chrome);
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  box-shadow: 4px 4px 0 #1c1a17;
+  bottom: 38px;
+  width: 280px;
+  min-height: 320px;
+  background: #ded8cd;
+  border: 1px solid #1a1a1a;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b,
+    4px 4px 0 #1a1a1a;
   z-index: 70;
   display: grid;
-  grid-template-columns: 36px 1fr;
+  grid-template-columns: 28px 1fr;
 }
 
 .start-menu-rail {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  background: linear-gradient(180deg, #1b8fa8 0%, #b8a4dc 100%);
+  background: linear-gradient(180deg, #168ea8 0%, #b8a4dc 100%);
   color: #ffffff;
-  padding: 10px 8px;
-  font-size: 24px;
+  padding: 8px 4px;
+  font-size: 16px;
   font-weight: bold;
-  letter-spacing: 2px;
-  text-shadow: 1px 1px 0 #1c1a17;
+  letter-spacing: 1px;
 }
 
 .start-menu-body {
-  padding: 12px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .start-search-box {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: #ffffff;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  padding: 6px 8px;
-  margin-bottom: 8px;
+  border: 1px solid #1a1a1a;
+  padding: 4px 6px;
+  margin-bottom: 6px;
 }
 
 .start-search-box input {
   border: 0;
   outline: none;
   width: 100%;
-  font-size: 21px;
+  font-size: 13px;
 }
 
 .start-item-btn {
   display: grid;
-  grid-template-columns: 32px 1fr 20px;
+  grid-template-columns: 24px 1fr 16px;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   border: 0;
   background: transparent;
-  padding: 8px;
-  font-size: 21px;
+  padding: 6px;
+  font-size: 13px;
   font-weight: bold;
   text-align: left;
 }
@@ -1305,66 +1324,72 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 44px;
-  background: var(--chrome);
-  border-top: 2px solid #ffffff;
+  height: 36px;
+  background: #ded8cd;
+  border-top: 1px solid #ffffff;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 3px 6px;
+  gap: 4px;
+  padding: 2px 4px;
   z-index: 60;
   box-shadow: inset 0 1px 0 #ffffff;
 }
 
 .start-btn {
-  font-size: 22px !important;
+  font-size: 13px !important;
   font-weight: bold !important;
-  height: 34px !important;
-  padding: 0 12px !important;
+  height: 28px !important;
+  padding: 0 10px !important;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .taskbar-buttons {
   display: flex;
-  gap: 4px;
+  gap: 3px;
   flex: 1;
   min-width: 0;
   overflow: hidden;
 }
 
 .taskbar-app-btn {
-  min-width: 120px;
-  max-width: 180px;
-  height: 34px;
-  border: 2px solid;
-  border-color: #ffffff #1c1a17 #1c1a17 #ffffff;
-  background: var(--chrome);
-  font-size: 20px;
+  min-width: 100px;
+  max-width: 150px;
+  height: 28px;
+  border: 1px solid #1a1a1a;
+  background: #ded8cd;
+  font-size: 13px;
   font-weight: bold;
   text-align: left;
-  padding: 0 10px;
+  padding: 0 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b;
 }
 
 .taskbar-app-btn.pressed {
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  background: repeating-linear-gradient(45deg, var(--chrome) 0 2px, #ffffff 2px 4px);
+  box-shadow:
+    inset 1px 1px 0 #9c968b,
+    inset -1px -1px 0 #ffffff;
+  background: repeating-linear-gradient(45deg, #ded8cd 0 2px, #ffffff 2px 4px);
 }
 
 .taskbar-tray {
   display: flex;
   align-items: center;
-  gap: 10px;
-  height: 34px;
-  border: 2px solid;
-  border-color: #1c1a17 #ffffff #ffffff #1c1a17;
-  padding: 0 10px;
-  font-size: 20px;
+  gap: 8px;
+  height: 28px;
+  border: 1px solid #1a1a1a;
+  padding: 0 8px;
+  font-size: 13px;
   font-weight: bold;
+  box-shadow:
+    inset 1px 1px 0 #9c968b,
+    inset -1px -1px 0 #ffffff;
 }
 
 .tray-mute-btn {
@@ -1380,7 +1405,6 @@ button {
 .pocket-tabs { display: none; }
 
 @media (max-width: 768px) {
-  html { font-size: 18px; }
   .top-navbar { display: none; }
   .homescreen-clock-widget { display: none; }
   .bottom-taskbar { display: none; }
@@ -1389,7 +1413,7 @@ button {
   .sticky { display: none; }
 
   .window-layer {
-    inset: 0 0 60px;
+    inset: 0 0 54px;
   }
 
   .app-window {
@@ -1407,22 +1431,22 @@ button {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background: var(--chrome);
-    border-top: 2px solid #ffffff;
+    height: 54px;
+    background: #ded8cd;
+    border-top: 1px solid #1a1a1a;
     z-index: 60;
   }
 
   .pocket-tab-btn {
     flex: 1;
     border: 0;
-    border-right: 1px solid var(--chrome-dark);
-    background: var(--chrome);
+    border-right: 1px solid #9c968b;
+    background: #ded8cd;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 17px;
+    font-size: 12px;
     font-weight: bold;
     color: var(--ink);
   }

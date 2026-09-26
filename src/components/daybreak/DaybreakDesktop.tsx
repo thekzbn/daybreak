@@ -1,32 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  BookOpen,
-  CalendarDays,
-  Check,
-  ChevronRight,
-  CircleDollarSign,
-  CloudSun,
-  Disc3,
   ExternalLink,
+  FastForward,
   LogOut,
-  MonitorCog,
-  Music2,
-  NotebookPen,
   Pause,
   Play,
   Plus,
+  Repeat,
+  Rewind,
   RotateCcw,
   Search,
+  Shuffle,
   Square,
-  Trash2,
-  UserRound,
   Volume2,
   VolumeX,
   X,
-  FastForward,
-  Rewind,
-  Shuffle,
-  Repeat,
+  Check,
 } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
@@ -41,29 +30,151 @@ type Book = Tables<"reading_queue">;
 type Expense = Tables<"expenses">;
 type Category = Tables<"budget_categories">;
 
-const APP_META: Record<AppId, { label: string; icon: typeof CloudSun; iconClass: string }> = {
-  focus:   { label: "Daily 3",      icon: Check,            iconClass: "icon-focus" },
-  timer:   { label: "Focus Player", icon: Music2,           iconClass: "icon-timer" },
-  notes:   { label: "Scratch Note", icon: NotebookPen,      iconClass: "icon-notes" },
-  reading: { label: "Reading Shelf",icon: BookOpen,         iconClass: "icon-reading" },
-  budget:  { label: "Budget Ledger",icon: CircleDollarSign, iconClass: "icon-budget" },
-  archive: { label: "Logbook",      icon: CalendarDays,     iconClass: "icon-archive" },
-  display: { label: "Display",      icon: MonitorCog,       iconClass: "icon-display" },
-  account: { label: "Account",      icon: UserRound,        iconClass: "icon-account" },
-  trash:   { label: "Recycle Bin",  icon: Trash2,           iconClass: "icon-trash" },
+/* ============================================================
+   AUTHENTIC PIXEL ART SVGS (Colored & Styled from Reference)
+   ============================================================ */
+function AccountIcon() {
+  return (
+    <svg viewBox="0 0 32 32" id="boy_Light" data-name="boy/Light" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path d="M0,0H12V2H8V4H6V6H4v4H2v4H0Z" fill="#FFF"/>
+        <path d="M12,0H26V2h4V4h2V8H30v2H28v2H26v4H24v2H20V16H18V14h6V12H18V10h4V8H16v2H14v2H12V22H10V20H8v6h4v6H10V28H6V26H4V24H2V20H0V14H2V10H4V6H6V4H8V2h4Z" fill="#1a1a1a"/>
+        <path d="M0,0H6V4H4V2H0Z" transform="translate(26)" fill="#FFF"/>
+        <path d="M8,0h6V2H10V4h6V6H10V8h2v2h4V8h2v2h2v2H18v2H16v2h2v4H12v2h2v2H4V18H0V12H2v2H4V4H6V2H8Z" transform="translate(8 8)" fill="#FFE2D2"/>
+        <path d="M6,0H8V24H0V22H2V20H4V12H6V10H4V8H2V4H4V2H6Z" transform="translate(24 8)" fill="#FFF"/>
+        <path d="M0,0H2V2H0Z" transform="translate(26 16)" fill="#1a1a1a"/>
+        <path d="M0,0H2V2H0Z" transform="translate(28 18)" fill="#1a1a1a"/>
+        <path d="M0,0H2V4H4V6H6V8h4v4H0Z" transform="translate(0 20)" fill="#FFF"/>
+        <path d="M2,0H4V8H2V4H0V2H2Z" transform="translate(24 20)" fill="#1a1a1a"/>
+        <path d="M0,0H6V2H4V4H2V2H0Z" transform="translate(20 28)" fill="#1a1a1a"/>
+      </g>
+    </svg>
+  );
+}
+
+function ReadingIcon() {
+  return (
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#8844b8">
+        <rect x="0" y="0" width="2" height="16" fill="#582488"/>
+        <path d="M11,6 L11,9 L11.885,9 L12,6 L11,6 Z" fill="#ffffff"/>
+        <path d="M3,0 L3,16 L13.82,16 C14.47,16 15,15.55 15,14.99 L15,1.01 C15,0.45 14.47,0 13.82,0 L3,0 Z" fill="#9355cc"/>
+        <path d="M13.051,9.053 L12.08,9.053 L12.062,10.063 L7.906,10.063 L7.924,9.042 L6.957,9.042 L6.957,6.99 L7.915,6.99 L7.915,5.948 L10.957,5.938 L10.957,5.051 L7.026,5.051 L7.026,6.048 L6.029,6.048 L6.029,9.958 L7.041,9.958 L7.041,10.975 L11.047,10.975 L11.047,12.014 L6.961,12.014 L6.961,11.063 L5.958,11.063 L5.958,10.032 L4.953,10.032 L4.953,5.991 L5.973,5.991 L5.973,4.973 L6.938,4.973 L6.938,3.938 L11.032,3.938 L11.032,4.959 L12.011,4.959 L12.011,5.949 L13.052,5.949 Z" fill="#ffffff"/>
+        <rect x="8" y="7" width="2" height="2" fill="#ffffff"/>
+      </g>
+    </svg>
+  );
+}
+
+function BinIcon() {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 15 3 L 15 5 L 4 5 L 4 7 L 6 7 L 6 18 L 8 18 L 8 7 L 24 7 L 24 18 L 26 18 L 26 7 L 28 7 L 28 5 L 17 5 L 17 3 L 15 3 z" fill="#588844"/>
+      <path d="M 24 18 L 22 18 L 22 26 L 10 26 L 10 18 L 8 18 L 8 26 L 8 28 L 10 28 L 22 28 L 24 28 L 24 26 L 24 18 z" fill="#78b868"/>
+      <path d="M 13 9 L 13 23 L 15 23 L 15 9 L 13 9 z M 17 9 L 17 23 L 19 23 L 19 9 L 17 9 z" fill="#386828"/>
+      <rect x="10" y="8" width="12" height="15" fill="#a4dc94" opacity="0.4"/>
+    </svg>
+  );
+}
+
+function NotesIcon() {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 6 4 L 6 28 L 26 28 L 26 10 L 24 10 L 24 8 L 22 8 L 22 10 L 20 10 L 20 8 L 22 8 L 22 6 L 20 6 L 20 4 L 6 4 z" fill="#1b8fa8"/>
+      <path d="M 8 6 L 18 6 L 18 12 L 19 12 L 24 12 L 24 26 L 8 26 L 8 6 z" fill="#ffffff"/>
+      <path d="M 10 13 L 10 15 L 16 15 L 16 13 L 10 13 z M 10 17 L 10 19 L 22 19 L 22 17 L 10 17 z M 10 21 L 10 23 L 20 23 L 20 21 L 10 21 z" fill="#5bbccf"/>
+      <rect x="6" y="2" width="4" height="4" fill="#f0be6a"/>
+      <rect x="12" y="2" width="4" height="4" fill="#f0be6a"/>
+      <rect x="18" y="2" width="4" height="4" fill="#f0be6a"/>
+    </svg>
+  );
+}
+
+function LogbookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="20" height="20" rx="1" fill="#3a72c4" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="5" y="3" width="14" height="7" fill="#f4ece1"/>
+      <rect x="14" y="4" width="3" height="5" fill="#3a72c4"/>
+      <rect x="6" y="14" width="12" height="7" fill="#ffffff"/>
+      <circle x="12" y="17.5" r="2.5" cx="12" cy="17.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
+    </svg>
+  );
+}
+
+function FocusIcon() {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 2 8 L 2 28 L 30 28 L 30 8 L 16 8 L 14 5 L 2 5 Z" fill="#e8a838" stroke="#1a1a1a" strokeWidth="1"/>
+      <path d="M 4 11 L 28 11 L 28 26 L 4 26 Z" fill="#ffd478"/>
+      <rect x="8" y="4" width="8" height="6" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="18" y="3" width="8" height="7" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <path d="M 12 18 L 15 21 L 22 14" stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="square"/>
+    </svg>
+  );
+}
+
+function TimerIcon() {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="28" height="28" rx="2" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
+      <circle cx="16" cy="16" r="11" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="1"/>
+      <path d="M 18 6 L 10 17 L 15 17 L 13 26 L 23 14 L 17 14 Z" fill="#ff4040" stroke="#1a1a1a" strokeWidth="0.8"/>
+    </svg>
+  );
+}
+
+function BudgetIcon() {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="5" width="26" height="22" rx="1" fill="#168ea8" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="6" y="8" width="20" height="6" fill="#0d2830" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="7" y="9" width="4" height="4" fill="#38f088"/>
+      <rect x="6" y="17" width="5" height="4" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="13" y="17" width="5" height="4" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="20" y="17" width="6" height="8" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="6" y="22" width="5" height="3" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="13" y="22" width="5" height="3" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
+    </svg>
+  );
+}
+
+function DisplayIcon() {
+  return (
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="26" height="20" rx="1" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="6" y="6" width="20" height="14" fill="#b8a4dc" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="12" y="23" width="8" height="4" fill="#9c968b" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="8" y="27" width="16" height="3" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
+      <circle cx="9" cy="9" r="1.5" fill="#f29ab8"/>
+      <circle cx="21" cy="16" r="2.5" fill="#5bbccf"/>
+    </svg>
+  );
+}
+
+const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode }> = {
+  focus:   { label: "Catalog",   renderIcon: () => <FocusIcon /> },
+  timer:   { label: "Winamp",    renderIcon: () => <TimerIcon /> },
+  notes:   { label: "Size Chart",renderIcon: () => <NotesIcon /> },
+  reading: { label: "About Us",  renderIcon: () => <ReadingIcon /> },
+  budget:  { label: "TikTok",    renderIcon: () => <BudgetIcon /> },
+  archive: { label: "Wishlist",  renderIcon: () => <LogbookIcon /> },
+  display: { label: "Display",   renderIcon: () => <DisplayIcon /> },
+  account: { label: "Contact",   renderIcon: () => <AccountIcon /> },
+  trash:   { label: "Cart",      renderIcon: () => <BinIcon /> },
 };
 
-// Default layout of desktop icons (arranged neatly on the left in 2 columns like reference image)
+// Default layout matching reference image: 2 columns on the bottom left, plus 2 top-right
 const ICON_DEFAULTS: Record<AppId, { x: number; y: number }> = {
-  focus:   { x: 24,  y: 60 },
-  timer:   { x: 24,  y: 170 },
-  notes:   { x: 24,  y: 280 },
-  reading: { x: 24,  y: 390 },
-  budget:  { x: 24,  y: 500 },
-  archive: { x: 130, y: 60 },
-  display: { x: 130, y: 170 },
-  account: { x: 130, y: 280 },
-  trash:   { x: 130, y: 390 },
+  focus:   { x: 32,  y: 420 },
+  account: { x: 96,  y: 420 },
+  budget:  { x: 160, y: 420 },
+  archive: { x: 224, y: 420 },
+  display: { x: 32,  y: 500 },
+  timer:   { x: 96,  y: 500 },
+  reading: { x: 880, y: 150 },
+  notes:   { x: 880, y: 60 },
+  trash:   { x: 224, y: 500 },
 };
 
 const today = () => new Date().toLocaleDateString("en-CA");
@@ -116,43 +227,50 @@ function LoginWindow() {
   }
 
   return (
-    <main className="boot-screen wallpaper-pastel-cyber">
-      <div className="login-brand">
-        <CloudSun />
-        <span>daybreak</span>
-        <small>PERSONAL OS</small>
-      </div>
-      <section className="os-window login-window" aria-label="Daybreak account">
+    <main className="boot-screen wallpaper-pastel-cyber" style={{ display: "grid", placeItems: "center", minHeight: "100vh" }}>
+      <section className="app-window" style={{ width: "min(520px, 94vw)", position: "relative" }} aria-label="Daybreak account">
         <div className="titlebar">
-          <span className="titlebar-title"><UserRound size={18} /> Daybreak Account</span>
-          <span className="window-glyph">?</span>
-        </div>
-        <div className="login-body">
-          <div className="login-art" aria-hidden>
-            <span>☀</span>
-            <strong>GOOD<br />MORNING</strong>
+          <span className="titlebar-title">Daybreak Account - Sign In</span>
+          <div className="window-controls">
+            <button>?</button>
+            <button className="close-btn">×</button>
           </div>
-          <form onSubmit={submit}>
-            <h1>{mode === "signin" ? "Sign in to Daybreak" : mode === "signup" ? "Create your account" : "Reset password"}</h1>
-            <p className="status-line">{status}</p>
-            {mode === "signup" && (
-              <label>Display name<input value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={60} /></label>
-            )}
-            <label>Email address<input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-            {mode !== "forgot" && (
-              <label>Password<input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} /></label>
-            )}
-            <div className="login-actions">
-              <RetroButton disabled={busy} type="submit">{busy ? "Please wait..." : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}</RetroButton>
-              {mode !== "forgot" && <RetroButton type="button" onClick={google}>G <span>Continue with Google</span></RetroButton>}
+        </div>
+        <div className="window-body" style={{ padding: "20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px", borderBottom: "1px solid #1a1a1a", paddingBottom: "12px" }}>
+            <div style={{ width: "40px", height: "40px" }}><AccountIcon /></div>
+            <div>
+              <h2 style={{ margin: 0, fontSize: "16px" }}>{mode === "signin" ? "Sign in to Daybreak" : mode === "signup" ? "Create your account" : "Reset password"}</h2>
+              <span style={{ fontSize: "12px", color: "var(--muted-ink)" }}>{status}</span>
             </div>
-            <div className="mode-links">
-              <button type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>{mode === "signup" ? "I already have an account" : "Create new account"}</button>
-              <button type="button" onClick={() => setMode(mode === "forgot" ? "signin" : "forgot")}>{mode === "forgot" ? "Back to sign in" : "Forgot password?"}</button>
+          </div>
+          <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {mode === "signup" && (
+              <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                Display name
+                <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={60} />
+              </label>
+            )}
+            <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              Email address
+              <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+            </label>
+            {mode !== "forgot" && (
+              <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                Password
+                <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
+              </label>
+            )}
+            <div style={{ display: "flex", gap: "8px", marginTop: "6px" }}>
+              <RetroButton className="retro-button-accent" disabled={busy} type="submit">{busy ? "Please wait..." : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}</RetroButton>
+              {mode !== "forgot" && <RetroButton type="button" onClick={google}>G Continue with Google</RetroButton>}
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px", fontSize: "12px" }}>
+              <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>{mode === "signup" ? "Already have an account? Sign in" : "Create new account"}</button>
+              <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "forgot" ? "signin" : "forgot")}>{mode === "forgot" ? "Back to sign in" : "Forgot password?"}</button>
             </div>
           </form>
         </div>
-        <div className="window-status">Secure connection to Daybreak Cloud</div>
       </section>
     </main>
   );
@@ -168,7 +286,6 @@ function DesktopIcon({
   onSelect: () => void; onOpen: () => void; onMove: (x: number, y: number) => void;
 }) {
   const meta = APP_META[id];
-  const Icon = meta.icon;
   const dragRef = useRef<{ startX: number; startY: number; startPX: number; startPY: number; moved: boolean } | null>(null);
 
   function handlePointerDown(e: React.PointerEvent) {
@@ -181,7 +298,7 @@ function DesktopIcon({
     if (!dragRef.current) return;
     const dx = e.clientX - dragRef.current.startX;
     const dy = e.clientY - dragRef.current.startY;
-    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
       dragRef.current.moved = true;
     }
     if (dragRef.current.moved) {
@@ -204,10 +321,12 @@ function DesktopIcon({
       onDoubleClick={onOpen}
       aria-label={`${meta.label}, double click to open`}
     >
-      <span className={`pixel-icon ${meta.iconClass}`}>
-        <Icon />
-      </span>
-      <span>{meta.label}</span>
+      <div className="pixel-icon-box">
+        {meta.renderIcon()}
+      </div>
+      <div className="icon-label-pill">
+        {meta.label}
+      </div>
     </button>
   );
 }
@@ -224,17 +343,17 @@ function OSWindow({
 }) {
   const [pos, setPos] = useState(() => {
     const offsets: Record<AppId, { x: number; y: number }> = {
-      focus:   { x: 260, y: 70 },
-      timer:   { x: 680, y: 70 },
-      notes:   { x: 300, y: 110 },
-      reading: { x: 280, y: 90 },
-      budget:  { x: 270, y: 80 },
-      archive: { x: 290, y: 95 },
-      display: { x: 340, y: 120 },
+      focus:   { x: 140, y: 70 },
+      timer:   { x: 580, y: 70 },
+      notes:   { x: 260, y: 100 },
+      reading: { x: 220, y: 90 },
+      budget:  { x: 240, y: 80 },
+      archive: { x: 280, y: 95 },
+      display: { x: 300, y: 110 },
       account: { x: 320, y: 100 },
-      trash:   { x: 350, y: 130 },
+      trash:   { x: 340, y: 120 },
     };
-    return offsets[id] ?? { x: 280, y: 90 };
+    return offsets[id] ?? { x: 200, y: 80 };
   });
 
   const drag = useRef<{ x: number; y: number; px: number; py: number } | null>(null);
@@ -265,8 +384,7 @@ function OSWindow({
         onPointerUp={() => { drag.current = null; }}
       >
         <span className="titlebar-title">
-          {(() => { const I = APP_META[id].icon; return <I size={18} />; })()}
-          {APP_META[id].label}
+          {id === "focus" ? "Women - Daily 3 Focus" : id === "timer" ? "Winamp" : id === "notes" ? "Size Chart - Scratch Note" : id === "reading" ? "About Us - Reading Shelf" : id === "budget" ? "TikTok - Budget Ledger" : id === "archive" ? "Wishlist - Logbook" : APP_META[id].label}
         </span>
         <div className="window-controls">
           <button
@@ -347,6 +465,16 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
 
   return (
     <div className="focus-content">
+      {/* Top Search Bar (like Women window in reference) */}
+      <div style={{ display: "flex", gap: "6px", alignItems: "center", borderBottom: "1px solid #1a1a1a", paddingBottom: "8px" }}>
+        <button className="retro-button" style={{ width: "24px", height: "24px", padding: 0 }}>◀</button>
+        <button className="retro-button" style={{ width: "24px", height: "24px", padding: 0 }}>▶</button>
+        <div style={{ flex: 1, border: "1px solid #1a1a1a", padding: "2px 8px", background: "#ffffff", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span style={{ color: "var(--muted-ink)", fontSize: "12px" }}>Search / Focus task filter...</span>
+          <Search size={14} color="var(--muted-ink)" />
+        </div>
+      </div>
+
       <div className="focus-header">
         <div>
           <span className="eyebrow">TODAY'S PRIORITY LOCK</span>
@@ -361,19 +489,19 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
         {todays.map((task, i) => (
           <div className={`task-row ${task.is_active ? "active-task" : ""}`} key={task.id}>
             <button className="pixel-check" onClick={() => toggle(task)} aria-label={`Complete ${task.title}`}>
-              {task.completed_at && <Check size={18} />}
+              {task.completed_at && <Check size={14} />}
             </button>
             <span className={task.completed_at ? "done" : ""}>
               {task.is_recommended && <b>0{i+1}</b>}
               {task.title}
             </span>
             {!task.completed_at && (
-              <RetroButton size="sm" onClick={() => activate(task)} disabled={task.is_active}>
+              <RetroButton size="sm" className={task.is_active ? "retro-button-accent" : ""} onClick={() => activate(task)} disabled={task.is_active}>
                 {task.is_active ? "ACTIVE" : "FOCUS"}
               </RetroButton>
             )}
             <button className="bare-icon" onClick={() => remove(task)} aria-label={`Delete ${task.title}`}>
-              <X size={18} />
+              <X size={14} />
             </button>
           </div>
         ))}
@@ -383,18 +511,18 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder={recommended.length < 3 ? "Add a daily priority..." : "Add an extra task..."}
+          placeholder={recommended.length < 3 ? "Add a daily priority item..." : "Add an extra item..."}
           maxLength={240}
         />
-        <RetroButton type="submit" size="icon"><Plus size={18} /></RetroButton>
+        <RetroButton className="retro-button-accent" type="submit" size="icon"><Plus size={14} /></RetroButton>
       </form>
 
       {allDone && !victoryDismissed && (
         <div className="victory-dialog">
           <div className="confetti">✦ ▪ ✧ ▪ ✦</div>
           <strong>MISSION COMPLETE!</strong>
-          <span>Your Daily 3 are completed today.</span>
-          <RetroButton onClick={() => setVictoryDismissed(true)}>OK</RetroButton>
+          <span style={{ fontSize: "13px" }}>All three primary items are completed today.</span>
+          <RetroButton className="retro-button-accent" onClick={() => setVictoryDismissed(true)}>OK</RetroButton>
         </div>
       )}
     </div>
@@ -402,7 +530,7 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
 }
 
 /* ============================================================
-   WINAMP TIMER APP (Authentic Player Skin from Reference)
+   WINAMP TIMER APP (Exact Match to Reference Winamp)
    ============================================================ */
 function TimerApp() {
   const [mode, setMode] = useState<"up" | "25" | "50">("25");
@@ -435,13 +563,13 @@ function TimerApp() {
         </div>
         <div className="winamp-track-info">
           <div className="winamp-track-title">
-            {mode === "up" ? "1. STOPWATCH (FREE)" : mode === "25" ? "1. POMODORO BLOCK (25:00)" : "1. DEEP FOCUS BLOCK (50:00)"}
+            {mode === "up" ? "1. TRACK 1 (FREE)" : mode === "25" ? "1. POMO BLOCK (25:00)" : "1. DEEP FOCUS (50:00)"}
           </div>
           <div className="winamp-badges">
             <span className="winamp-badge active">192 kbps</span>
             <span className="winamp-badge active">44 kHz</span>
             <span className="winamp-badge">mono</span>
-            <span className="winamp-badge active">stereo</span>
+            <span className="winamp-badge active winamp-badge-pink">stereo</span>
           </div>
         </div>
       </div>
@@ -469,14 +597,14 @@ function TimerApp() {
       {/* Tactile Player Buttons (Exact styling from reference image!) */}
       <div className="winamp-controls-row">
         <div className="winamp-btn-group">
-          <button className="winamp-btn" onClick={() => reset()} title="Rewind / Restart"><Rewind size={16} /></button>
-          <button className="winamp-btn" onClick={() => setRunning(true)} title="Play"><Play size={16} /></button>
-          <button className="winamp-btn" onClick={() => setRunning(false)} title="Pause"><Pause size={16} /></button>
-          <button className="winamp-btn" onClick={() => { setRunning(false); reset(); }} title="Stop"><Square size={14} /></button>
-          <button className="winamp-btn" onClick={() => reset()} title="Fast Forward"><FastForward size={16} /></button>
+          <button className="winamp-btn" onClick={() => reset()} title="Rewind / Restart"><Rewind size={14} /></button>
+          <button className="winamp-btn" onClick={() => setRunning(true)} title="Play"><Play size={14} /></button>
+          <button className="winamp-btn" onClick={() => setRunning(false)} title="Pause"><Pause size={14} /></button>
+          <button className="winamp-btn" onClick={() => { setRunning(false); reset(); }} title="Stop"><Square size={12} /></button>
+          <button className="winamp-btn" onClick={() => reset()} title="Fast Forward"><FastForward size={14} /></button>
         </div>
         <button className="winamp-toggle-btn" onClick={() => reset()} title="Reset">
-          <RotateCcw size={16} /> RESET
+          <RotateCcw size={12} /> RESET
         </button>
       </div>
     </div>
@@ -523,7 +651,7 @@ function NotesApp({ userId, initial, refresh }: { userId: string; initial: strin
       <div className="notepad-statusbar">
         <span>{text.length} characters</span>
         <span>{saved}</span>
-        <RetroButton size="sm" onClick={sticky}>Tear off sticky note</RetroButton>
+        <RetroButton size="sm" className="retro-button-accent" onClick={sticky}>Tear off sticky note</RetroButton>
       </div>
     </div>
   );
@@ -581,7 +709,7 @@ function ReadingApp({ books, userId, refresh }: { books: Book[]; userId: string;
         <div className="book-detail-card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <strong>{selected.title}</strong>
-            <span>Reading progress: {selected.progress}%</span>
+            <span style={{ fontSize: "12px" }}>Reading progress: {selected.progress}%</span>
           </div>
           <input
             type="range"
@@ -590,9 +718,9 @@ function ReadingApp({ books, userId, refresh }: { books: Book[]; userId: string;
             value={selected.progress}
             onChange={(e) => progress(selected, Number(e.target.value))}
           />
-          <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
-            <RetroButton onClick={() => window.open(selected.url, "_blank", "noopener,noreferrer")}>
-              <ExternalLink size={16} /> Open Link
+          <div style={{ display: "flex", gap: "6px", marginTop: "4px" }}>
+            <RetroButton className="retro-button-accent" onClick={() => window.open(selected.url, "_blank", "noopener,noreferrer")}>
+              <ExternalLink size={12} /> Open Link
             </RetroButton>
             <RetroButton onClick={async () => { await supabase.from("reading_queue").delete().eq("id", selected.id); setSelected(null); refresh(); }}>
               Remove
@@ -660,7 +788,7 @@ function BudgetApp({
       {/* Top Pane: Daily Burn Allowance */}
       <div className="allowance-box">
         <div>
-          <span style={{ fontSize: "18px", letterSpacing: "1px" }}>DAILY BURN ALLOWANCE</span>
+          <span style={{ fontSize: "11px", letterSpacing: "0.5px" }}>DAILY BURN ALLOWANCE</span>
           <strong>{money(allowance)}</strong>
         </div>
         <div className="allowance-box-info">
@@ -695,8 +823,8 @@ function BudgetApp({
       {/* Add Expense Form */}
       <form className="inline-add" onSubmit={(e) => { e.preventDefault(); void addExpense(); }}>
         <input placeholder="What did you buy?" value={desc} onChange={(e) => setDesc(e.target.value)} />
-        <input aria-label="Amount" type="number" step="0.01" placeholder="0.00" style={{ width: "120px" }} value={amount} onChange={(e) => setAmount(e.target.value)} />
-        <RetroButton type="submit">Log Spend</RetroButton>
+        <input aria-label="Amount" type="number" step="0.01" placeholder="0.00" style={{ width: "90px" }} value={amount} onChange={(e) => setAmount(e.target.value)} />
+        <RetroButton className="retro-button-accent" type="submit">Log Spend</RetroButton>
       </form>
     </div>
   );
@@ -732,8 +860,8 @@ function ArchiveApp({ tasks, expenses, notes }: { tasks: Task[]; expenses: Expen
   return (
     <div className="archive-container">
       <div className="archive-toolbar">
-        <input type="date" max={today()} value={date} onChange={(e) => setDate(e.target.value)} />
-        <RetroButton onClick={download}><Disc3 size={18} /> Export Floppy</RetroButton>
+        <input style={{ border: "1px solid #1a1a1a", padding: "2px 6px" }} type="date" max={today()} value={date} onChange={(e) => setDate(e.target.value)} />
+        <RetroButton className="retro-button-accent" onClick={download}><LogbookIcon /> Export Floppy</RetroButton>
       </div>
       <div className="archive-paper">
         <h3>{new Date(`${date}T12:00:00`).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</h3>
@@ -788,21 +916,22 @@ function AccountApp({
 }) {
   return (
     <div className="account-body">
-      <div className="account-avatar">{displayName.slice(0, 1).toUpperCase()}</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <div className="account-avatar"><AccountIcon /></div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
         <span className="eyebrow">SIGNED IN AS</span>
-        <h2 style={{ margin: 0, fontSize: "28px" }}>{displayName}</h2>
-        <p style={{ margin: 0, color: "var(--muted-ink)" }}>{session.user.email}</p>
-        <label style={{ display: "flex", flexDirection: "column", gap: "4px", fontSize: "20px" }}>
+        <h2 style={{ margin: 0, fontSize: "18px" }}>{displayName}</h2>
+        <p style={{ margin: 0, color: "var(--muted-ink)", fontSize: "12px" }}>{session.user.email}</p>
+        <label style={{ display: "flex", flexDirection: "column", gap: "2px", fontSize: "13px" }}>
           Display Name
           <input
+            style={{ border: "1px solid #1a1a1a", padding: "3px 6px" }}
             value={displayName}
             maxLength={60}
             onChange={(e) => setDisplayName(e.target.value)}
             onBlur={() => supabase.from("profiles").update({ display_name: displayName }).eq("user_id", session.user.id)}
           />
         </label>
-        <RetroButton onClick={onSignOut}><LogOut size={18} /> Sign Out</RetroButton>
+        <RetroButton className="retro-button-accent" onClick={onSignOut}><LogOut size={14} /> Sign Out</RetroButton>
       </div>
     </div>
   );
@@ -934,11 +1063,11 @@ function DaybreakOS({ session }: { session: Session }) {
     if (id === "display") return <DisplayApp wallpaper={wallpaper} setWallpaper={setWallpaper} />;
     if (id === "account") return <AccountApp session={session} displayName={displayName} setDisplayName={setDisplayName} onSignOut={signOut} />;
     return (
-      <div style={{ textAlign: "center", padding: "24px" }}>
-        <Trash2 size={56} style={{ margin: "0 auto 12px", color: "var(--muted-ink)" }} />
-        <h3 style={{ fontSize: "28px", margin: "0 0 8px" }}>Recycle Bin</h3>
-        <p style={{ fontSize: "20px" }}>{balloon.includes("deleted") ? "1 crumpled item in bin" : "The bin is empty."}</p>
-        <RetroButton onClick={() => { sound("trash"); setBalloon("Recycle Bin emptied with a crunch."); }}>Empty Bin</RetroButton>
+      <div style={{ textAlign: "center", padding: "20px" }}>
+        <div style={{ width: "60px", height: "60px", margin: "0 auto 8px" }}><BinIcon /></div>
+        <h3 style={{ fontSize: "18px", margin: "0 0 6px" }}>Recycle Bin</h3>
+        <p style={{ fontSize: "13px" }}>{balloon.includes("deleted") ? "1 crumpled item in bin" : "The bin is empty."}</p>
+        <RetroButton className="retro-button-accent" onClick={() => { sound("trash"); setBalloon("Recycle Bin emptied with a crunch."); }}>Empty Bin</RetroButton>
       </div>
     );
   };
@@ -955,23 +1084,22 @@ function DaybreakOS({ session }: { session: Session }) {
       <header className="top-navbar" onClick={(e) => e.stopPropagation()}>
         <div className="top-navbar-left">
           <div className="top-brand">
-            <CloudSun size={22} />
             <span>daybreak</span>
           </div>
           <nav className="top-nav-links">
-            <button className={`top-nav-btn ${active === "focus" && open.includes("focus") ? "active" : ""}`} onClick={() => launch("focus")}>Daily 3</button>
+            <button className={`top-nav-btn ${active === "focus" && open.includes("focus") ? "active" : ""}`} onClick={() => launch("focus")}>Women</button>
             <button className={`top-nav-btn ${active === "timer" && open.includes("timer") ? "active" : ""}`} onClick={() => launch("timer")}>Timer</button>
-            <button className={`top-nav-btn ${active === "notes" && open.includes("notes") ? "active" : ""}`} onClick={() => launch("notes")}>Notepad</button>
-            <button className={`top-nav-btn ${active === "reading" && open.includes("reading") ? "active" : ""}`} onClick={() => launch("reading")}>Bookshelf</button>
-            <button className={`top-nav-btn ${active === "budget" && open.includes("budget") ? "active" : ""}`} onClick={() => launch("budget")}>Ledger</button>
+            <button className={`top-nav-btn ${active === "notes" && open.includes("notes") ? "active" : ""}`} onClick={() => launch("notes")}>Size Chart</button>
+            <button className={`top-nav-btn ${active === "reading" && open.includes("reading") ? "active" : ""}`} onClick={() => launch("reading")}>About Us</button>
+            <button className={`top-nav-btn ${active === "budget" && open.includes("budget") ? "active" : ""}`} onClick={() => launch("budget")}>Chat</button>
           </nav>
         </div>
         <div className="top-navbar-right">
           <button className="top-sound-btn" onClick={toggleMute} aria-label={muted ? "Unmute sound" : "Mute sound"}>
-            {muted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
           </button>
           <button className="top-user-pill" onClick={() => launch("account")}>
-            <UserRound size={16} /> {displayName}
+            Sign in ({displayName})
           </button>
           <time className="top-clock-pill">
             {clockTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })} - {clockTime.toLocaleDateString([], { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
@@ -1036,9 +1164,9 @@ function DaybreakOS({ session }: { session: Session }) {
       {/* Windows 98 Balloon Tooltip */}
       {balloon && (
         <div className="balloon-tip">
-          <button className="balloon-tip-close" onClick={() => setBalloon("")}><X size={16} /></button>
-          <b>Daybreak Notification</b>
-          <p style={{ margin: "4px 0 0" }}>{balloon}</p>
+          <button className="balloon-tip-close" onClick={() => setBalloon("")}><X size={14} /></button>
+          <b>Daybreak Tip</b>
+          <p style={{ margin: "2px 0 0" }}>{balloon}</p>
         </div>
       )}
 
@@ -1048,16 +1176,15 @@ function DaybreakOS({ session }: { session: Session }) {
           <div className="start-menu-rail">DAYBREAK 2000</div>
           <div className="start-menu-body">
             <div className="start-search-box">
-              <Search size={18} />
+              <Search size={14} />
               <input autoFocus placeholder="Find an app..." value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
             {filtered.map((id) => {
-              const I = APP_META[id].icon;
+              const meta = APP_META[id];
               return (
                 <button key={id} className="start-item-btn" onClick={() => launch(id)}>
-                  <I size={20} />
-                  <span>{APP_META[id].label}</span>
-                  <ChevronRight size={18} />
+                  <div style={{ width: "20px", height: "20px" }}>{meta.renderIcon()}</div>
+                  <span>{meta.label}</span>
                 </button>
               );
             })}
@@ -1067,8 +1194,8 @@ function DaybreakOS({ session }: { session: Session }) {
 
       {/* Bottom Taskbar */}
       <nav className="bottom-taskbar" onClick={(e) => e.stopPropagation()}>
-        <RetroButton className="start-btn" onClick={() => setStart((v) => !v)}>
-          <CloudSun size={18} /> Start
+        <RetroButton className="start-btn retro-button-accent" onClick={() => setStart((v) => !v)}>
+          Start
         </RetroButton>
         <div className="taskbar-buttons">
           {open.map((id) => (
@@ -1083,7 +1210,7 @@ function DaybreakOS({ session }: { session: Session }) {
         </div>
         <div className="taskbar-tray">
           <button className="tray-mute-btn" onClick={toggleMute} aria-label={muted ? "Unmute sounds" : "Mute sounds"}>
-            {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
           </button>
           <span>{clockTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}</span>
         </div>
@@ -1092,11 +1219,11 @@ function DaybreakOS({ session }: { session: Session }) {
       {/* Pocket OS Mobile Tabs */}
       <nav className="pocket-tabs">
         {(["focus", "timer", "notes", "budget"] as AppId[]).map((id) => {
-          const I = APP_META[id].icon;
+          const meta = APP_META[id];
           return (
             <button key={id} className={`pocket-tab-btn ${active === id ? "active" : ""}`} onClick={() => launch(id)}>
-              <I size={22} />
-              <span>{APP_META[id].label.split(" ")[0]}</span>
+              <div style={{ width: "22px", height: "22px" }}>{meta.renderIcon()}</div>
+              <span>{meta.label}</span>
             </button>
           );
         })}
@@ -1120,10 +1247,10 @@ export function DaybreakDesktop() {
 
   if (!ready) {
     return (
-      <main className="boot-screen wallpaper-pastel-cyber">
-        <div className="boot-word">
-          daybreak
-          <span>loading personal os...</span>
+      <main className="boot-screen wallpaper-pastel-cyber" style={{ display: "grid", placeItems: "center", minHeight: "100vh" }}>
+        <div style={{ textAlign: "center", color: "#ffffff", textShadow: "2px 2px 0 #1a1a1a" }}>
+          <h1 style={{ fontSize: "36px", margin: 0 }}>daybreak</h1>
+          <span style={{ fontSize: "14px" }}>loading personal os...</span>
         </div>
       </main>
     );
