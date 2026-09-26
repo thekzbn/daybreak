@@ -367,8 +367,10 @@ button {
   top: 0;
   left: 0;
   pointer-events: auto;
+  /* Default size -- overridden per-app below */
   width: min(650px, calc(100vw - 120px));
-  max-height: calc(100vh - 110px);
+  height: 520px;
+  /* Windows NEVER grow with content -- the body scrolls instead */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -394,16 +396,22 @@ button {
   transform: none !important;
   width: 100% !important;
   height: 100% !important;
-  max-height: none !important;
 }
 
-/* Per-app width sizing */
-.window-timer   { width: 450px; }
-.window-notes   { width: 580px; }
-.window-reading { width: 680px; }
-.window-budget  { width: 700px; }
-.window-archive { width: 680px; }
-.window-display, .window-account, .window-trash { width: 480px; }
+/*
+  Per-app fixed dimensions.
+  Width and height are both fixed so the window frame is always
+  a stable container. Content inside scrolls -- it never pushes the frame.
+*/
+.window-focus   { width: 620px; height: 540px; }
+.window-timer   { width: 450px; height: 380px; }
+.window-notes   { width: 580px; height: 460px; }
+.window-reading { width: 680px; height: 480px; }
+.window-budget  { width: 700px; height: 560px; }
+.window-archive { width: 680px; height: 520px; }
+.window-display { width: 480px; height: 360px; }
+.window-account { width: 480px; height: 420px; }
+.window-trash   { width: 480px; height: 360px; }
 
 /* ============================================================
    WINDOW TITLEBAR (Exact match to Reference Image!)
