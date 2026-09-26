@@ -18,3 +18,9 @@ If you discover a security vulnerability within Daybreak Command Centre, please 
 3. Include detailed reproduction steps, potential impact, and any proof-of-concept information.
 
 We will review your submission promptly, verify the issue, and release a patch as soon as possible. Thank you for helping keep Daybreak and its users secure!
+
+## Contact
+
+Maintainer: Ayomide Deji-Adeyale  
+Portfolio: [thekzbn.name.ng](https://thekzbn.name.ng)  
+Email: [thekzbn@proton.me](mailto:thekzbn@proton.me)

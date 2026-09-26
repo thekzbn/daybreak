@@ -10,6 +10,8 @@
 [![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_DB-3ecf8e?logo=supabase)](https://supabase.com/)
 [![Lovable](https://img.shields.io/badge/Built_with-Lovable-ff557f)](https://lovable.dev)
 
+**Author**: Ayomide Deji-Adeyale &mdash; [thekzbn.name.ng](https://thekzbn.name.ng) &mdash; [thekzbn@proton.me](mailto:thekzbn@proton.me)
+
 ---
 
 ## 🖥️ Overview

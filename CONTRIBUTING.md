@@ -96,3 +96,5 @@ Notify the user with a retro chime sound when a 25-minute Pomodoro timer conclud
 ## 💬 Community & Questions
 
 If you have questions or want to discuss a new feature before building it, feel free to open a Discussion or an Issue on GitHub.
+
+For direct contact, reach the maintainer at [thekzbn@proton.me](mailto:thekzbn@proton.me) or visit [thekzbn.name.ng](https://thekzbn.name.ng).

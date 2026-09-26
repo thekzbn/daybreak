@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A vintage Y2K personal command centre desktop OS web application",
   "license": "MIT",
-  "author": "Ayomide Deji-Adeyale",
+  "author": {
+    "name": "Ayomide Deji-Adeyale",
+    "email": "thekzbn@proton.me",
+    "url": "https://thekzbn.name.ng"
+  },
   "keywords": [
     "y2k",
     "desktop-os",
