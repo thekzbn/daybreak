@@ -27,7 +27,7 @@
 }
 
 /* ============================================================
-   DESIGN TOKENS — Exact Match to Y2K Reference Image
+   DESIGN TOKENS — Authentic Y2K Desktop OS Theme
    ============================================================ */
 :root {
   --radius: 0;
@@ -147,21 +147,22 @@ button {
 }
 
 /* ============================================================
-   TOP NAVIGATION BAR (Exact match to Reference Image!)
+   TOP SYSTEM BAR
    ============================================================ */
 .top-navbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 34px;
+  height: 32px;
   background: #eae4d8;
   border-bottom: 1px solid var(--chrome-shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px 0 0;
+  padding: 0 14px 0 0;
   z-index: 50;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .top-navbar-left {
@@ -171,11 +172,11 @@ button {
 }
 
 .top-brand {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   font-style: italic;
   color: #168ea8;
-  padding: 0 18px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -190,6 +191,7 @@ button {
   align-items: center;
   height: 100%;
   font-size: 13px;
+  gap: 12px;
 }
 
 .top-sound-btn {
@@ -204,24 +206,6 @@ button {
 }
 
 .top-sound-btn:hover {
-  background: #ffffff;
-}
-
-.top-user-pill {
-  height: 100%;
-  border: 0;
-  border-left: 1px solid var(--chrome-shadow);
-  background: transparent;
-  padding: 0 14px;
-  font-size: 13px;
-  font-weight: bold;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.top-user-pill:hover {
   background: #ffffff;
 }
 
@@ -242,7 +226,7 @@ button {
    ============================================================ */
 .homescreen-clock-widget {
   position: absolute;
-  top: 50px;
+  top: 48px;
   right: 28px;
   text-align: right;
   color: #ffffff;
@@ -270,8 +254,8 @@ button {
   position: absolute;
   border: 1px solid transparent;
   background: transparent;
-  width: 78px;
-  min-height: 82px;
+  width: 80px;
+  min-height: 84px;
   padding: 4px 2px;
   display: flex;
   flex-direction: column;
@@ -360,7 +344,7 @@ button {
    ============================================================ */
 .window-layer {
   position: absolute;
-  inset: 36px 0 76px;
+  inset: 34px 0 72px;
   pointer-events: none;
 }
 
@@ -369,8 +353,8 @@ button {
   top: 0;
   left: 0;
   pointer-events: auto;
-  width: min(640px, calc(100vw - 120px));
-  max-height: calc(100vh - 120px);
+  width: min(650px, calc(100vw - 120px));
+  max-height: calc(100vh - 110px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -400,18 +384,19 @@ button {
 }
 
 /* Per-app width sizing */
-.window-timer   { width: 440px; }
-.window-notes   { width: 560px; }
-.window-reading { width: 660px; }
-.window-budget  { width: 680px; }
-.window-display, .window-account, .window-trash { width: 460px; }
+.window-timer   { width: 450px; }
+.window-notes   { width: 580px; }
+.window-reading { width: 680px; }
+.window-budget  { width: 700px; }
+.window-archive { width: 680px; }
+.window-display, .window-account, .window-trash { width: 480px; }
 
 /* ============================================================
    WINDOW TITLEBAR (Exact match to Reference Image!)
    ============================================================ */
 .titlebar {
-  height: 26px;
-  min-height: 26px;
+  height: 28px;
+  min-height: 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -481,13 +466,13 @@ button {
   color: #ffffff;
 }
 
-/* Window content container (white interior with 1px border) */
+/* Window content container (white interior with generous padding) */
 .window-body {
   flex: 1;
   overflow: auto;
   background: #ffffff;
   color: var(--ink);
-  padding: 14px;
+  padding: 18px 20px;
 }
 
 /* ============================================================
@@ -502,8 +487,8 @@ button {
     inset 1px 1px 0 #ffffff,
     inset -1px -1px 0 #9c968b,
     1px 1px 0 #1a1a1a !important;
-  height: 28px;
-  padding: 0 12px !important;
+  height: 30px;
+  padding: 0 14px !important;
   font-size: 13px !important;
   font-weight: bold !important;
 }
@@ -533,72 +518,94 @@ button {
 }
 
 /* ============================================================
-   DAILY 3 FOCUS WINDOW
+   STANDALONE APP: DAILY 3 FOCUS WINDOW
    ============================================================ */
 .focus-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
-.focus-header {
+.focus-hero-card {
+  background: #faf8f5;
+  border: 1px solid #1a1a1a;
+  padding: 14px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--chrome-shadow);
-  padding-bottom: 10px;
+  box-shadow: inset 1px 1px 0 #ffffff;
 }
 
 .focus-header h2 {
-  margin: 0;
-  font-size: 20px;
+  margin: 2px 0 0;
+  font-size: 22px;
   font-weight: bold;
 }
 
 .eyebrow {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--teal);
   font-weight: bold;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+}
+
+.three-meter-badge {
+  background: #ede7dc;
+  border: 1px solid #1a1a1a;
+  padding: 4px 12px;
+  text-align: center;
 }
 
 .three-meter {
-  font-size: 34px;
+  font-size: 28px;
   font-weight: bold;
   color: var(--teal);
   line-height: 1;
 }
 
 .three-meter span {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--muted-ink);
 }
 
-.task-list {
+.section-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--muted-ink);
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-list-well {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .task-row {
   display: grid;
   grid-template-columns: 24px 1fr auto 24px;
   align-items: center;
-  gap: 8px;
-  padding: 8px;
+  gap: 10px;
+  padding: 10px 12px;
   border: 1px solid #1a1a1a;
-  background: #faf8f5;
+  background: #ffffff;
   font-size: 14px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .task-row.active-task {
   background: var(--amber-soft);
   border-color: var(--amber);
+  box-shadow: inset 2px 0 0 var(--amber);
 }
 
-.task-row b {
-  margin-right: 6px;
+.task-priority-tag {
   color: var(--teal);
+  font-weight: bold;
+  margin-right: 6px;
 }
 
 .task-row .done {
@@ -635,8 +642,8 @@ button {
 
 .inline-add {
   display: flex;
-  gap: 6px;
-  margin-top: 6px;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .inline-add input, .expense-entry input {
@@ -644,7 +651,7 @@ button {
   min-width: 0;
   border: 1px solid #1a1a1a;
   background: #ffffff;
-  padding: 4px 8px;
+  padding: 6px 10px;
   font-size: 14px;
   outline: none;
   box-shadow: inset 1px 1px 0 #9c968b;
@@ -658,15 +665,15 @@ button {
   position: absolute;
   inset: 50% auto auto 50%;
   transform: translate(-50%, -50%);
-  width: 280px;
-  padding: 18px;
+  width: 300px;
+  padding: 22px;
   background: var(--chrome);
   border: 2px solid #1a1a1a;
   box-shadow: 6px 6px 0 #1a1a1a;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   z-index: 50;
   text-align: center;
 }
@@ -677,7 +684,7 @@ button {
 
 .confetti {
   color: var(--danger);
-  font-size: 24px;
+  font-size: 26px;
   animation: confetti .6s steps(2) infinite;
 }
 
@@ -686,48 +693,48 @@ button {
 }
 
 /* ============================================================
-   WINAMP TIMER WINDOW (Exact Match to Winamp in Reference!)
+   STANDALONE APP: WINAMP FOCUS TIMER
    ============================================================ */
 .winamp-skin {
   background: #ded8cd;
   border: 1px solid #1a1a1a;
-  padding: 8px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .winamp-top-screen {
   background: #0d2830;
   border: 1px solid #1a1a1a;
-  padding: 6px 8px;
+  padding: 8px 10px;
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 8px;
+  grid-template-columns: 130px 1fr;
+  gap: 10px;
   align-items: center;
   box-shadow: inset 1px 1px 0 #000000;
 }
 
 .winamp-time-display {
   color: var(--led-cyan);
-  font-size: 32px;
+  font-size: 34px;
   font-weight: bold;
   line-height: 1;
   text-shadow: 0 0 8px rgba(0, 229, 255, 0.7);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .winamp-play-indicator {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--led-green);
 }
 
 .winamp-track-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .winamp-track-title {
@@ -746,7 +753,7 @@ button {
 
 .winamp-badge {
   border: 1px solid #1e5260;
-  padding: 1px 3px;
+  padding: 1px 4px;
   font-size: 11px;
   color: #5bbccf;
   line-height: 1;
@@ -763,7 +770,7 @@ button {
 
 /* Dancing Spectrum Analyzer */
 .winamp-spectrum {
-  height: 24px;
+  height: 26px;
   background: #081820;
   border: 1px solid #1e5260;
   padding: 2px 4px;
@@ -799,7 +806,7 @@ button {
   border: 1px solid #1a1a1a;
   background: #ded8cd;
   color: var(--ink);
-  padding: 3px 6px;
+  padding: 4px 6px;
   font-size: 12px;
   font-weight: bold;
   box-shadow:
@@ -819,17 +826,17 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .winamp-btn-group {
   display: flex;
-  gap: 2px;
+  gap: 3px;
 }
 
 .winamp-btn {
-  width: 32px;
-  height: 26px;
+  width: 34px;
+  height: 28px;
   border: 1px solid #1a1a1a;
   background: var(--amber);
   color: var(--ink);
@@ -855,7 +862,7 @@ button {
   color: var(--ink);
   font-size: 12px;
   font-weight: bold;
-  padding: 2px 8px;
+  padding: 3px 10px;
   box-shadow:
     inset 1px 1px 0 #fff0c0,
     inset -1px -1px 0 #b08020;
@@ -865,38 +872,38 @@ button {
 }
 
 /* ============================================================
-   NOTEPAD WINDOW
+   STANDALONE APP: NOTEPAD
    ============================================================ */
 .notepad-container {
-  height: 360px;
+  height: 380px;
   display: flex;
   flex-direction: column;
   background: #ffffff;
 }
 
 .notepad-menubar {
-  padding: 3px 8px;
+  padding: 4px 10px;
   background: #eae4d8;
   border-bottom: 1px solid #1a1a1a;
   font-size: 13px;
   color: var(--ink);
   display: flex;
-  gap: 12px;
+  gap: 14px;
 }
 
 .notepad-textarea {
   flex: 1;
   resize: none;
   border: 0;
-  padding: 10px;
+  padding: 14px 16px;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
   outline: none;
   background: #ffffff;
 }
 
 .notepad-statusbar {
-  padding: 4px 10px;
+  padding: 6px 12px;
   background: #eae4d8;
   border-top: 1px solid #1a1a1a;
   display: flex;
@@ -907,30 +914,33 @@ button {
 }
 
 /* ============================================================
-   READING QUEUE (WOODEN BOOKSHELF)
+   STANDALONE APP: READING QUEUE (WOODEN BOOKSHELF)
    ============================================================ */
 .reading-container {
-  padding: 12px;
+  padding: 14px;
   background: #faf6f0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .wood-shelf {
-  height: 240px;
-  padding: 24px 16px 0;
+  height: 250px;
+  padding: 26px 18px 0;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: linear-gradient(90deg, #4d2f19 0%, #704526 25%, #8a5833 50%, #704526 75%, #4d2f19 100%);
   border: 10px ridge #8a5833;
-  box-shadow: inset 0 -20px 0 #3a2210, 3px 3px 0 #1a1a1a;
+  box-shadow: inset 0 -22px 0 #3a2210, 3px 3px 0 #1a1a1a;
 }
 
 .book-spine {
-  height: 180px;
-  width: 80px;
+  height: 190px;
+  width: 84px;
   border: 1px solid #1a1a1a;
-  padding: 8px 4px;
+  padding: 10px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -940,7 +950,7 @@ button {
 }
 
 .book-spine:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
 }
 
 .book-spine span {
@@ -948,13 +958,13 @@ button {
   font-size: 13px;
   font-weight: bold;
   overflow: hidden;
-  max-height: 120px;
+  max-height: 125px;
 }
 
 .book-spine small {
   background: rgba(255, 255, 255, 0.9);
   color: #141210;
-  padding: 1px 4px;
+  padding: 2px 5px;
   font-size: 11px;
   font-weight: bold;
 }
@@ -965,8 +975,8 @@ button {
 .spine-amber  { background: linear-gradient(160deg, #f0be6a 0%, #cf9636 100%); color: #141210; }
 
 .empty-book-slot {
-  height: 70px;
-  width: 80px;
+  height: 75px;
+  width: 84px;
   border: 2px dashed #a37b56;
   background: rgba(77, 47, 25, 0.4);
   color: #d4bda8;
@@ -982,28 +992,27 @@ button {
 }
 
 .book-detail-card {
-  margin-top: 10px;
-  padding: 10px;
+  padding: 12px 14px;
   border: 1px solid #1a1a1a;
   background: #ede7dc;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 /* ============================================================
-   BUDGET LEDGER (DUAL-PANE)
+   STANDALONE APP: BUDGET LEDGER (DUAL-PANE)
    ============================================================ */
 .ledger-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .allowance-box {
   background: #0d2830;
   color: var(--led-green);
-  padding: 12px 16px;
+  padding: 14px 18px;
   border: 1px solid #1a1a1a;
   display: flex;
   justify-content: space-between;
@@ -1012,7 +1021,7 @@ button {
 }
 
 .allowance-box strong {
-  font-size: 36px;
+  font-size: 38px;
   line-height: 1;
   text-shadow: 0 0 8px rgba(56, 240, 136, 0.7);
 }
@@ -1035,29 +1044,29 @@ button {
 .ledger-settings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .ledger-settings-grid label {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   font-size: 13px;
   font-weight: bold;
 }
 
 .ledger-settings-grid input {
   border: 1px solid #1a1a1a;
-  padding: 4px 6px;
+  padding: 5px 8px;
   font-size: 13px;
 }
 
 .envelope-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   border: 1px solid #1a1a1a;
-  padding: 8px;
+  padding: 12px;
   background: #faf8f5;
 }
 
@@ -1081,12 +1090,12 @@ button {
 }
 
 /* ============================================================
-   ARCHIVE / LOGBOOK WINDOW
+   STANDALONE APP: ARCHIVE / LOGBOOK WINDOW
    ============================================================ */
 .archive-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .archive-toolbar {
@@ -1098,52 +1107,53 @@ button {
 .archive-paper {
   background: #ffffff;
   border: 1px solid #1a1a1a;
-  padding: 12px;
-  min-height: 240px;
+  padding: 16px 18px;
+  min-height: 260px;
   font-size: 13px;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.03);
 }
 
 .archive-paper h3 {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-size: 16px;
   border-bottom: 1px solid #1a1a1a;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
 }
 
 .archive-paper pre {
   font-family: inherit;
   font-size: 13px;
   white-space: pre-wrap;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* ============================================================
-   DISPLAY PROPERTIES
+   STANDALONE APP: DISPLAY PROPERTIES
    ============================================================ */
 .display-properties-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .monitor-frame {
-  height: 130px;
+  height: 140px;
   border: 8px ridge #9c968b;
   box-shadow: 2px 2px 0 #1a1a1a;
   display: grid;
   place-items: center;
   color: #ffffff;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   text-shadow: 1px 1px 0 #1a1a1a;
 }
 
 .wallpaper-fieldset {
   border: 1px groove #9c968b;
-  padding: 10px;
+  padding: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
 }
 
 .wallpaper-fieldset legend {
@@ -1155,30 +1165,30 @@ button {
 .wallpaper-fieldset label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 13px;
   cursor: pointer;
 }
 
 .swatch {
-  width: 28px;
-  height: 18px;
+  width: 32px;
+  height: 20px;
   border: 1px solid #1a1a1a;
 }
 
 /* ============================================================
-   ACCOUNT WINDOW
+   STANDALONE APP: ACCOUNT WINDOW
    ============================================================ */
 .account-body {
   display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 16px;
+  grid-template-columns: 88px 1fr;
+  gap: 18px;
   align-items: start;
 }
 
 .account-avatar {
-  width: 80px;
-  height: 80px;
+  width: 88px;
+  height: 88px;
   border: 1px solid #1a1a1a;
   display: grid;
   place-items: center;
@@ -1210,6 +1220,48 @@ button {
   background: transparent;
   padding: 0;
   color: var(--muted-ink);
+}
+
+/* ============================================================
+   DESKTOP RIGHT-CLICK CONTEXT MENU (Win98 / Classic Style)
+   ============================================================ */
+.desktop-context-menu {
+  position: absolute;
+  width: 210px;
+  background: #ded8cd;
+  border: 1px solid #1a1a1a;
+  padding: 2px;
+  z-index: 9999;
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #9c968b,
+    3px 3px 0 rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+}
+
+.context-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  font-size: 13px;
+  text-align: left;
+}
+
+.context-menu-item:hover {
+  background: var(--teal);
+  color: #ffffff;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background: #9c968b;
+  border-bottom: 1px solid #ffffff;
+  margin: 3px 1px;
 }
 
 /* ============================================================

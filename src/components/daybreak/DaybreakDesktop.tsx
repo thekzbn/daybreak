@@ -16,6 +16,8 @@ import {
   VolumeX,
   X,
   Check,
+  Sparkles,
+  Download,
 } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
@@ -97,7 +99,7 @@ function LogbookIcon() {
       <rect x="5" y="3" width="14" height="7" fill="#f4ece1"/>
       <rect x="14" y="4" width="3" height="5" fill="#3a72c4"/>
       <rect x="6" y="14" width="12" height="7" fill="#ffffff"/>
-      <circle x="12" y="17.5" r="2.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <circle x="12" y="17.5" r="2.5" cx="12" cy="17.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
     </svg>
   );
 }
@@ -152,6 +154,7 @@ function DisplayIcon() {
   );
 }
 
+/* App definitions with canonical names strictly from the Daybreak prompt */
 const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode }> = {
   focus:   { label: "Daily 3",      renderIcon: () => <FocusIcon /> },
   timer:   { label: "Focus Timer",  renderIcon: () => <TimerIcon /> },
@@ -238,36 +241,36 @@ function LoginWindow() {
             <button className="close-btn">×</button>
           </div>
         </div>
-        <div className="window-body" style={{ padding: "18px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px", borderBottom: "1px solid #1a1a1a", paddingBottom: "10px" }}>
-            <div style={{ width: "36px", height: "36px" }}><AccountIcon /></div>
+        <div className="window-body" style={{ padding: "20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px", borderBottom: "1px solid #1a1a1a", paddingBottom: "12px" }}>
+            <div style={{ width: "40px", height: "40px" }}><AccountIcon /></div>
             <div>
-              <h2 style={{ margin: 0, fontSize: "15px" }}>{mode === "signin" ? "Sign in to Daybreak" : mode === "signup" ? "Create your account" : "Reset password"}</h2>
+              <h2 style={{ margin: 0, fontSize: "16px" }}>{mode === "signin" ? "Sign in to Daybreak" : mode === "signup" ? "Create your account" : "Reset password"}</h2>
               <span style={{ fontSize: "12px", color: "var(--muted-ink)" }}>{status}</span>
             </div>
           </div>
-          <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {mode === "signup" && (
-              <label style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+              <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 Display name
-                <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={60} />
+                <input style={{ border: "1px solid #1a1a1a", padding: "5px 8px" }} value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={60} />
               </label>
             )}
-            <label style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+            <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               Email address
-              <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input style={{ border: "1px solid #1a1a1a", padding: "5px 8px" }} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
             </label>
             {mode !== "forgot" && (
-              <label style={{ display: "flex", flexDirection: "column", gap: "3px" }}>
+              <label style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 Password
-                <input style={{ border: "1px solid #1a1a1a", padding: "4px 6px" }} type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input style={{ border: "1px solid #1a1a1a", padding: "5px 8px" }} type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} />
               </label>
             )}
             <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
               <RetroButton className="retro-button-accent" disabled={busy} type="submit">{busy ? "Please wait..." : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}</RetroButton>
               {mode !== "forgot" && <RetroButton type="button" onClick={google}>G Continue with Google</RetroButton>}
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px", fontSize: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px", fontSize: "12px" }}>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>{mode === "signup" ? "Already have an account? Sign in" : "Create new account"}</button>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "forgot" ? "signin" : "forgot")}>{mode === "forgot" ? "Back to sign in" : "Forgot password?"}</button>
             </div>
@@ -345,15 +348,15 @@ function OSWindow({
 }) {
   const [pos, setPos] = useState(() => {
     const offsets: Record<AppId, { x: number; y: number }> = {
-      focus:   { x: 230, y: 60 },
-      timer:   { x: 670, y: 60 },
-      notes:   { x: 280, y: 90 },
-      reading: { x: 250, y: 80 },
-      budget:  { x: 270, y: 75 },
-      archive: { x: 290, y: 85 },
-      display: { x: 310, y: 100 },
-      account: { x: 330, y: 95 },
-      trash:   { x: 350, y: 110 },
+      focus:   { x: 230, y: 55 },
+      timer:   { x: 670, y: 55 },
+      notes:   { x: 280, y: 80 },
+      reading: { x: 250, y: 70 },
+      budget:  { x: 270, y: 65 },
+      archive: { x: 290, y: 75 },
+      display: { x: 310, y: 90 },
+      account: { x: 330, y: 85 },
+      trash:   { x: 350, y: 100 },
     };
     return offsets[id] ?? { x: 240, y: 70 };
   });
@@ -467,43 +470,52 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
 
   return (
     <div className="focus-content">
-      <div className="focus-header">
-        <div>
-          <span className="eyebrow">TODAY'S PRIORITY LOCK</span>
+      <div className="focus-hero-card">
+        <div className="focus-header">
+          <span className="eyebrow">DAILY PRIORITY LOCK</span>
           <h2>Daily 3 Focus</h2>
         </div>
-        <div className="three-meter">
-          {recommended.filter((t) => t.completed_at).length}<span>/3</span>
+        <div className="three-meter-badge">
+          <div className="three-meter">
+            {recommended.filter((t) => t.completed_at).length}<span>/3</span>
+          </div>
+          <span style={{ fontSize: "11px", color: "var(--muted-ink)" }}>Completed</span>
         </div>
       </div>
 
-      <div className="task-list">
-        {todays.map((task, i) => (
-          <div className={`task-row ${task.is_active ? "active-task" : ""}`} key={task.id}>
-            <button className="pixel-check" onClick={() => toggle(task)} aria-label={`Complete ${task.title}`}>
-              {task.completed_at && <Check size={14} />}
-            </button>
-            <span className={task.completed_at ? "done" : ""}>
-              {task.is_recommended && <b>0{i+1}</b>}
-              {task.title}
-            </span>
-            {!task.completed_at && (
-              <RetroButton size="sm" className={task.is_active ? "retro-button-accent" : ""} onClick={() => activate(task)} disabled={task.is_active}>
-                {task.is_active ? "ACTIVE" : "FOCUS"}
-              </RetroButton>
-            )}
-            <button className="bare-icon" onClick={() => remove(task)} aria-label={`Delete ${task.title}`}>
-              <X size={14} />
-            </button>
-          </div>
-        ))}
+      <div>
+        <div className="section-label">
+          <span>PRIMARY GOALS FOR TODAY</span>
+          <span>{recommended.length}/3 locked</span>
+        </div>
+        <div className="task-list-well">
+          {todays.map((task, i) => (
+            <div className={`task-row ${task.is_active ? "active-task" : ""}`} key={task.id}>
+              <button className="pixel-check" onClick={() => toggle(task)} aria-label={`Complete ${task.title}`}>
+                {task.completed_at && <Check size={14} />}
+              </button>
+              <span className={task.completed_at ? "done" : ""}>
+                {task.is_recommended && <b className="task-priority-tag">0{i+1}</b>}
+                {task.title}
+              </span>
+              {!task.completed_at && (
+                <RetroButton size="sm" className={task.is_active ? "retro-button-accent" : ""} onClick={() => activate(task)} disabled={task.is_active}>
+                  {task.is_active ? "ACTIVE" : "FOCUS"}
+                </RetroButton>
+              )}
+              <button className="bare-icon" onClick={() => remove(task)} aria-label={`Delete ${task.title}`}>
+                <X size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
 
       <form className="inline-add" onSubmit={(e) => { e.preventDefault(); void addTask(); }}>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder={recommended.length < 3 ? "Add a primary priority..." : "Add an extra task..."}
+          placeholder={recommended.length < 3 ? "Add priority (up to 3)..." : "Add bonus task..."}
           maxLength={240}
         />
         <RetroButton className="retro-button-accent" type="submit" size="icon"><Plus size={14} /></RetroButton>
@@ -555,7 +567,7 @@ function TimerApp() {
         </div>
         <div className="winamp-track-info">
           <div className="winamp-track-title">
-            {mode === "up" ? "1. TRACK 1 (FREE)" : mode === "25" ? "1. POMO BLOCK (25:00)" : "1. DEEP FOCUS (50:00)"}
+            {mode === "up" ? "1. STOPWATCH (COUNT UP)" : mode === "25" ? "1. POMODORO BLOCK (25:00)" : "1. DEEP WORK BLOCK (50:00)"}
           </div>
           <div className="winamp-badges">
             <span className="winamp-badge active">192 kbps</span>
@@ -638,7 +650,7 @@ function NotesApp({ userId, initial, refresh }: { userId: string; initial: strin
         value={text}
         onChange={(e) => setText(e.target.value)}
         onBlur={save}
-        placeholder="Type something before it floats away..."
+        placeholder="Type scratch notes before they float away..."
       />
       <div className="notepad-statusbar">
         <span>{text.length} characters</span>
@@ -852,8 +864,8 @@ function ArchiveApp({ tasks, expenses, notes }: { tasks: Task[]; expenses: Expen
   return (
     <div className="archive-container">
       <div className="archive-toolbar">
-        <input style={{ border: "1px solid #1a1a1a", padding: "2px 6px" }} type="date" max={today()} value={date} onChange={(e) => setDate(e.target.value)} />
-        <RetroButton className="retro-button-accent" onClick={download}><LogbookIcon /> Export Floppy</RetroButton>
+        <input style={{ border: "1px solid #1a1a1a", padding: "4px 8px" }} type="date" max={today()} value={date} onChange={(e) => setDate(e.target.value)} />
+        <RetroButton className="retro-button-accent" onClick={download}><Download size={14} /> Export Floppy (.txt)</RetroButton>
       </div>
       <div className="archive-paper">
         <h3>{new Date(`${date}T12:00:00`).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</h3>
@@ -909,14 +921,14 @@ function AccountApp({
   return (
     <div className="account-body">
       <div className="account-avatar"><AccountIcon /></div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <span className="eyebrow">SIGNED IN AS</span>
-        <h2 style={{ margin: 0, fontSize: "18px" }}>{displayName}</h2>
-        <p style={{ margin: 0, color: "var(--muted-ink)", fontSize: "12px" }}>{session.user.email}</p>
-        <label style={{ display: "flex", flexDirection: "column", gap: "2px", fontSize: "13px" }}>
+        <h2 style={{ margin: 0, fontSize: "20px" }}>{displayName}</h2>
+        <p style={{ margin: 0, color: "var(--muted-ink)", fontSize: "13px" }}>{session.user.email}</p>
+        <label style={{ display: "flex", flexDirection: "column", gap: "4px", fontSize: "13px" }}>
           Display Name
           <input
-            style={{ border: "1px solid #1a1a1a", padding: "3px 6px" }}
+            style={{ border: "1px solid #1a1a1a", padding: "4px 8px" }}
             value={displayName}
             maxLength={60}
             onChange={(e) => setDisplayName(e.target.value)}
@@ -948,13 +960,13 @@ function DaybreakOS({ session }: { session: Session }) {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [settings, setSettings] = useState<Tables<"budget_settings"> | null>(null);
-  const [balloon, setBalloon] = useState("Double-click an icon or click the bottom dock to begin.");
+  const [balloon, setBalloon] = useState("Right-click anywhere for context menu, or use the bottom dock.");
 
   // Draggable icons position state
   const [iconPositions, setIconPositions] = useState<Record<AppId, { x: number; y: number }>>(() => ({ ...ICON_DEFAULTS }));
 
-  // Recent apps list (ordered by most recent access)
-  const [recentApps, setRecentApps] = useState<AppId[]>(["focus", "timer", "notes", "reading", "budget"]);
+  // Right-click context menu state
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number; visible: boolean }>({ x: 0, y: 0, visible: false });
 
   const refresh = useCallback(async () => {
     const uid = session.user.id;
@@ -1018,7 +1030,7 @@ function DaybreakOS({ session }: { session: Session }) {
     setOpen((v) => (v.includes(id) ? v : [...v, id]));
     setMinimized((v) => v.filter((x) => x !== id));
     setActive(id);
-    setRecentApps((prev) => [id, ...prev.filter((item) => item !== id)]);
+    setContextMenu({ x: 0, y: 0, visible: false });
   }
 
   function handleDockClick(id: AppId) {
@@ -1029,7 +1041,6 @@ function DaybreakOS({ session }: { session: Session }) {
       setMinimized((v) => v.filter((x) => x !== id));
       setActive(id);
     } else if (active === id) {
-      // Toggle minimize if already active (macOS dock style)
       setMinimized((v) => [...v, id]);
     } else {
       setActive(id);
@@ -1059,6 +1070,28 @@ function DaybreakOS({ session }: { session: Session }) {
     setMaximized((v) => v.filter((x) => x !== id));
   }
 
+  async function createStickyAt(x: number, y: number) {
+    sound();
+    await supabase.from("stickies").insert({
+      user_id: session.user.id,
+      content: "New note...",
+      color: "yellow",
+      position_x: Math.max(20, Math.min(x, window.innerWidth - 200)),
+      position_y: Math.max(50, Math.min(y, window.innerHeight - 200)),
+    });
+    setContextMenu({ x: 0, y: 0, visible: false });
+    refresh();
+  }
+
+  function handleContextMenu(e: React.MouseEvent) {
+    e.preventDefault();
+    setContextMenu({
+      x: Math.min(e.clientX, window.innerWidth - 220),
+      y: Math.min(e.clientY, window.innerHeight - 300),
+      visible: true,
+    });
+  }
+
   const content = (id: AppId) => {
     if (id === "focus") return <FocusApp tasks={tasks} userId={session.user.id} refresh={refresh} chime={() => sound("victory")} />;
     if (id === "timer") return <TimerApp />;
@@ -1084,12 +1117,15 @@ function DaybreakOS({ session }: { session: Session }) {
     return () => window.clearInterval(id);
   }, []);
 
-  // Compute dock apps list: pinned apps + any open apps
   const dockApps = Array.from(new Set([...DOCK_PINNED_APPS, ...open.filter((id) => id !== "trash")]));
 
   return (
-    <main className={`desktop wallpaper-${wallpaper}`} onClick={() => setSelected(null)}>
-      {/* Top Menu Bar */}
+    <main
+      className={`desktop wallpaper-${wallpaper}`}
+      onClick={() => { setSelected(null); setContextMenu({ x: 0, y: 0, visible: false }); }}
+      onContextMenu={handleContextMenu}
+    >
+      {/* Top Menu Bar (Clean System Status Header) */}
       <header className="top-navbar" onClick={(e) => e.stopPropagation()}>
         <div className="top-navbar-left">
           <div className="top-brand">
@@ -1099,9 +1135,6 @@ function DaybreakOS({ session }: { session: Session }) {
         <div className="top-navbar-right">
           <button className="top-sound-btn" onClick={toggleMute} aria-label={muted ? "Unmute sound" : "Mute sound"}>
             {muted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-          </button>
-          <button className="top-user-pill" onClick={() => launch("account")}>
-            Sign in ({displayName})
           </button>
           <time className="top-clock-pill">
             {clockTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })} - {clockTime.toLocaleDateString([], { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
@@ -1169,6 +1202,55 @@ function DaybreakOS({ session }: { session: Session }) {
           <button className="balloon-tip-close" onClick={() => setBalloon("")}><X size={14} /></button>
           <b>Daybreak Tip</b>
           <p style={{ margin: "2px 0 0" }}>{balloon}</p>
+        </div>
+      )}
+
+      {/* Desktop Right-Click Context Menu */}
+      {contextMenu.visible && (
+        <div
+          className="desktop-context-menu"
+          style={{ left: contextMenu.x, top: contextMenu.y }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="context-menu-item" onClick={() => createStickyAt(contextMenu.x, contextMenu.y)}>
+            <span>📝 New Sticky Note</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("display")}>
+            <span>🖼️ Display Properties...</span>
+          </button>
+          <div className="context-menu-divider" />
+          <button className="context-menu-item" onClick={() => { setIconPositions({ ...ICON_DEFAULTS }); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
+            <span>⚡ Align Icons</span>
+          </button>
+          <button className="context-menu-item" onClick={() => { refresh(); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
+            <span>🔄 Refresh Desktop</span>
+          </button>
+          <div className="context-menu-divider" />
+          <button className="context-menu-item" onClick={() => launch("focus")}>
+            <span>🎯 Daily 3 Focus</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("timer")}>
+            <span>🎵 Focus Timer (Winamp)</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("notes")}>
+            <span>📋 Scratch Note</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("reading")}>
+            <span>📚 Reading Shelf</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("budget")}>
+            <span>💰 Budget Ledger</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("archive")}>
+            <span>💾 Logbook</span>
+          </button>
+          <div className="context-menu-divider" />
+          <button className="context-menu-item" onClick={() => launch("trash")}>
+            <span>🗑️ Recycle Bin</span>
+          </button>
+          <button className="context-menu-item" onClick={() => launch("account")}>
+            <span>👤 Account Settings...</span>
+          </button>
         </div>
       )}
 
