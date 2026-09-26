@@ -391,7 +391,7 @@ button {
    ============================================================ */
 .window-layer {
   position: absolute;
-  inset: 36px 0 40px;
+  inset: 36px 0 76px;
   pointer-events: none;
 }
 
@@ -401,7 +401,7 @@ button {
   left: 0;
   pointer-events: auto;
   width: min(640px, calc(100vw - 120px));
-  max-height: calc(100vh - 90px);
+  max-height: calc(100vh - 120px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -564,7 +564,7 @@ button {
 }
 
 /* ============================================================
-   DAILY 3 FOCUS WINDOW (Women / Catalog layout in reference)
+   DAILY 3 FOCUS WINDOW
    ============================================================ */
 .focus-content {
   display: flex;
@@ -1222,7 +1222,7 @@ button {
 .balloon-tip {
   position: absolute;
   right: 20px;
-  bottom: 48px;
+  bottom: 74px;
   width: 260px;
   background: #ffffcc;
   border: 1px solid #1a1a1a;
@@ -1244,159 +1244,110 @@ button {
 }
 
 /* ============================================================
-   START MENU (Spotlight Quick Launcher)
+   MACOS-STYLE RETRO FLOATING DOCK (At Bottom Screen)
    ============================================================ */
-.start-menu-panel {
+.macos-dock {
   position: absolute;
-  left: 2px;
-  bottom: 38px;
-  width: 280px;
-  min-height: 320px;
-  background: #ded8cd;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 52px;
+  padding: 4px 10px;
+  background: rgba(222, 216, 205, 0.92);
+  backdrop-filter: blur(8px);
   border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 60;
   box-shadow:
     inset 1px 1px 0 #ffffff,
     inset -1px -1px 0 #9c968b,
-    4px 4px 0 #1a1a1a;
-  z-index: 70;
-  display: grid;
-  grid-template-columns: 28px 1fr;
+    0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-.start-menu-rail {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  background: linear-gradient(180deg, #168ea8 0%, #b8a4dc 100%);
-  color: #ffffff;
-  padding: 8px 4px;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.start-menu-body {
-  padding: 8px;
+.dock-item {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 2px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.start-search-box {
-  display: flex;
   align-items: center;
-  gap: 4px;
-  background: #ffffff;
-  border: 1px solid #1a1a1a;
-  padding: 4px 6px;
-  margin-bottom: 6px;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.start-search-box input {
-  border: 0;
-  outline: none;
-  width: 100%;
-  font-size: 13px;
+.dock-item:hover {
+  transform: translateY(-8px) scale(1.18);
 }
 
-.start-item-btn {
+.dock-item:active {
+  transform: translateY(-4px) scale(1.08);
+}
+
+.dock-icon-wrapper {
+  width: 32px;
+  height: 32px;
   display: grid;
-  grid-template-columns: 24px 1fr 16px;
-  align-items: center;
-  gap: 6px;
-  border: 0;
-  background: transparent;
-  padding: 6px;
-  font-size: 13px;
-  font-weight: bold;
-  text-align: left;
+  place-items: center;
 }
 
-.start-item-btn:hover {
-  background: var(--teal);
-  color: #ffffff;
+.dock-icon-wrapper svg {
+  width: 30px;
+  height: 30px;
 }
 
-/* ============================================================
-   BOTTOM TASKBAR (Windows 98 Style)
-   ============================================================ */
-.bottom-taskbar {
+/* Running/Active Dot Indicator underneath icon */
+.dock-active-dot {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 36px;
-  background: #ded8cd;
-  border-top: 1px solid #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 4px;
-  z-index: 60;
-  box-shadow: inset 0 1px 0 #ffffff;
+  bottom: 1px;
+  width: 4px;
+  height: 4px;
+  background: #168ea8;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #168ea8;
 }
 
-.start-btn {
-  font-size: 13px !important;
-  font-weight: bold !important;
-  height: 28px !important;
-  padding: 0 10px !important;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+.dock-active-dot.focused {
+  background: #f0be6a;
+  box-shadow: 0 0 6px #f0be6a;
 }
 
-.taskbar-buttons {
-  display: flex;
-  gap: 3px;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.taskbar-app-btn {
-  min-width: 100px;
-  max-width: 150px;
-  height: 28px;
-  border: 1px solid #1a1a1a;
-  background: #ded8cd;
-  font-size: 13px;
+/* Tooltip on Hover */
+.dock-tooltip {
+  position: absolute;
+  bottom: 50px;
+  background: #1a1a1a;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 2px 8px;
+  font-size: 11px;
   font-weight: bold;
-  text-align: left;
-  padding: 0 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
-  box-shadow:
-    inset 1px 1px 0 #ffffff,
-    inset -1px -1px 0 #9c968b;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.12s, transform 0.12s;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
 }
 
-.taskbar-app-btn.pressed {
-  box-shadow:
-    inset 1px 1px 0 #9c968b,
-    inset -1px -1px 0 #ffffff;
-  background: repeating-linear-gradient(45deg, #ded8cd 0 2px, #ffffff 2px 4px);
+.dock-item:hover .dock-tooltip {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.taskbar-tray {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 28px;
-  border: 1px solid #1a1a1a;
-  padding: 0 8px;
-  font-size: 13px;
-  font-weight: bold;
-  box-shadow:
-    inset 1px 1px 0 #9c968b,
-    inset -1px -1px 0 #ffffff;
-}
-
-.tray-mute-btn {
-  border: 0;
-  background: transparent;
-  padding: 0;
-  color: var(--ink);
+/* Divider before Trash in Dock */
+.dock-divider {
+  width: 1px;
+  height: 32px;
+  background: #9c968b;
+  border-right: 1px solid #ffffff;
+  margin: 0 2px;
 }
 
 /* ============================================================
@@ -1407,8 +1358,7 @@ button {
 @media (max-width: 768px) {
   .top-navbar { display: none; }
   .homescreen-clock-widget { display: none; }
-  .bottom-taskbar { display: none; }
-  .start-menu-panel { display: none; }
+  .macos-dock { display: none; }
   .balloon-tip { display: none; }
   .sticky { display: none; }
 

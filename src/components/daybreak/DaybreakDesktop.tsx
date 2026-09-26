@@ -97,7 +97,7 @@ function LogbookIcon() {
       <rect x="5" y="3" width="14" height="7" fill="#f4ece1"/>
       <rect x="14" y="4" width="3" height="5" fill="#3a72c4"/>
       <rect x="6" y="14" width="12" height="7" fill="#ffffff"/>
-      <circle cx="12" cy="17.5" r="2.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <circle x="12" y="17.5" r="2.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
     </svg>
   );
 }
@@ -152,7 +152,6 @@ function DisplayIcon() {
   );
 }
 
-/* App definitions with canonical names strictly from the Daybreak prompt */
 const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode }> = {
   focus:   { label: "Daily 3",      renderIcon: () => <FocusIcon /> },
   timer:   { label: "Focus Timer",  renderIcon: () => <TimerIcon /> },
@@ -165,7 +164,7 @@ const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode
   trash:   { label: "Recycle Bin",  renderIcon: () => <BinIcon /> },
 };
 
-// Default layout matching reference: 2 columns on the left
+// Default layout of desktop icons (arranged on the left side)
 const ICON_DEFAULTS: Record<AppId, { x: number; y: number }> = {
   focus:   { x: 28,  y: 60 },
   timer:   { x: 28,  y: 160 },
@@ -177,6 +176,8 @@ const ICON_DEFAULTS: Record<AppId, { x: number; y: number }> = {
   account: { x: 120, y: 260 },
   trash:   { x: 120, y: 360 },
 };
+
+const DOCK_PINNED_APPS: AppId[] = ["focus", "timer", "notes", "reading", "budget", "archive", "display", "account"];
 
 const today = () => new Date().toLocaleDateString("en-CA");
 const monthStart = () => `${today().slice(0, 7)}-01`;
@@ -937,8 +938,6 @@ function DaybreakOS({ session }: { session: Session }) {
   const [minimized, setMinimized] = useState<AppId[]>([]);
   const [maximized, setMaximized] = useState<AppId[]>([]);
   const [selected, setSelected] = useState<AppId | null>(null);
-  const [start, setStart] = useState(false);
-  const [search, setSearch] = useState("");
   const [wallpaper, setWallpaperState] = useState<Wallpaper>("pastel-cyber");
   const [muted, setMuted] = useState(false);
   const [displayName, setDisplayName] = useState(String(session.user.user_metadata?.["display_name"] ?? "Daybreaker"));
@@ -949,10 +948,13 @@ function DaybreakOS({ session }: { session: Session }) {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [settings, setSettings] = useState<Tables<"budget_settings"> | null>(null);
-  const [balloon, setBalloon] = useState("Double-click an icon to begin.");
+  const [balloon, setBalloon] = useState("Double-click an icon or click the bottom dock to begin.");
 
   // Draggable icons position state
   const [iconPositions, setIconPositions] = useState<Record<AppId, { x: number; y: number }>>(() => ({ ...ICON_DEFAULTS }));
+
+  // Recent apps list (ordered by most recent access)
+  const [recentApps, setRecentApps] = useState<AppId[]>(["focus", "timer", "notes", "reading", "budget"]);
 
   const refresh = useCallback(async () => {
     const uid = session.user.id;
@@ -1016,7 +1018,22 @@ function DaybreakOS({ session }: { session: Session }) {
     setOpen((v) => (v.includes(id) ? v : [...v, id]));
     setMinimized((v) => v.filter((x) => x !== id));
     setActive(id);
-    setStart(false);
+    setRecentApps((prev) => [id, ...prev.filter((item) => item !== id)]);
+  }
+
+  function handleDockClick(id: AppId) {
+    sound();
+    if (!open.includes(id)) {
+      launch(id);
+    } else if (minimized.includes(id)) {
+      setMinimized((v) => v.filter((x) => x !== id));
+      setActive(id);
+    } else if (active === id) {
+      // Toggle minimize if already active (macOS dock style)
+      setMinimized((v) => [...v, id]);
+    } else {
+      setActive(id);
+    }
   }
 
   async function setWallpaper(w: Wallpaper) {
@@ -1041,8 +1058,6 @@ function DaybreakOS({ session }: { session: Session }) {
     setMinimized((v) => v.filter((x) => x !== id));
     setMaximized((v) => v.filter((x) => x !== id));
   }
-
-  const filtered = (Object.keys(APP_META) as AppId[]).filter((id) => APP_META[id].label.toLowerCase().includes(search.toLowerCase()));
 
   const content = (id: AppId) => {
     if (id === "focus") return <FocusApp tasks={tasks} userId={session.user.id} refresh={refresh} chime={() => sound("victory")} />;
@@ -1069,8 +1084,11 @@ function DaybreakOS({ session }: { session: Session }) {
     return () => window.clearInterval(id);
   }, []);
 
+  // Compute dock apps list: pinned apps + any open apps
+  const dockApps = Array.from(new Set([...DOCK_PINNED_APPS, ...open.filter((id) => id !== "trash")]));
+
   return (
-    <main className={`desktop wallpaper-${wallpaper}`} onClick={() => { setSelected(null); setStart(false); }}>
+    <main className={`desktop wallpaper-${wallpaper}`} onClick={() => setSelected(null)}>
       {/* Top Navigation Bar (from the reference fashion OS design!) */}
       <header className="top-navbar" onClick={(e) => e.stopPropagation()}>
         <div className="top-navbar-left">
@@ -1161,50 +1179,46 @@ function DaybreakOS({ session }: { session: Session }) {
         </div>
       )}
 
-      {/* Start Menu (Spotlight Quick Launcher) */}
-      {start && (
-        <div className="start-menu-panel" onClick={(e) => e.stopPropagation()}>
-          <div className="start-menu-rail">DAYBREAK 2000</div>
-          <div className="start-menu-body">
-            <div className="start-search-box">
-              <Search size={14} />
-              <input autoFocus placeholder="Find an app..." value={search} onChange={(e) => setSearch(e.target.value)} />
-            </div>
-            {filtered.map((id) => {
-              const meta = APP_META[id];
-              return (
-                <button key={id} className="start-item-btn" onClick={() => launch(id)}>
-                  <div style={{ width: "20px", height: "20px" }}>{meta.renderIcon()}</div>
-                  <span>{meta.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* Bottom Taskbar */}
-      <nav className="bottom-taskbar" onClick={(e) => e.stopPropagation()}>
-        <RetroButton className="start-btn retro-button-accent" onClick={() => setStart((v) => !v)}>
-          Start
-        </RetroButton>
-        <div className="taskbar-buttons">
-          {open.map((id) => (
+      {/* macOS-style Floating Retro Bottom Dock */}
+      <nav className="macos-dock" onClick={(e) => e.stopPropagation()}>
+        {dockApps.map((id) => {
+          const meta = APP_META[id];
+          const isOpen = open.includes(id);
+          const isCurrentActive = active === id && isOpen && !minimized.includes(id);
+          return (
             <button
               key={id}
-              className={`taskbar-app-btn ${active === id && !minimized.includes(id) ? "pressed" : ""}`}
-              onClick={() => { setActive(id); setMinimized((v) => v.filter((x) => x !== id)); }}
+              className="dock-item"
+              onClick={() => handleDockClick(id)}
+              aria-label={meta.label}
             >
-              {APP_META[id].label}
+              <div className="dock-icon-wrapper">
+                {meta.renderIcon()}
+              </div>
+              {isOpen && (
+                <span className={`dock-active-dot ${isCurrentActive ? "focused" : ""}`} />
+              )}
+              <span className="dock-tooltip">{meta.label}</span>
             </button>
-          ))}
-        </div>
-        <div className="taskbar-tray">
-          <button className="tray-mute-btn" onClick={toggleMute} aria-label={muted ? "Unmute sounds" : "Mute sounds"}>
-            {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
-          </button>
-          <span>{clockTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}</span>
-        </div>
+          );
+        })}
+
+        <div className="dock-divider" />
+
+        {/* Recycle Bin at the end of Dock (like macOS Trash) */}
+        <button
+          className="dock-item"
+          onClick={() => handleDockClick("trash")}
+          aria-label="Recycle Bin"
+        >
+          <div className="dock-icon-wrapper">
+            <BinIcon />
+          </div>
+          {open.includes("trash") && (
+            <span className={`dock-active-dot ${active === "trash" && !minimized.includes("trash") ? "focused" : ""}`} />
+          )}
+          <span className="dock-tooltip">Recycle Bin</span>
+        </button>
       </nav>
 
       {/* Pocket OS Mobile Tabs */}
