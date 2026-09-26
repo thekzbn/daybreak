@@ -39,16 +39,16 @@ function AccountIcon() {
   return (
     <svg viewBox="0 0 32 32" id="boy_Light" data-name="boy/Light" xmlns="http://www.w3.org/2000/svg">
       <g>
-        <path d="M0,0H12V2H8V4H6V6H4v4H2v4H0Z" fill="#ffffff00"/>
-        <path d="M12,0H26V2h4V4h2V8H30v2H28v2H26v4H24v2H20V16H18V14h6V12H18V10h4V8H16v2H14v2H12V22H10V20H8v6h4v6H10V28H6V26H4V24H2V20H0V14H2V10H4V6H6V4H8V2h4Z" fill="#1a1a1a"/>
-        <path d="M0,0H6V4H4V2H0Z" transform="translate(26)" fill="#ffffff00"/>
-        <path d="M8,0h6V2H10V4h6V6H10V8h2v2h4V8h2v2h2v2H18v2H16v2h2v4H12v2h2v2H4V18H0V12H2v2H4V4H6V2H8Z" transform="translate(8 8)" fill="#FFE2D2"/>
-        <path d="M6,0H8V24H0V22H2V20H4V12H6V10H4V8H2V4H4V2H6Z" transform="translate(24 8)" fill="#ffffff00"/>
-        <path d="M0,0H2V2H0Z" transform="translate(26 16)" fill="#1a1a1a"/>
-        <path d="M0,0H2V2H0Z" transform="translate(28 18)" fill="#1a1a1a"/>
-        <path d="M0,0H2V4H4V6H6V8h4v4H0Z" transform="translate(0 20)" fill="#ffffff00"/>
-        <path d="M2,0H4V8H2V4H0V2H2Z" transform="translate(24 20)" fill="#1a1a1a"/>
-        <path d="M0,0H6V2H4V4H2V2H0Z" transform="translate(20 28)" fill="#1a1a1a"/>
+        <path d="M0,0H12V2H8V4H6V6H4v4H2v4H0Z" fill="#ffffff00" />
+        <path d="M12,0H26V2h4V4h2V8H30v2H28v2H26v4H24v2H20V16H18V14h6V12H18V10h4V8H16v2H14v2H12V22H10V20H8v6h4v6H10V28H6V26H4V24H2V20H0V14H2V10H4V6H6V4H8V2h4Z" fill="#1a1a1a" />
+        <path d="M0,0H6V4H4V2H0Z" transform="translate(26)" fill="#ffffff00" />
+        <path d="M8,0h6V2H10V4h6V6H10V8h2v2h4V8h2v2h2v2H18v2H16v2h2v4H12v2h2v2H4V18H0V12H2v2H4V4H6V2H8Z" transform="translate(8 8)" fill="#FFE2D2" />
+        <path d="M6,0H8V24H0V22H2V20H4V12H6V10H4V8H2V4H4V2H6Z" transform="translate(24 8)" fill="#ffffff00" />
+        <path d="M0,0H2V2H0Z" transform="translate(26 16)" fill="#1a1a1a" />
+        <path d="M0,0H2V2H0Z" transform="translate(28 18)" fill="#1a1a1a" />
+        <path d="M0,0H2V4H4V6H6V8h4v4H0Z" transform="translate(0 20)" fill="#ffffff00" />
+        <path d="M2,0H4V8H2V4H0V2H2Z" transform="translate(24 20)" fill="#1a1a1a" />
+        <path d="M0,0H6V2H4V4H2V2H0Z" transform="translate(20 28)" fill="#1a1a1a" />
       </g>
     </svg>
   );
@@ -58,11 +58,11 @@ function ReadingIcon() {
   return (
     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <g fill="#8844b8">
-        <rect x="0" y="0" width="2" height="16" fill="#582488"/>
-        <path d="M11,6 L11,9 L11.885,9 L12,6 L11,6 Z" fill="#ffffff"/>
-        <path d="M3,0 L3,16 L13.82,16 C14.47,16 15,15.55 15,14.99 L15,1.01 C15,0.45 14.47,0 13.82,0 L3,0 Z" fill="#9355cc"/>
-        <path d="M13.051,9.053 L12.08,9.053 L12.062,10.063 L7.906,10.063 L7.924,9.042 L6.957,9.042 L6.957,6.99 L7.915,6.99 L7.915,5.948 L10.957,5.938 L10.957,5.051 L7.026,5.051 L7.026,6.048 L6.029,6.048 L6.029,9.958 L7.041,9.958 L7.041,10.975 L11.047,10.975 L11.047,12.014 L6.961,12.014 L6.961,11.063 L5.958,11.063 L5.958,10.032 L4.953,10.032 L4.953,5.991 L5.973,5.991 L5.973,4.973 L6.938,4.973 L6.938,3.938 L11.032,3.938 L11.032,4.959 L12.011,4.959 L12.011,5.949 L13.052,5.949 Z" fill="#ffffff"/>
-        <rect x="8" y="7" width="2" height="2" fill="#ffffff"/>
+        <rect x="0" y="0" width="2" height="16" fill="#582488" />
+        <path d="M11,6 L11,9 L11.885,9 L12,6 L11,6 Z" fill="#ffffff" />
+        <path d="M3,0 L3,16 L13.82,16 C14.47,16 15,15.55 15,14.99 L15,1.01 C15,0.45 14.47,0 13.82,0 L3,0 Z" fill="#9355cc" />
+        <path d="M13.051,9.053 L12.08,9.053 L12.062,10.063 L7.906,10.063 L7.924,9.042 L6.957,9.042 L6.957,6.99 L7.915,6.99 L7.915,5.948 L10.957,5.938 L10.957,5.051 L7.026,5.051 L7.026,6.048 L6.029,6.048 L6.029,9.958 L7.041,9.958 L7.041,10.975 L11.047,10.975 L11.047,12.014 L6.961,12.014 L6.961,11.063 L5.958,11.063 L5.958,10.032 L4.953,10.032 L4.953,5.991 L5.973,5.991 L5.973,4.973 L6.938,4.973 L6.938,3.938 L11.032,3.938 L11.032,4.959 L12.011,4.959 L12.011,5.949 L13.052,5.949 Z" fill="#ffffff" />
+        <rect x="8" y="7" width="2" height="2" fill="#ffffff" />
       </g>
     </svg>
   );
@@ -71,10 +71,10 @@ function ReadingIcon() {
 function BinIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 15 3 L 15 5 L 4 5 L 4 7 L 6 7 L 6 18 L 8 18 L 8 7 L 24 7 L 24 18 L 26 18 L 26 7 L 28 7 L 28 5 L 17 5 L 17 3 L 15 3 z" fill="#588844"/>
-      <path d="M 24 18 L 22 18 L 22 26 L 10 26 L 10 18 L 8 18 L 8 26 L 8 28 L 10 28 L 22 28 L 24 28 L 24 26 L 24 18 z" fill="#78b868"/>
-      <path d="M 13 9 L 13 23 L 15 23 L 15 9 L 13 9 z M 17 9 L 17 23 L 19 23 L 19 9 L 17 9 z" fill="#386828"/>
-      <rect x="10" y="8" width="12" height="15" fill="#a4dc94" opacity="0.4"/>
+      <path d="M 15 3 L 15 5 L 4 5 L 4 7 L 6 7 L 6 18 L 8 18 L 8 7 L 24 7 L 24 18 L 26 18 L 26 7 L 28 7 L 28 5 L 17 5 L 17 3 L 15 3 z" fill="#588844" />
+      <path d="M 24 18 L 22 18 L 22 26 L 10 26 L 10 18 L 8 18 L 8 26 L 8 28 L 10 28 L 22 28 L 24 28 L 24 26 L 24 18 z" fill="#78b868" />
+      <path d="M 13 9 L 13 23 L 15 23 L 15 9 L 13 9 z M 17 9 L 17 23 L 19 23 L 19 9 L 17 9 z" fill="#386828" />
+      <rect x="10" y="8" width="12" height="15" fill="#a4dc94" opacity="0.4" />
     </svg>
   );
 }
@@ -82,12 +82,12 @@ function BinIcon() {
 function NotesIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 6 4 L 6 28 L 26 28 L 26 10 L 24 10 L 24 8 L 22 8 L 22 10 L 20 10 L 20 8 L 22 8 L 22 6 L 20 6 L 20 4 L 6 4 z" fill="#1b8fa8"/>
-      <path d="M 8 6 L 18 6 L 18 12 L 19 12 L 24 12 L 24 26 L 8 26 L 8 6 z" fill="#ffffff"/>
-      <path d="M 10 13 L 10 15 L 16 15 L 16 13 L 10 13 z M 10 17 L 10 19 L 22 19 L 22 17 L 10 17 z M 10 21 L 10 23 L 20 23 L 20 21 L 10 21 z" fill="#5bbccf"/>
-      <rect x="6" y="2" width="4" height="4" fill="#f0be6a"/>
-      <rect x="12" y="2" width="4" height="4" fill="#f0be6a"/>
-      <rect x="18" y="2" width="4" height="4" fill="#f0be6a"/>
+      <path d="M 6 4 L 6 28 L 26 28 L 26 10 L 24 10 L 24 8 L 22 8 L 22 10 L 20 10 L 20 8 L 22 8 L 22 6 L 20 6 L 20 4 L 6 4 z" fill="#1b8fa8" />
+      <path d="M 8 6 L 18 6 L 18 12 L 19 12 L 24 12 L 24 26 L 8 26 L 8 6 z" fill="#ffffff" />
+      <path d="M 10 13 L 10 15 L 16 15 L 16 13 L 10 13 z M 10 17 L 10 19 L 22 19 L 22 17 L 10 17 z M 10 21 L 10 23 L 20 23 L 20 21 L 10 21 z" fill="#5bbccf" />
+      <rect x="6" y="2" width="4" height="4" fill="#f0be6a" />
+      <rect x="12" y="2" width="4" height="4" fill="#f0be6a" />
+      <rect x="18" y="2" width="4" height="4" fill="#f0be6a" />
     </svg>
   );
 }
@@ -95,18 +95,9 @@ function NotesIcon() {
 function LogbookIcon() {
   return (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      {/* Outer Floppy Shell */}
-      <path d="M3 3h13l5 5v13H3V3z" fill="#3a72c4" stroke="#1a1a1a" strokeWidth="1"/>
-      {/* Top Metal Slider / Shutter */}
-      <path d="M7 3h9v8H7V3z" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
-      {/* Metal Shutter Cutout Window */}
-      <rect x="9" y="5" width="2.5" height="4" fill="#0d2830" stroke="#1a1a1a" strokeWidth="0.5"/>
-      {/* Bottom Paper Label */}
-      <rect x="6" y="13" width="12" height="8" fill="#ffffff" stroke="#1a1a1a" strokeWidth="1"/>
-      {/* Label Pastel Header Stripe */}
-      <rect x="6" y="13" width="12" height="2" fill="#5bbccf"/>
-      {/* Label Write Area Hollow Border */}
-      <rect x="8" y="16.5" width="8" height="3.5" fill="#faf8f5" stroke="#9c968b" strokeWidth="0.5"/>
+      <path d="M3 3h13l5 5v13H3z" fill="#3a72c4" stroke="#1a1a1a" />
+      <path d="M7 3h8.7v8H7z" fill="#ded8cd" stroke="#1a1a1a" />
+      <path fill="#fff" stroke="#1a1a1a" d="M6 13h12v8H6z" />
     </svg>
   );
 }
@@ -114,11 +105,11 @@ function LogbookIcon() {
 function FocusIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 2 8 L 2 28 L 30 28 L 30 8 L 16 8 L 14 5 L 2 5 Z" fill="#e8a838" stroke="#1a1a1a" strokeWidth="1"/>
-      <path d="M 4 11 L 28 11 L 28 26 L 4 26 Z" fill="#ffd478"/>
-      <rect x="8" y="4" width="8" height="6" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="18" y="3" width="8" height="7" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <path d="M 12 18 L 15 21 L 22 14" stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="square"/>
+      <path d="M 2 8 L 2 28 L 30 28 L 30 8 L 16 8 L 14 5 L 2 5 Z" fill="#e8a838" stroke="#1a1a1a" strokeWidth="1" />
+      <path d="M 4 11 L 28 11 L 28 26 L 4 26 Z" fill="#ffd478" />
+      <rect x="8" y="4" width="8" height="6" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="0.5" />
+      <rect x="18" y="3" width="8" height="7" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="0.5" />
+      <path d="M 12 18 L 15 21 L 22 14" stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="square" />
     </svg>
   );
 }
@@ -126,18 +117,18 @@ function FocusIcon() {
 function TimerIcon() {
   return (
     <svg viewBox="0 0 32 32" data-name="clockfacethreeoclock/Light" xmlns="http://www.w3.org/2000/svg">
-      <g strokeWidth="0"/>
-      <g strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M0 0h10v2H6v2H4v2H2v4H0Z" fill="#ffffff00"/>
-      <path data-name="Path" d="M10 0h12v2h-6v12h8v2H14V2h-4Z" fill="#1a1a1a"/>
-      <path data-name="Path" d="M22 0h10v10h-2V6h-2V4h-2V2h-4Z" fill="#ffffff00"/>
-      <path data-name="Path" d="M6 2h4v2H6Z" fill="#1a1a1a"/>
-      <path data-name="Path" d="M10 2h4v14h10v-2h-8V2h6v2h4v2h2v4h2v12h-2v4h-2v2h-4v2H10v-2H6v-2H4v-4H2V10h2V6h2V4h4Z" fill="#f0be6a"/>
-      <path data-name="Path" d="M22 2h4v2h-4ZM4 4h2v2H4Zm22 0h2v2h-2ZM2 6h2v4H2Zm26 0h2v4h-2ZM0 10h2v12H0Zm30 0h2v12h-2Z" fill="#1a1a1a"/>
-      <path data-name="Path" d="M0 22h2v4h2v2h2v2h4v2H0Z" fill="#ffffff00"/>
-      <path data-name="Path" d="M2 22h2v4H2Zm26 0h2v4h-2Z" fill="#1a1a1a"/>
-      <path data-name="Path" d="M30 22h2v10H22v-2h4v-2h2v-2h2Z" fill="#ffffff00"/>
-      <path data-name="Path" d="M4 26h2v2H4Zm22 0h2v2h-2ZM6 28h4v2H6Zm16 0h4v2h-4Zm-12 2h12v2H10Z" fill="#1a1a1a"/>
+      <g strokeWidth="0" />
+      <g strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M0 0h10v2H6v2H4v2H2v4H0Z" fill="#ffffff00" />
+      <path data-name="Path" d="M10 0h12v2h-6v12h8v2H14V2h-4Z" fill="#1a1a1a" />
+      <path data-name="Path" d="M22 0h10v10h-2V6h-2V4h-2V2h-4Z" fill="#ffffff00" />
+      <path data-name="Path" d="M6 2h4v2H6Z" fill="#1a1a1a" />
+      <path data-name="Path" d="M10 2h4v14h10v-2h-8V2h6v2h4v2h2v4h2v12h-2v4h-2v2h-4v2H10v-2H6v-2H4v-4H2V10h2V6h2V4h4Z" fill="#f0be6a" />
+      <path data-name="Path" d="M22 2h4v2h-4ZM4 4h2v2H4Zm22 0h2v2h-2ZM2 6h2v4H2Zm26 0h2v4h-2ZM0 10h2v12H0Zm30 0h2v12h-2Z" fill="#1a1a1a" />
+      <path data-name="Path" d="M0 22h2v4h2v2h2v2h4v2H0Z" fill="#ffffff00" />
+      <path data-name="Path" d="M2 22h2v4H2Zm26 0h2v4h-2Z" fill="#1a1a1a" />
+      <path data-name="Path" d="M30 22h2v10H22v-2h4v-2h2v-2h2Z" fill="#ffffff00" />
+      <path data-name="Path" d="M4 26h2v2H4Zm22 0h2v2h-2ZM6 28h4v2H6Zm16 0h4v2h-4Zm-12 2h12v2H10Z" fill="#1a1a1a" />
     </svg>
   );
 }
@@ -145,14 +136,14 @@ function TimerIcon() {
 function BudgetIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <rect x="3" y="5" width="26" height="22" rx="1" fill="#168ea8" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="6" y="8" width="20" height="6" fill="#0d2830" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="7" y="9" width="4" height="4" fill="#38f088"/>
-      <rect x="6" y="17" width="5" height="4" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="13" y="17" width="5" height="4" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="20" y="17" width="6" height="8" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="6" y="22" width="5" height="3" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
-      <rect x="13" y="22" width="5" height="3" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5"/>
+      <rect x="3" y="5" width="26" height="22" rx="1" fill="#168ea8" stroke="#1a1a1a" strokeWidth="1" />
+      <rect x="6" y="8" width="20" height="6" fill="#0d2830" stroke="#1a1a1a" strokeWidth="0.5" />
+      <rect x="7" y="9" width="4" height="4" fill="#38f088" />
+      <rect x="6" y="17" width="5" height="4" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5" />
+      <rect x="13" y="17" width="5" height="4" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5" />
+      <rect x="20" y="17" width="6" height="8" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="0.5" />
+      <rect x="6" y="22" width="5" height="3" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5" />
+      <rect x="13" y="22" width="5" height="3" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="0.5" />
     </svg>
   );
 }
@@ -160,9 +151,9 @@ function BudgetIcon() {
 function DisplayIcon() {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path stroke="#000" strokeWidth="1" fill="#ded8cd" d="M8 27h16v3H8zm5-4h6v4h-6zM3 3h26v20H3z"/>
-      <path stroke="#000" strokeWidth="1" fill="#5bbccf" d="M5.5 5.5h21v11h-21z"/>
-      <path stroke="#000" strokeWidth="1" fill="#b8b0a2" d="M5.5 16.5h21v4h-21z"/>
+      <path stroke="#000" strokeWidth="1" fill="#ded8cd" d="M8 27h16v3H8zm5-4h6v4h-6zM3 3h26v20H3z" />
+      <path stroke="#000" strokeWidth="1" fill="#5bbccf" d="M5.5 5.5h21v11h-21z" />
+      <path stroke="#000" strokeWidth="1" fill="#b8b0a2" d="M5.5 16.5h21v4h-21z" />
     </svg>
   );
 }
@@ -170,9 +161,9 @@ function DisplayIcon() {
 function StickyMenuIcon() {
   return (
     <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-      <path d="M2 2h8l4 4v8H2z" fill="#fef08a" stroke="#1a1a1a" strokeWidth="1"/>
-      <path d="M10 2v4h4" fill="#fde047" stroke="#1a1a1a" strokeWidth="1"/>
-      <path d="M4 6h4M4 9h8M4 11h6" stroke="#1a1a1a" strokeWidth="1"/>
+      <path d="M2 2h8l4 4v8H2z" fill="#fef08a" stroke="#1a1a1a" strokeWidth="1" />
+      <path d="M10 2v4h4" fill="#fde047" stroke="#1a1a1a" strokeWidth="1" />
+      <path d="M4 6h4M4 9h8M4 11h6" stroke="#1a1a1a" strokeWidth="1" />
     </svg>
   );
 }
@@ -180,10 +171,10 @@ function StickyMenuIcon() {
 function AlignMenuIcon() {
   return (
     <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="5" height="5" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="9" y="2" width="5" height="5" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="2" y="9" width="5" height="5" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="9" y="9" width="5" height="5" fill="#38f088" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="2" y="2" width="5" height="5" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="1" />
+      <rect x="9" y="2" width="5" height="5" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="1" />
+      <rect x="2" y="9" width="5" height="5" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="1" />
+      <rect x="9" y="9" width="5" height="5" fill="#38f088" stroke="#1a1a1a" strokeWidth="1" />
     </svg>
   );
 }
@@ -191,36 +182,36 @@ function AlignMenuIcon() {
 function RefreshMenuIcon() {
   return (
     <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13 8A5 5 0 1 1 8 3h4" fill="none" stroke="#1a1a1a" strokeWidth="1.5"/>
-      <path d="M9 1l4 2-4 2z" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="1"/>
+      <path d="M13 8A5 5 0 1 1 8 3h4" fill="none" stroke="#1a1a1a" strokeWidth="1.5" />
+      <path d="M9 1l4 2-4 2z" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="1" />
     </svg>
   );
 }
 
 /* App definitions with canonical names strictly from the Daybreak prompt */
 const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode }> = {
-  focus:   { label: "Daily 3",      renderIcon: () => <FocusIcon /> },
-  timer:   { label: "Focus Timer",  renderIcon: () => <TimerIcon /> },
-  notes:   { label: "Scratch Note", renderIcon: () => <NotesIcon /> },
-  reading: { label: "Reading Shelf",renderIcon: () => <ReadingIcon /> },
-  budget:  { label: "Budget Ledger",renderIcon: () => <BudgetIcon /> },
-  archive: { label: "Logbook",      renderIcon: () => <LogbookIcon /> },
-  display: { label: "Display",      renderIcon: () => <DisplayIcon /> },
-  account: { label: "Account",      renderIcon: () => <AccountIcon /> },
-  trash:   { label: "Recycle Bin",  renderIcon: () => <BinIcon /> },
+  focus: { label: "Daily 3", renderIcon: () => <FocusIcon /> },
+  timer: { label: "Focus Timer", renderIcon: () => <TimerIcon /> },
+  notes: { label: "Scratch Note", renderIcon: () => <NotesIcon /> },
+  reading: { label: "Reading Shelf", renderIcon: () => <ReadingIcon /> },
+  budget: { label: "Budget Ledger", renderIcon: () => <BudgetIcon /> },
+  archive: { label: "Logbook", renderIcon: () => <LogbookIcon /> },
+  display: { label: "Display", renderIcon: () => <DisplayIcon /> },
+  account: { label: "Account", renderIcon: () => <AccountIcon /> },
+  trash: { label: "Recycle Bin", renderIcon: () => <BinIcon /> },
 };
 
 // Default layout of desktop icons (arranged on the left side)
 const ICON_DEFAULTS: Record<AppId, { x: number; y: number }> = {
-  focus:   { x: 28,  y: 60 },
-  timer:   { x: 28,  y: 160 },
-  notes:   { x: 28,  y: 260 },
-  reading: { x: 28,  y: 360 },
-  budget:  { x: 28,  y: 460 },
+  focus: { x: 28, y: 60 },
+  timer: { x: 28, y: 160 },
+  notes: { x: 28, y: 260 },
+  reading: { x: 28, y: 360 },
+  budget: { x: 28, y: 460 },
   archive: { x: 120, y: 60 },
   display: { x: 120, y: 160 },
   account: { x: 120, y: 260 },
-  trash:   { x: 120, y: 360 },
+  trash: { x: 120, y: 360 },
 };
 
 const DOCK_PINNED_APPS: AppId[] = ["focus", "timer", "notes", "reading", "budget", "archive", "display", "account"];
@@ -391,15 +382,15 @@ function OSWindow({
 }) {
   const [pos, setPos] = useState(() => {
     const offsets: Record<AppId, { x: number; y: number }> = {
-      focus:   { x: 230, y: 55 },
-      timer:   { x: 670, y: 55 },
-      notes:   { x: 280, y: 80 },
+      focus: { x: 230, y: 55 },
+      timer: { x: 670, y: 55 },
+      notes: { x: 280, y: 80 },
       reading: { x: 250, y: 70 },
-      budget:  { x: 270, y: 65 },
+      budget: { x: 270, y: 65 },
       archive: { x: 290, y: 75 },
       display: { x: 310, y: 90 },
       account: { x: 330, y: 85 },
-      trash:   { x: 350, y: 100 },
+      trash: { x: 350, y: 100 },
     };
     return offsets[id] ?? { x: 240, y: 70 };
   });
@@ -468,8 +459,8 @@ function OSWindow({
    ============================================================ */
 function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: string; refresh: () => void; chime: () => void }) {
   const [title, setTitle] = useState("");
-  const todays = tasks.filter((t) => t.task_date === today()).sort((a,b) => a.priority - b.priority);
-  const recommended = todays.filter((t) => t.is_recommended).slice(0,3);
+  const todays = tasks.filter((t) => t.task_date === today()).sort((a, b) => a.priority - b.priority);
+  const recommended = todays.filter((t) => t.is_recommended).slice(0, 3);
   const allDone = recommended.length === 3 && recommended.every((t) => t.completed_at);
   const celebrated = useRef(false);
   const [victoryDismissed, setVictoryDismissed] = useState(false);
@@ -538,7 +529,7 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
                 {task.completed_at && <Check size={14} />}
               </button>
               <span className={task.completed_at ? "done" : ""}>
-                {task.is_recommended && <b className="task-priority-tag">0{i+1}</b>}
+                {task.is_recommended && <b className="task-priority-tag">0{i + 1}</b>}
                 {task.title}
               </span>
               {!task.completed_at && (
