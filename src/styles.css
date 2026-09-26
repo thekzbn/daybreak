@@ -185,37 +185,6 @@ button {
   letter-spacing: 0.5px;
 }
 
-.top-nav-links {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.top-nav-btn {
-  height: 100%;
-  border: 0;
-  border-right: 1px solid var(--chrome-shadow);
-  background: transparent;
-  padding: 0 16px;
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: background 0.1s;
-}
-
-.top-nav-btn:hover {
-  background: #ffffff;
-  color: var(--teal);
-}
-
-.top-nav-btn.active {
-  background: var(--teal);
-  color: #ffffff;
-}
-
 .top-navbar-right {
   display: flex;
   align-items: center;

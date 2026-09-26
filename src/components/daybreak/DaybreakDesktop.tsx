@@ -1089,19 +1089,12 @@ function DaybreakOS({ session }: { session: Session }) {
 
   return (
     <main className={`desktop wallpaper-${wallpaper}`} onClick={() => setSelected(null)}>
-      {/* Top Navigation Bar (from the reference fashion OS design!) */}
+      {/* Top Menu Bar */}
       <header className="top-navbar" onClick={(e) => e.stopPropagation()}>
         <div className="top-navbar-left">
           <div className="top-brand">
             <span>daybreak</span>
           </div>
-          <nav className="top-nav-links">
-            <button className={`top-nav-btn ${active === "focus" && open.includes("focus") ? "active" : ""}`} onClick={() => launch("focus")}>Daily 3</button>
-            <button className={`top-nav-btn ${active === "timer" && open.includes("timer") ? "active" : ""}`} onClick={() => launch("timer")}>Timer</button>
-            <button className={`top-nav-btn ${active === "notes" && open.includes("notes") ? "active" : ""}`} onClick={() => launch("notes")}>Scratch Note</button>
-            <button className={`top-nav-btn ${active === "reading" && open.includes("reading") ? "active" : ""}`} onClick={() => launch("reading")}>Reading Shelf</button>
-            <button className={`top-nav-btn ${active === "budget" && open.includes("budget") ? "active" : ""}`} onClick={() => launch("budget")}>Ledger</button>
-          </nav>
         </div>
         <div className="top-navbar-right">
           <button className="top-sound-btn" onClick={toggleMute} aria-label={muted ? "Unmute sound" : "Mute sound"}>
