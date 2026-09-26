@@ -14,7 +14,317 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      budget_categories: {
+        Row: {
+          created_at: string
+          icon: string
+          id: string
+          monthly_limit: number
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string
+          id?: string
+          monthly_limit?: number
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string
+          id?: string
+          monthly_limit?: number
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      budget_settings: {
+        Row: {
+          created_at: string
+          fixed_costs: number
+          id: string
+          income: number
+          month: string
+          saving_goal: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          fixed_costs?: number
+          id?: string
+          income?: number
+          month: string
+          saving_goal?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          fixed_costs?: number
+          id?: string
+          income?: number
+          month?: string
+          saving_goal?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      daily_archives: {
+        Row: {
+          archive_date: string
+          completed_tasks: Json
+          created_at: string
+          focus_seconds: number
+          id: string
+          notes: string
+          spend_total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          archive_date: string
+          completed_tasks?: Json
+          created_at?: string
+          focus_seconds?: number
+          id?: string
+          notes?: string
+          spend_total?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          archive_date?: string
+          completed_tasks?: Json
+          created_at?: string
+          focus_seconds?: number
+          id?: string
+          notes?: string
+          spend_total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      expenses: {
+        Row: {
+          amount: number
+          category_id: string | null
+          created_at: string
+          description: string
+          id: string
+          spent_on: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          category_id?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          spent_on?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          category_id?: string | null
+          created_at?: string
+          description?: string
+          id?: string
+          spent_on?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "budget_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          note_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          note_date?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          note_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          desktop_layout: Json
+          display_name: string
+          sound_muted: boolean
+          updated_at: string
+          user_id: string
+          wallpaper: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          desktop_layout?: Json
+          display_name?: string
+          sound_muted?: boolean
+          updated_at?: string
+          user_id: string
+          wallpaper?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          desktop_layout?: Json
+          display_name?: string
+          sound_muted?: boolean
+          updated_at?: string
+          user_id?: string
+          wallpaper?: string
+        }
+        Relationships: []
+      }
+      reading_queue: {
+        Row: {
+          created_at: string
+          id: string
+          progress: number
+          slot: number
+          spine_color: string
+          title: string
+          updated_at: string
+          url: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          progress?: number
+          slot: number
+          spine_color?: string
+          title: string
+          updated_at?: string
+          url: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          progress?: number
+          slot?: number
+          spine_color?: string
+          title?: string
+          updated_at?: string
+          url?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      stickies: {
+        Row: {
+          color: string
+          content: string
+          created_at: string
+          id: string
+          position_x: number
+          position_y: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string
+          content?: string
+          created_at?: string
+          id?: string
+          position_x?: number
+          position_y?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string
+          content?: string
+          created_at?: string
+          id?: string
+          position_x?: number
+          position_y?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          focus_seconds: number
+          id: string
+          is_active: boolean
+          is_recommended: boolean
+          priority: number
+          task_date: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          focus_seconds?: number
+          id?: string
+          is_active?: boolean
+          is_recommended?: boolean
+          priority?: number
+          task_date?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          focus_seconds?: number
+          id?: string
+          is_active?: boolean
+          is_recommended?: boolean
+          priority?: number
+          task_date?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
