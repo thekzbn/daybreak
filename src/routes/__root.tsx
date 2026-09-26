@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Your personal pastel cyber command centre." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@thekzbn" },
     ],
     links: [
       {
@@ -93,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.cdnfonts.com" },
       { rel: "stylesheet", href: "https://fonts.cdnfonts.com/css/bit-cell" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "https://cdn.thekzbn.name.ng/assets/img/logo.png", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,
