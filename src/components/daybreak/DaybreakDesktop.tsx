@@ -95,11 +95,18 @@ function NotesIcon() {
 function LogbookIcon() {
   return (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="20" height="20" rx="1" fill="#3a72c4" stroke="#1a1a1a" strokeWidth="1"/>
-      <rect x="5" y="3" width="14" height="7" fill="#f4ece1"/>
-      <rect x="14" y="4" width="3" height="5" fill="#3a72c4"/>
-      <rect x="6" y="14" width="12" height="7" fill="#ffffff"/>
-      <circle x="12" y="17.5" r="2.5" cx="12" cy="17.5" fill="#d4d0c8" stroke="#1a1a1a" strokeWidth="0.5"/>
+      {/* Outer Floppy Shell */}
+      <path d="M3 3h13l5 5v13H3V3z" fill="#3a72c4" stroke="#1a1a1a" strokeWidth="1"/>
+      {/* Top Metal Slider / Shutter */}
+      <path d="M7 3h9v8H7V3z" fill="#ded8cd" stroke="#1a1a1a" strokeWidth="1"/>
+      {/* Metal Shutter Cutout Window */}
+      <rect x="9" y="5" width="2.5" height="4" fill="#0d2830" stroke="#1a1a1a" strokeWidth="0.5"/>
+      {/* Bottom Paper Label */}
+      <rect x="6" y="13" width="12" height="8" fill="#ffffff" stroke="#1a1a1a" strokeWidth="1"/>
+      {/* Label Pastel Header Stripe */}
+      <rect x="6" y="13" width="12" height="2" fill="#5bbccf"/>
+      {/* Label Write Area Hollow Border */}
+      <rect x="8" y="16.5" width="8" height="3.5" fill="#faf8f5" stroke="#9c968b" strokeWidth="0.5"/>
     </svg>
   );
 }
