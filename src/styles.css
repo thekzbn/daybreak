@@ -1265,13 +1265,28 @@ button {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 5px 10px;
+  gap: 8px;
+  padding: 4px 8px;
   border: 0;
   background: transparent;
   color: #1a1a1a;
   font-size: 13px;
   text-align: left;
+}
+
+.context-menu-item .menu-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.context-menu-item .menu-icon svg {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
 }
 
 .context-menu-item:hover {

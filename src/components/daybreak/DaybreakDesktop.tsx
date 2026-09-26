@@ -151,6 +151,36 @@ function DisplayIcon() {
   );
 }
 
+function StickyMenuIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2h8l4 4v8H2z" fill="#fef08a" stroke="#1a1a1a" strokeWidth="1"/>
+      <path d="M10 2v4h4" fill="#fde047" stroke="#1a1a1a" strokeWidth="1"/>
+      <path d="M4 6h4M4 9h8M4 11h6" stroke="#1a1a1a" strokeWidth="1"/>
+    </svg>
+  );
+}
+
+function AlignMenuIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="5" height="5" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="9" y="2" width="5" height="5" fill="#f29ab8" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="2" y="9" width="5" height="5" fill="#f0be6a" stroke="#1a1a1a" strokeWidth="1"/>
+      <rect x="9" y="9" width="5" height="5" fill="#38f088" stroke="#1a1a1a" strokeWidth="1"/>
+    </svg>
+  );
+}
+
+function RefreshMenuIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 8A5 5 0 1 1 8 3h4" fill="none" stroke="#1a1a1a" strokeWidth="1.5"/>
+      <path d="M9 1l4 2-4 2z" fill="#5bbccf" stroke="#1a1a1a" strokeWidth="1"/>
+    </svg>
+  );
+}
+
 /* App definitions with canonical names strictly from the Daybreak prompt */
 const APP_META: Record<AppId, { label: string; renderIcon: () => React.ReactNode }> = {
   focus:   { label: "Daily 3",      renderIcon: () => <FocusIcon /> },
@@ -1210,42 +1240,54 @@ function DaybreakOS({ session }: { session: Session }) {
           onClick={(e) => e.stopPropagation()}
         >
           <button className="context-menu-item" onClick={() => createStickyAt(contextMenu.x, contextMenu.y)}>
+            <span className="menu-icon"><StickyMenuIcon /></span>
             <span>New Sticky Note</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("display")}>
+            <span className="menu-icon"><DisplayIcon /></span>
             <span>Display Properties...</span>
           </button>
           <div className="context-menu-divider" />
           <button className="context-menu-item" onClick={() => { setIconPositions({ ...ICON_DEFAULTS }); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
+            <span className="menu-icon"><AlignMenuIcon /></span>
             <span>Align Icons</span>
           </button>
           <button className="context-menu-item" onClick={() => { refresh(); setContextMenu({ x: 0, y: 0, visible: false }); sound(); }}>
+            <span className="menu-icon"><RefreshMenuIcon /></span>
             <span>Refresh Desktop</span>
           </button>
           <div className="context-menu-divider" />
           <button className="context-menu-item" onClick={() => launch("focus")}>
+            <span className="menu-icon"><FocusIcon /></span>
             <span>Daily 3 Focus</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("timer")}>
+            <span className="menu-icon"><TimerIcon /></span>
             <span>Focus Timer</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("notes")}>
+            <span className="menu-icon"><NotesIcon /></span>
             <span>Scratch Note</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("reading")}>
+            <span className="menu-icon"><ReadingIcon /></span>
             <span>Reading Shelf</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("budget")}>
+            <span className="menu-icon"><BudgetIcon /></span>
             <span>Budget Ledger</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("archive")}>
+            <span className="menu-icon"><LogbookIcon /></span>
             <span>Logbook</span>
           </button>
           <div className="context-menu-divider" />
           <button className="context-menu-item" onClick={() => launch("trash")}>
+            <span className="menu-icon"><BinIcon /></span>
             <span>Recycle Bin</span>
           </button>
           <button className="context-menu-item" onClick={() => launch("account")}>
+            <span className="menu-icon"><AccountIcon /></span>
             <span>Account Settings...</span>
           </button>
         </div>
