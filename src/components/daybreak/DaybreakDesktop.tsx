@@ -228,6 +228,7 @@ function RetroButton(props: React.ComponentProps<typeof Button>) {
    LOGIN WINDOW (Vintage Y2K OS Sign In)
    ============================================================ */
 function LoginWindow() {
+  const [authMethod, setAuthMethod] = useState<"choice" | "email">("choice");
   const [mode, setMode] = useState<"signin" | "signup" | "forgot">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -265,9 +266,51 @@ function LoginWindow() {
     setBusy(false);
   }
 
+  if (authMethod === "choice") {
+    return (
+      <main className="boot-screen wallpaper-pastel-cyber login-boot">
+        <section className="app-window login-choice-window" aria-label="Daybreak sign in">
+          <div className="titlebar">
+            <span className="titlebar-title">Welcome to Daybreak</span>
+            <div className="window-controls" aria-hidden="true">
+              <button tabIndex={-1}>?</button>
+              <button className="close-btn" tabIndex={-1}>×</button>
+            </div>
+          </div>
+          <div className="window-body login-choice-body">
+            <div className="login-choice-heading">
+              <div className="login-account-icon"><AccountIcon /></div>
+              <div>
+                <h1>Sign in to Daybreak</h1>
+                <p>Choose how you want to continue.</p>
+              </div>
+            </div>
+            <div className="login-choice-actions">
+              <RetroButton className="login-provider-button" disabled={busy} type="button" onClick={google}>
+                <svg className="login-provider-icon" viewBox="0 0 16 16" aria-hidden="true">
+                  <path fill="#4285f4" d="M15 8.2c0-.5 0-.9-.1-1.3H8v2.6h4c-.2.8-.7 1.5-1.4 2v1.7h2.3c1.3-1.2 2.1-3 2.1-5z" />
+                  <path fill="#34a853" d="M8 15c2 0 3.6-.7 4.9-1.8l-2.3-1.7c-.6.4-1.5.7-2.6.7-1.9 0-3.5-1.3-4.1-3H1.5V11C2.7 13.4 5.1 15 8 15z" />
+                  <path fill="#fbbc05" d="M3.9 9.2a4.2 4.2 0 0 1 0-2.4V5H1.5A7 7 0 0 0 1 8c0 1.1.2 2.1.5 3l2.4-1.8z" />
+                  <path fill="#ea4335" d="M8 3.8c1.1 0 2 .4 2.8 1.1l2.1-2A6.7 6.7 0 0 0 8 1 7 7 0 0 0 1.5 5l2.4 1.8c.6-1.7 2.2-3 4.1-3z" />
+                </svg>
+                Continue with Google
+              </RetroButton>
+              <RetroButton className="login-provider-button retro-button-accent" type="button" onClick={() => setAuthMethod("email")}>
+                <svg className="login-provider-icon pixel-email-icon" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="M1 3h14v10H1V3zm2 2v1h1v1h1v1h1v1h4V8h1V7h1V6h1V5h-2v1h-1v1H6V6H5V5H3zm0 3v3h10V8h-1v1h-1v1H5V9H4V8H3z" />
+                </svg>
+                Continue with Email
+              </RetroButton>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   return (
-    <main className="boot-screen wallpaper-pastel-cyber" style={{ display: "grid", placeItems: "center", minHeight: "100vh" }}>
-      <section className="app-window" style={{ width: "min(500px, 94vw)", position: "relative" }} aria-label="Daybreak account">
+    <main className="boot-screen wallpaper-pastel-cyber login-boot">
+      <section className="app-window login-email-window" aria-label="Daybreak account">
         <div className="titlebar">
           <span className="titlebar-title">Daybreak Account</span>
           <div className="window-controls">
@@ -302,9 +345,9 @@ function LoginWindow() {
             )}
             <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
               <RetroButton className="retro-button-accent" disabled={busy} type="submit">{busy ? "Please wait..." : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}</RetroButton>
-              {mode !== "forgot" && <RetroButton type="button" onClick={google}>G Continue with Google</RetroButton>}
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px", fontSize: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px", fontSize: "12px", gap: "12px", flexWrap: "wrap" }}>
+              <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => { setAuthMethod("choice"); setMode("signin"); }}>Back</button>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "signup" ? "signin" : "signup")}>{mode === "signup" ? "Already have an account? Sign in" : "Create new account"}</button>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => setMode(mode === "forgot" ? "signin" : "forgot")}>{mode === "forgot" ? "Back to sign in" : "Forgot password?"}</button>
             </div>
