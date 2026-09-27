@@ -95,6 +95,76 @@ body {
   cursor: url('https://pixelarticons.com/free/cursors/default.png') 4 1, default;
 }
 
+.login-boot {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.login-choice-window,
+.login-email-window {
+  width: min(500px, 94vw);
+  position: relative;
+}
+
+.login-choice-window {
+  width: min(420px, 92vw);
+}
+
+.login-choice-body {
+  padding: 24px;
+}
+
+.login-choice-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.login-choice-heading h1 {
+  margin: 0 0 3px;
+  font-size: 18px;
+}
+
+.login-choice-heading p {
+  margin: 0;
+  color: var(--muted-ink);
+  font-size: 12px;
+}
+
+.login-account-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+
+.login-choice-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.login-provider-button {
+  width: 100%;
+  min-height: 42px;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-inline: 14px;
+}
+
+.login-provider-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  image-rendering: pixelated;
+}
+
+.pixel-email-icon {
+  fill: currentColor;
+}
+
 /* Pointer cursor for links, buttons, icons, dock and interactive elements */
 a, button, input[type="button"], input[type="submit"], select, .desktop-icon, .dock-item, .retro-button, .context-menu-item, .window-controls button, .pixel-check, .bare-icon, .top-sound-btn, .top-user-pill, .book-spine, .empty-book-slot {
   cursor: url('https://pixelarticons.com/free/cursors/pointer.png') 12 1, pointer;
@@ -244,7 +314,7 @@ button {
   color: #ffffff;
   text-shadow: 1px 1px 0 #1a1a1a, 0 0 12px rgba(184, 164, 220, 0.8);
   pointer-events: auto;
-  cursor: grab;
+  cursor: url('/cursors/drag.svg') 16 16, move;
   user-select: none;
   touch-action: none;
   z-index: 5;
@@ -254,7 +324,7 @@ button {
 }
 
 .homescreen-clock-widget:active {
-  cursor: grabbing;
+  cursor: url('/cursors/drag.svg') 16 16, move;
   border-color: #ffffff;
   background: rgba(43, 34, 56, 0.4);
 }
@@ -285,14 +355,14 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  cursor: grab;
+  cursor: url('/cursors/drag.svg') 16 16, move;
   touch-action: none;
   user-select: none;
   z-index: 10;
 }
 
 .desktop-icon:active {
-  cursor: grabbing;
+  cursor: url('/cursors/drag.svg') 16 16, move;
 }
 
 .desktop-icon:hover .icon-label-pill {
@@ -363,7 +433,7 @@ button {
   align-items: center;
   justify-content: space-between;
   padding: 0 6px;
-  cursor: grab;
+  cursor: url('/cursors/drag.svg') 16 16, move;
   user-select: none;
   touch-action: none;
   font-size: 11px;
@@ -372,7 +442,7 @@ button {
 }
 
 .sticky-drag-handle:active {
-  cursor: grabbing;
+  cursor: url('/cursors/drag.svg') 16 16, move;
 }
 
 .sticky-pin {
@@ -485,7 +555,7 @@ button {
   font-size: 14px;
   font-weight: bold;
   user-select: none;
-  cursor: move;
+  cursor: url('/cursors/drag.svg') 16 16, move;
 }
 
 .app-window.active .titlebar {
