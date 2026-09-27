@@ -355,14 +355,14 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  cursor: url('/cursors/drag.svg') 16 16, move;
+  cursor: url('https://pixelarticons.com/free/cursors/pointer.png') 12 1, pointer;
   touch-action: none;
   user-select: none;
   z-index: 10;
 }
 
 .desktop-icon:active {
-  cursor: url('/cursors/drag.svg') 16 16, move;
+  cursor: url('https://pixelarticons.com/free/cursors/pointer.png') 12 1, pointer;
 }
 
 .desktop-icon:hover .icon-label-pill {
