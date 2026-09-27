@@ -101,18 +101,18 @@ body {
   min-height: 100vh;
 }
 
-.login-choice-window,
 .login-email-window {
   width: min(500px, 94vw);
   position: relative;
 }
 
-.login-choice-window {
-  width: min(420px, 92vw);
-}
-
-.login-choice-body {
-  padding: 24px;
+/* Choice screen: buttons float directly on the wallpaper, no window chrome */
+.login-choice {
+  width: min(380px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 0;
 }
 
 .login-choice-heading {
