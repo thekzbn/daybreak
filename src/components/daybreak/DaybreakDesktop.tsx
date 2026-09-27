@@ -345,7 +345,6 @@ function LoginWindow() {
             )}
             <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
               <RetroButton className="retro-button-accent" disabled={busy} type="submit">{busy ? "Please wait..." : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}</RetroButton>
-              {mode !== "forgot" && <RetroButton type="button" onClick={google}>G Continue with Google</RetroButton>}
             </div>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "8px", fontSize: "12px", gap: "12px", flexWrap: "wrap" }}>
               <button style={{ border: 0, background: "none", textDecoration: "underline", padding: 0 }} type="button" onClick={() => { setAuthMethod("choice"); setMode("signin"); }}>Back</button>
