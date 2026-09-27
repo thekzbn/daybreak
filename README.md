@@ -1,4 +1,4 @@
-# Daybreak Command Centre
+# Daybreak
 
 > A vintage Pastel Cyber Y2K Personal Command Centre Desktop OS designed for mindful daily productivity.
 
@@ -8,7 +8,6 @@
 [![TanStack Start](https://img.shields.io/badge/TanStack_Start-1.168-orange)](https://tanstack.com/start)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2-38bdf8?logo=tailwind-css)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_DB-3ecf8e?logo=supabase)](https://supabase.com/)
-[![Lovable](https://img.shields.io/badge/Built_with-Lovable-ff557f)](https://lovable.dev)
 
 **Author**: Ayomide Deji-Adeyale &mdash; [thekzbn.name.ng](https://thekzbn.name.ng) &mdash; [thekzbn@proton.me](mailto:thekzbn@proton.me)
 
