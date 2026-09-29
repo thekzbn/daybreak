@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { lovable } from "@/integrations/lovable";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
+import { db, isLocalMode, LOCAL_FLAG, LOCAL_USER_ID } from "./localDb";
 
 type AppId = "focus" | "timer" | "notes" | "reading" | "budget" | "archive" | "display" | "account" | "trash";
 type Wallpaper = "pastel-cyber" | "retro-grid" | "vintage-lavender" | "pixel-clouds";
@@ -293,6 +294,10 @@ function LoginWindow() {
               </svg>
               Continue with Email
             </RetroButton>
+            <RetroButton className="login-provider-button" type="button" onClick={() => { localStorage.setItem(LOCAL_FLAG, "1"); window.dispatchEvent(new Event("daybreak-local")); }}>
+              Use without signing in
+            </RetroButton>
+            <p style={{ margin: 0, fontSize: "12px" }}>Local mode keeps everything in this browser only.</p>
           </div>
         </div>
       </main>
@@ -509,7 +514,7 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
 
   async function addTask() {
     if (!title.trim()) return;
-    await supabase.from("tasks").insert({
+    await db().from("tasks").insert({
       user_id: userId,
       title: title.trim(),
       task_date: today(),
@@ -521,18 +526,18 @@ function FocusApp({ tasks, userId, refresh, chime }: { tasks: Task[]; userId: st
   }
 
   async function toggle(task: Task) {
-    await supabase.from("tasks").update({ completed_at: task.completed_at ? null : new Date().toISOString(), is_active: false }).eq("id", task.id);
+    await db().from("tasks").update({ completed_at: task.completed_at ? null : new Date().toISOString(), is_active: false }).eq("id", task.id);
     refresh();
   }
 
   async function activate(task: Task) {
-    await supabase.from("tasks").update({ is_active: false }).eq("user_id", userId).eq("task_date", today());
-    await supabase.from("tasks").update({ is_active: true }).eq("id", task.id);
+    await db().from("tasks").update({ is_active: false }).eq("user_id", userId).eq("task_date", today());
+    await db().from("tasks").update({ is_active: true }).eq("id", task.id);
     refresh();
   }
 
   async function remove(task: Task) {
-    await supabase.from("tasks").delete().eq("id", task.id);
+    await db().from("tasks").delete().eq("id", task.id);
     refresh();
   }
 
@@ -694,14 +699,14 @@ function NotesApp({ userId, initial, refresh }: { userId: string; initial: strin
 
   async function save() {
     setSaved("Saving...");
-    await supabase.from("notes").upsert({ user_id: userId, note_date: today(), content: text }, { onConflict: "user_id,note_date" });
+    await db().from("notes").upsert({ user_id: userId, note_date: today(), content: text }, { onConflict: "user_id,note_date" });
     setSaved("Saved");
     refresh();
   }
 
   async function sticky() {
     if (!text.trim()) return;
-    await supabase.from("stickies").insert({ user_id: userId, content: text.slice(0, 300), color: "yellow", position_x: 480, position_y: 120 });
+    await db().from("stickies").insert({ user_id: userId, content: text.slice(0, 300), color: "yellow", position_x: 480, position_y: 120 });
     refresh();
   }
 
@@ -735,12 +740,12 @@ function ReadingApp({ books, userId, refresh }: { books: Book[]; userId: string;
     const url = window.prompt("Link to the book or article", "https://");
     if (!url) return;
     const color = window.prompt("Spine color: rose, teal, violet, amber", "rose") || "rose";
-    await supabase.from("reading_queue").insert({ user_id: userId, title, url, slot, spine_color: color });
+    await db().from("reading_queue").insert({ user_id: userId, title, url, slot, spine_color: color });
     refresh();
   }
 
   async function progress(book: Book, value: number) {
-    await supabase.from("reading_queue").update({ progress: value }).eq("id", book.id);
+    await db().from("reading_queue").update({ progress: value }).eq("id", book.id);
     refresh();
     setSelected({ ...book, progress: value });
   }
@@ -788,7 +793,7 @@ function ReadingApp({ books, userId, refresh }: { books: Book[]; userId: string;
             <RetroButton className="retro-button-accent" onClick={() => window.open(selected.url, "_blank", "noopener,noreferrer")}>
               <ExternalLink size={12} /> Open Link
             </RetroButton>
-            <RetroButton onClick={async () => { await supabase.from("reading_queue").delete().eq("id", selected.id); setSelected(null); refresh(); }}>
+            <RetroButton onClick={async () => { await db().from("reading_queue").delete().eq("id", selected.id); setSelected(null); refresh(); }}>
               Remove
             </RetroButton>
           </div>
@@ -825,7 +830,7 @@ function BudgetApp({
   const allowance = (surplus - spent) / Math.max(days, 1);
 
   async function save() {
-    await supabase.from("budget_settings").upsert({
+    await db().from("budget_settings").upsert({
       user_id: userId,
       month: monthStart(),
       income: Number(income) || 0,
@@ -837,7 +842,7 @@ function BudgetApp({
 
   async function addExpense() {
     if (!(Number(amount) > 0)) return;
-    await supabase.from("expenses").insert({
+    await db().from("expenses").insert({
       user_id: userId,
       amount: Number(amount),
       description: desc,
@@ -994,7 +999,7 @@ function AccountApp({
             value={displayName}
             maxLength={60}
             onChange={(e) => setDisplayName(e.target.value)}
-            onBlur={() => supabase.from("profiles").update({ display_name: displayName }).eq("user_id", session.user.id)}
+            onBlur={() => db().from("profiles").update({ display_name: displayName }).eq("user_id", session.user.id)}
           />
         </label>
         <RetroButton className="retro-button-accent" onClick={onSignOut}><LogOut size={14} /> Sign Out</RetroButton>
@@ -1165,14 +1170,14 @@ function DaybreakOS({ session }: { session: Session }) {
   const refresh = useCallback(async () => {
     const uid = session.user.id;
     const [t, b, n, s, e, c, bs, p] = await Promise.all([
-      supabase.from("tasks").select("*").eq("user_id", uid),
-      supabase.from("reading_queue").select("*").eq("user_id", uid),
-      supabase.from("notes").select("*").eq("user_id", uid),
-      supabase.from("stickies").select("*").eq("user_id", uid),
-      supabase.from("expenses").select("*").eq("user_id", uid),
-      supabase.from("budget_categories").select("*").eq("user_id", uid),
-      supabase.from("budget_settings").select("*").eq("user_id", uid).eq("month", monthStart()).maybeSingle(),
-      supabase.from("profiles").select("*").eq("user_id", uid).maybeSingle(),
+      db().from("tasks").select("*").eq("user_id", uid),
+      db().from("reading_queue").select("*").eq("user_id", uid),
+      db().from("notes").select("*").eq("user_id", uid),
+      db().from("stickies").select("*").eq("user_id", uid),
+      db().from("expenses").select("*").eq("user_id", uid),
+      db().from("budget_categories").select("*").eq("user_id", uid),
+      db().from("budget_settings").select("*").eq("user_id", uid).eq("month", monthStart()).maybeSingle(),
+      db().from("profiles").select("*").eq("user_id", uid).maybeSingle(),
     ]);
     setTasks(t.data ?? []);
     setBooks(b.data ?? []);
@@ -1190,10 +1195,10 @@ function DaybreakOS({ session }: { session: Session }) {
 
   useEffect(() => {
     async function init() {
-      await supabase.from("profiles").upsert({ user_id: session.user.id, display_name: displayName }, { onConflict: "user_id", ignoreDuplicates: true });
-      const { data } = await supabase.from("budget_categories").select("id").eq("user_id", session.user.id).limit(1);
+      await db().from("profiles").upsert({ user_id: session.user.id, display_name: displayName }, { onConflict: "user_id", ignoreDuplicates: true });
+      const { data } = await db().from("budget_categories").select("id").eq("user_id", session.user.id).limit(1);
       if (!data?.length) {
-        await supabase.from("budget_categories").insert([
+        await db().from("budget_categories").insert([
           { user_id: session.user.id, name: "Essentials", icon: "▣", monthly_limit: 800 },
           { user_id: session.user.id, name: "Food", icon: "◆", monthly_limit: 350 },
           { user_id: session.user.id, name: "Fun", icon: "★", monthly_limit: 180 },
@@ -1243,17 +1248,22 @@ function DaybreakOS({ session }: { session: Session }) {
 
   async function setWallpaper(w: Wallpaper) {
     setWallpaperState(w);
-    await supabase.from("profiles").update({ wallpaper: w }).eq("user_id", session.user.id);
+    await db().from("profiles").update({ wallpaper: w }).eq("user_id", session.user.id);
     setBalloon(`Display: ${w.replaceAll("-", " ")} applied.`);
   }
 
   async function toggleMute() {
     const next = !muted;
     setMuted(next);
-    await supabase.from("profiles").update({ sound_muted: next }).eq("user_id", session.user.id);
+    await db().from("profiles").update({ sound_muted: next }).eq("user_id", session.user.id);
   }
 
   async function signOut() {
+    if (isLocalMode()) {
+      localStorage.removeItem(LOCAL_FLAG);
+      window.dispatchEvent(new Event("daybreak-local"));
+      return;
+    }
     await supabase.auth.signOut();
   }
 
@@ -1269,7 +1279,7 @@ function DaybreakOS({ session }: { session: Session }) {
 
   async function createStickyAt(x: number, y: number) {
     sound();
-    await supabase.from("stickies").insert({
+    await db().from("stickies").insert({
       user_id: session.user.id,
       content: "New note...",
       color: "yellow",
@@ -1282,17 +1292,17 @@ function DaybreakOS({ session }: { session: Session }) {
 
   async function updateStickyContent(id: string, content: string) {
     setStickies((v) => v.map((x) => (x.id === id ? { ...x, content } : x)));
-    await supabase.from("stickies").update({ content }).eq("id", id);
+    await db().from("stickies").update({ content }).eq("id", id);
   }
 
   async function deleteSticky(id: string) {
     sound("trash");
     setStickies((v) => v.filter((x) => x.id !== id));
-    await supabase.from("stickies").delete().eq("id", id);
+    await db().from("stickies").delete().eq("id", id);
   }
 
   async function moveSticky(id: string, x: number, y: number) {
-    await supabase.from("stickies").update({ position_x: x, position_y: y }).eq("id", id);
+    await db().from("stickies").update({ position_x: x, position_y: y }).eq("id", id);
   }
 
   function handleContextMenu(e: React.MouseEvent) {
@@ -1497,14 +1507,18 @@ function DaybreakOS({ session }: { session: Session }) {
 export function DaybreakDesktop() {
   const [session, setSession] = useState<Session | null>(null);
   const [ready, setReady] = useState(false);
+  const [local, setLocal] = useState(false);
 
   useEffect(() => {
+    setLocal(isLocalMode());
+    const onLocal = () => setLocal(isLocalMode());
+    window.addEventListener("daybreak-local", onLocal);
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setReady(true);
     });
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => data.subscription.unsubscribe();
+    return () => { data.subscription.unsubscribe(); window.removeEventListener("daybreak-local", onLocal); };
   }, []);
 
   if (!ready) {
@@ -1518,5 +1532,13 @@ export function DaybreakDesktop() {
     );
   }
 
-  return session ? <DaybreakOS session={session} /> : <LoginWindow />;
+  if (local) {
+    const localSession = {
+      access_token: "", refresh_token: "", expires_in: 0, token_type: "bearer",
+      user: { id: LOCAL_USER_ID, email: "Local mode (this browser only)", user_metadata: { display_name: "Guest" }, app_metadata: {}, aud: "local", created_at: "" },
+    } as unknown as Session;
+    return <DaybreakOS key="local" session={localSession} />;
+  }
+
+  return session ? <DaybreakOS key={session.user.id} session={session} /> : <LoginWindow />;
 }
