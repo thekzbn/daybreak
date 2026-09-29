@@ -294,6 +294,10 @@ function LoginWindow() {
               </svg>
               Continue with Email
             </RetroButton>
+            <RetroButton className="login-provider-button" type="button" onClick={() => { localStorage.setItem(LOCAL_FLAG, "1"); window.dispatchEvent(new Event("daybreak-local")); }}>
+              Use without signing in
+            </RetroButton>
+            <p style={{ margin: 0, fontSize: "12px" }}>Local mode keeps everything in this browser only.</p>
           </div>
         </div>
       </main>
@@ -1255,6 +1259,11 @@ function DaybreakOS({ session }: { session: Session }) {
   }
 
   async function signOut() {
+    if (isLocalMode()) {
+      localStorage.removeItem(LOCAL_FLAG);
+      window.dispatchEvent(new Event("daybreak-local"));
+      return;
+    }
     await supabase.auth.signOut();
   }
 
@@ -1498,14 +1507,18 @@ function DaybreakOS({ session }: { session: Session }) {
 export function DaybreakDesktop() {
   const [session, setSession] = useState<Session | null>(null);
   const [ready, setReady] = useState(false);
+  const [local, setLocal] = useState(false);
 
   useEffect(() => {
+    setLocal(isLocalMode());
+    const onLocal = () => setLocal(isLocalMode());
+    window.addEventListener("daybreak-local", onLocal);
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setReady(true);
     });
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    return () => data.subscription.unsubscribe();
+    return () => { data.subscription.unsubscribe(); window.removeEventListener("daybreak-local", onLocal); };
   }, []);
 
   if (!ready) {
@@ -1519,5 +1532,13 @@ export function DaybreakDesktop() {
     );
   }
 
-  return session ? <DaybreakOS session={session} /> : <LoginWindow />;
+  if (local) {
+    const localSession = {
+      access_token: "", refresh_token: "", expires_in: 0, token_type: "bearer",
+      user: { id: LOCAL_USER_ID, email: "Local mode (this browser only)", user_metadata: { display_name: "Guest" }, app_metadata: {}, aud: "local", created_at: "" },
+    } as unknown as Session;
+    return <DaybreakOS key="local" session={localSession} />;
+  }
+
+  return session ? <DaybreakOS key={session.user.id} session={session} /> : <LoginWindow />;
 }
