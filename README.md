@@ -70,8 +70,8 @@ daybreak-command-centre/
 
 - **Frontend Framework**: React 19 + TanStack Start / Vite
 - **Styling**: Tailwind CSS v4 + Custom Retro CSS rules
-- **Backend and Database**: Supabase (PostgreSQL with Row-Level Security)
-- **Authentication**: Supabase Cloud Auth (Email / Password)
+- **Backend and Database**: Supabase (PostgreSQL with Row-Level Security) for signed-in sessions
+- **Authentication**: Google OAuth or email/password, with an anonymous local mode that stores data in this browser's `localStorage`
 
 ---
 
@@ -85,8 +85,8 @@ daybreak-command-centre/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/thekzbn/daybreak-command-centre.git
-cd daybreak-command-centre
+git clone https://github.com/thekzbn/daybreak.git
+cd daybreak
 ```
 
 ### 2. Configure Environment Variables
@@ -97,7 +97,7 @@ Copy `.env.example` to `.env`:
 cp .env.example .env
 ```
 
-Update `.env` with your Supabase credentials:
+To use the signed-in, cloud-backed mode, update `.env` with your Supabase project credentials. You can also choose **Use without signing in** at the login screen; that mode stores supported app data in this browser only and does not sync across browsers or devices.
 
 ```env
 VITE_SUPABASE_PROJECT_ID="your-project-id"
@@ -108,7 +108,7 @@ VITE_SUPABASE_URL="https://your-project-id.supabase.co"
 ### 3. Database Setup
 
 Apply the database migrations located in `supabase/migrations/` to your Supabase project:
-- Tables: `tasks`, `reading_queue`, `notes`, `stickies`, `expenses`, `budget_categories`, `budget_settings`, `profiles`.
+- Tables: `tasks`, `reading_queue`, `notes`, `stickies`, `expenses`, `budget_categories`, `budget_settings`, `profiles`, and `daily_archives`.
 - All tables are protected by Row-Level Security (`auth.uid() = user_id`).
 
 ### 4. Install Dependencies and Run
